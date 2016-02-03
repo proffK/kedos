@@ -14,11 +14,17 @@ static inline uint32_t mmio_read(uint32_t reg)
 }
  
 /* Loop <delay> times in a way that the compiler won't optimize away. */
-static inline void delay(int32_t count)
+static inline void delay(uint32_t count)
 {
 	asm volatile("__delay_%=: subs %[count], %[count], #1; bne __delay_%=\n"
 		 : : [count]"r"(count) : "cc");
 }
+
+//static inline void delay(uint32_t count) 
+//{
+//    volatile uint32_t reg = count;
+//    while (reg--) ;
+//}
  
 size_t strlen(const char* str)
 {
@@ -103,40 +109,29 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 	(void) r1;
 	(void) atags;
 
-    uint32_t ra;
+    uint32_t volatile ra, i;
 
-    ra = mmio_read(GPFSEL1);
-    ra&=~(7<<12);
-    ra|=4<<12;    //alt0
-    ra&=~(7<<15); //gpio15
-    ra|=4<<15;    //alt0
-    mmio_write(GPFSEL1, ra);
+    ra = 1 << 21;
+    mmio_write(GPFSEL4, ra);
 
-    ra=mmio_read(GPFSEL4);
-    ra&=~(7<<21);
-    ra|=1<<21;
-    mmio_write(GPFSEL4,ra);
-
-    ra=mmio_read(GPFSEL3);
-    ra&=~(7<<15);
-    ra|=1<<15;
-    mmio_write(GPFSEL3,ra);
-
-
-	uart_init();
-    uart_putc('c');
-	uart_puts("Hello, kernel World!\r\n");
+    ra = 1 << 15;
+    
+	//uart_init();
+    //uart_putc('c');
+	//uart_puts("Hello, kernel World!\r\n");
  
-    while(1)
-    {
-        mmio_write(GPSET1,1<<(47-32));
-        mmio_write(GPCLR1,1<<(35-32));
-        delay(1000000);
-        mmio_write(GPCLR1,1<<(47-32));
-        mmio_write(GPSET1,1<<(35-32));
-        delay(1000000);
-    }
+	while (1) {
+            
+            mmio_write(GPSET1, ra);
+            i = 0x300000;
+            delay(i);
 
-	while (1)
-		uart_putc(uart_getc());
+            mmio_write(GPCLR1, ra);
+            i = 0x300000;
+            delay(i);
+
+    }
+        
+
+		//uart_putc(uart_getc());
 }
