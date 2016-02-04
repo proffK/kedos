@@ -23,7 +23,7 @@ static inline uint32_t mmio_read(uint32_t reg)
 /* Loop <delay> times in a way that the compiler won't optimize away. */
 static inline void delay(volatile uint32_t count)
 {
-    volatile register reg = count;
+    register volatile uint32_t reg = count;
 	asm volatile("__delay_%=: subs %[count], %[count], #1;\
                   bne __delay_%="
 		          :
@@ -119,16 +119,16 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 	(void) r1;
 	(void) atags;
 
-    uint32_t volatile ra, i;
+    uint32_t volatile ra;
 
     ra = 1 << 21;
     mmio_write(GPFSEL4, ra);
 
     ra = 1 << 15;
     
-	//uart_init();
+	uart_init();
     //uart_putc('c');
-	//uart_puts("Hello, kernel World!\r\n");
+	uart_puts("Hello, kernel World!\r\n");
  
 	while (1) {
             
