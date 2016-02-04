@@ -13,13 +13,23 @@ static inline uint32_t mmio_read(uint32_t reg)
 	return *(volatile uint32_t *)reg;
 }
  
-/* Loop <delay> times in a way that the compiler won't optimize away. */
-static inline void delay(uint32_t count)
-{
-	asm volatile("__delay_%=: subs %[count], %[count], #1; bne __delay_%=\n"
-		 : : [count]"r"(count) : "cc");
-}
+///* Loop <delay> times in a way that the compiler won't optimize away. */
+//static inline void delay(volatile uint32_t count)
+//{
+//	asm volatile("__delay_%=: subs %[count], %[count], #1; bne __delay_%=\n"
+//		 : : [count]"r"(count) : "cc");
+//}
 
+/* Loop <delay> times in a way that the compiler won't optimize away. */
+static inline void delay(volatile uint32_t count)
+{
+    volatile register reg = count;
+	asm volatile("__delay_%=: subs %[count], %[count], #1;\
+                  bne __delay_%="
+		          :
+                  : [count]"r"(reg) 
+                  : "cc");
+}
 //static inline void delay(uint32_t count) 
 //{
 //    volatile uint32_t reg = count;
@@ -123,12 +133,10 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 	while (1) {
             
             mmio_write(GPSET1, ra);
-            i = 0x300000;
-            delay(i);
+            delay(0x300000);
 
             mmio_write(GPCLR1, ra);
-            i = 0x300000;
-            delay(i);
+            delay(0x300000);
 
     }
         
