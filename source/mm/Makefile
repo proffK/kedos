@@ -1,9 +1,11 @@
-TARGET=libbarebone.a
+TARGET=libmem.a
 ARM=arm-none-eabi
 
-SOURCES=kprint.c strlen.c error.c kmalloc.c kdie.c memset.c memcpy.c
-OBJECTS=kprint.o strlen.o error.o kmalloc.o kdie.o memset.o memcpy.o
 INCLUDE=../include
+
+SOURCES=heap.c
+OBJECTS=heap.o
+INCLUDES=$(INCLUDE)/mm/*.h
 
 AS=$(ARM)-gcc
 AS_FLAGS=-mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -nostartfiles
@@ -16,12 +18,12 @@ CC_FLAGS=-Wall -mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic 
 
 OBJ=$(ARM)-objcopy
 
-.PHONY:sources clean 
+.PHONY: clean sources
 
-$(TARGET): sources
+$(TARGET): sources 
 	$(AR) $(AR_FLAGS) $@ $(OBJECTS)
 
-sources: $(SOURCES)
+sources: $(SOURCES) $(INCLUDES)
 	$(CC) $(CC_FLAGS) -c $(SOURCES) -lgcc
 
 clean:

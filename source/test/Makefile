@@ -1,8 +1,8 @@
-TARGET=libbcm2836.a
+TARGET=libtest.a
 ARM=arm-none-eabi
 
-SOURCES=uart.c registers.c
-OBJECTS=uart.o registers.o
+SOURCES=mem_test.c heap_test.c
+OBJECTS=mem_test.o heap_test.o
 INCLUDE=../include
 
 AS=$(ARM)-gcc
@@ -12,17 +12,17 @@ AR=$(ARM)-ar
 AR_FLAGS=rcs
 
 CC=$(ARM)-gcc
-CC_FLAGS=-mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -std=gnu99 -nostartfiles -O2 -I$(INCLUDE)
+CC_FLAGS=-Wall -mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -std=gnu99 -nostartfiles -O2 -I../include
 
 OBJ=$(ARM)-objcopy
 
-.PHONY:sources clean 
+.PHONY: sources clean
 
 $(TARGET): sources
 	$(AR) $(AR_FLAGS) $@ $(OBJECTS)
 
 sources: $(SOURCES)
-	$(CC) $(CC_FLAGS) -c $^
+	$(CC) $(CC_FLAGS) -c $(SOURCES) -lgcc
 
 clean:
 	rm -rf *.o

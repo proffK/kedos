@@ -1,0 +1,10 @@
+1. Implement kernel realloc (easy) (optional)
+2. Implement phys page realloc (medium) (optional)
+
+3. Write block device interface.
+4. Write file system.
+5. Write tty system.
+6. Write elf loader.
+7. Write scheduler.
+
+8. Build all.

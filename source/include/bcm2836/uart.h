@@ -1,6 +1,7 @@
 #ifndef __BCM2836_UART__
 #define __BCM2836_UART__
 #include "defines.h"
+#include <stddef.h>
 
 #define UART0_BASE   (PBASE + 0x201000)
 

@@ -1,12 +1,13 @@
-#include "../lib/nostdlib.h"
+#include <lib/nostdlib.h>
+#include <lib/string.h>
 
 #include <stddef.h>
 #include <stdint.h>
 
-#include "gpio.h"
-#include "uart.h"
-#include "mmio.h"
-#include "delay.h"
+#include "bcm2836/gpio.h"
+#include "bcm2836/uart.h"
+#include "bcm2836/mmio.h"
+#include "bcm2836/delay.h"
 
 void uart_init()
 {
