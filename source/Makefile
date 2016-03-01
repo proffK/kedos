@@ -2,7 +2,7 @@ TARGET=kernel
 ARM=arm-none-eabi
 
 INCLUDE=include
-STLIBS=-L./lib -L./bcm2836 -L./mm -L./test -ltest -lmem -lbcm2836 -lbarebone -lbcm2836 -lgcc
+STLIBS=-L./lib -L./bcm2836 -L./mm -L./test -L./fs -ltest -lfs -lmem -lbcm2836 -lbarebone -lbcm2836 -lgcc
 
 AS=$(ARM)-gcc
 AS_FLAGS=-mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -nostartfiles
@@ -15,9 +15,9 @@ LD_FLAGS=-mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -ffreestandi
 
 OBJ=$(ARM)-objcopy
 
-.PHONY: lib bcm2836 mm test all clean
+.PHONY: fs lib bcm2836 mm test all clean count
 
-all: lib bcm2836 mm test $(TARGET)
+all: lib bcm2836 mm fs test $(TARGET)
 
 $(TARGET): kernel.o boot.o 
 	$(CC) -T $(LD_SCRIPT) -o $(TARGET).elf $(LD_FLAGS) $^ $(STLIBS)
@@ -39,6 +39,9 @@ bcm2836:
 mm:
 	make -C mm
 
+fs:
+	make -C fs
+
 test:
 	make -C test
 
@@ -50,3 +53,6 @@ clean:
 	make -C lib clean
 	make -C bcm2836 clean
 	make -C mm clean
+	make -C fs clean
+count:
+	wc -l *.c */*.c include/*/*.h
