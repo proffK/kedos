@@ -1,8 +1,8 @@
 TARGET=libbcm2836.a
 ARM=arm-none-eabi
 
-SOURCES=uart.c registers.c
-OBJECTS=uart.o registers.o
+SOURCES=uart.c registers.c timer.c
+OBJECTS=uart.o registers.o timer.o
 INCLUDE=../include
 
 AS=$(ARM)-gcc
