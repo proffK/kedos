@@ -61,7 +61,8 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
         phys_area_init(&new_heap, new_heap.list, KERNEL_HEAP_START_SIZE);
         
         //mem_test();
-        heap_test();
+        //heap_test();
+        timer_test();
 
         kdie("First succesfull die");
 

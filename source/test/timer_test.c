@@ -17,19 +17,32 @@
 
 */
 
-#ifndef _TEST_
-#define _TEST_
+#include <test/test.h>
 
-#include <lib/nostdio.h>
-#include <lib/nostdlib.h>
-#include <bcm2836/defines.h>
-#include <bcm2836/timer.h>
-#include <mm/heap.h>
+#define MAX_COUNT 20
+#define PERIOD 1000000
 
-int mem_test();
+int timer_test()
+{
+        int count = 0;
 
-int heap_test();
+        for (count = 0; count < MAX_COUNT; ++count) {
 
-int timer_test();
+                kprint("%d\r\n", count);
+                usleep(PERIOD);
 
-#endif
+        }
+        kprint("If numbers appeared every PERIOD,\r\n"
+                "test passed succecfully\r\n");
+
+        timeout_wait(0 == 0, 10 * PERIOD);
+        kprint("first timeout_wait test\r\n");
+
+        timeout_wait(1 == 0, 10 * PERIOD);
+        kprint("second timeout_wait test\r\n");
+
+        return 0;
+}
+
+#undef MAX_COUNT
+#undef PERIOD
