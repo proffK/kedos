@@ -11,15 +11,3 @@ void usleep(usec_t us)
 
         return;
 }
-
-int timeout_wait(int cond, usec_t us)
-{
-        volatile uint32_t ts = sys_timer->counter_lo;
-
-        do {
-                if (cond != 0) return 0;
-        } while (sys_timer->counter_lo - ts < us);
-
-        errno = ETIMEDOUT;
-        return -1;
-}
