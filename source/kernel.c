@@ -30,6 +30,8 @@
 
 #include "mm/heap.h"
 
+#include "sys/devs.h"
+
 #include "test/test.h"
 
 #define KERNEL_HEAP_SIZE 0x10000000
@@ -47,11 +49,6 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 
         phys_area_list new_heap;
 
-        ra = 1 << 21;
-        mmio_write(GPFSEL4, ra);
-
-        ra = 1 << 15;
-    
 	uart_init();
         kprint("Hello, kernel world.\r\n"
                "Kernel start in %p\r\n"
@@ -62,19 +59,22 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
         
         //mem_test();
         //heap_test();
-        timer_test();
+        //timer_test();
+        kprint("Power set: %x\r\n", bcm2835_vc_set_power_state(BCM2835_VC_POWER_ID_SDCARD, BCM2835_VC_SET_POWER_STATE_ON_WAIT));
 
-        kdie("First succesfull die");
+        bdevs_init();
 
-	while (1) {
-            
-                mmio_write(GPSET1, ra);
-                delay(0x300000);
+        kdie("First succesfull death");
 
-                mmio_write(GPCLR1, ra);
-                delay(0x300000);
-
-        }
+//	while (1) {
+//            
+//                mmio_write(GPSET1, ra);
+//                delay(0x300000);
+//
+//                mmio_write(GPCLR1, ra);
+//                delay(0x300000);
+//
+//        }
         
 
 		//uart_putc(uart_getc());

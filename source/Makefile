@@ -2,7 +2,7 @@ TARGET=kernel
 ARM=arm-none-eabi
 
 INCLUDE=include
-STLIBS=-L./lib -L./bcm2836 -L./mm -L./test -L./fs -ltest -lfs -lmem -lbcm2836 -lbarebone -lbcm2836 -lgcc
+STLIBS=-L./lib -L./bcm2836 -L./mm -L./test -L./fs -L./sys -ltest -lsys -lfs -lmem -lbcm2836 -lbarebone -lbcm2836 -lgcc
 
 AS=$(ARM)-gcc
 AS_FLAGS=-mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -nostartfiles
@@ -15,9 +15,9 @@ LD_FLAGS=-mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -ffreestandi
 
 OBJ=$(ARM)-objcopy
 
-.PHONY: fs lib bcm2836 mm test all clean count
+.PHONY: fs lib bcm2836 mm sys test all clean count
 
-all: lib bcm2836 mm fs test $(TARGET)
+all: lib bcm2836 mm fs sys test $(TARGET)
 
 $(TARGET): kernel.o boot.o 
 	$(CC) -T $(LD_SCRIPT) -o $(TARGET).elf $(LD_FLAGS) $^ $(STLIBS)
@@ -25,10 +25,10 @@ $(TARGET): kernel.o boot.o
 	mv $(TARGET).bin ../kernel/kernel.img
 
 kernel.o: kernel.c 
-	$(CC) $(CC_FLAGS) -c -g $^ -o $@ -O2 -Wall -Wextra -lgcc
+	$(CC) $(CC_FLAGS) -c $^ -o $@ -O2 -Wall -Wextra -lgcc
 
 boot.o: boot.S
-	$(AS) $(AS_FLAGS) -c -g $^ -o $@
+	$(AS) $(AS_FLAGS) -c $^ -o $@
 
 lib:
 	make -C lib
@@ -41,6 +41,9 @@ mm:
 
 fs:
 	make -C fs
+
+sys:
+	make -C sys
 
 test:
 	make -C test

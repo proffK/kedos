@@ -2,7 +2,7 @@
 
 void reg2arr(reg_t* arr)
 {
-        asm ("str %%r0, %0\n\t"
+        /*asm volatile ( "str %%r0, %0\n\t"
                         "ldr %%r0, %0\n\t"
                         "add %%r0, %%r0, #4\n\t"
                         "str %%pc, [%%r0]\n\t"
@@ -32,12 +32,9 @@ void reg2arr(reg_t* arr)
                         "str %%r12, [%%r0]\n\t"
                         "add %%r0, %%r0, #4\n\t"
                         "str %%sp, [%%r0]\n\t"
-                        "add %%r0, %%r0, #4\n\t"
-                        "str %%lr, [%%r0]\n\t" 
-                        : "=m" (arr) 
-                        :
-                        : "r1", "r2",
+                        "add %%r0, %%r0, #4\n\t" 
+                        "str %%lr, [%%r0]\n\t" : "=m" (arr) : : "r1", "r2",
                         "r3", "r4", "r5", "r6", "r7",
                         "r8", "r9", "r10", "r11", "r12",
-                        "r13", "r14", "r15", "memory");
+                        "memory" ); */
 }
