@@ -12,6 +12,8 @@
 #define ARCH_BITS 32
 #define REGS_NUM  16
 
+#define RPI2
+
 typedef uint32_t reg_t;
 typedef uint32_t aptr_t;
 typedef uint8_t byte;

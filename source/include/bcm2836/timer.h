@@ -22,6 +22,16 @@ extern struct bcm2836_sys_timer* sys_timer;
 
 void usleep(usec_t us);
 
-int timeout_wait(int cond, usec_t us);
+#define timeout_wait(cond, us) \
+do {\
+        volatile uint32_t ts = sys_timer->counter_lo;\
+        do {\
+                if ((cond) != 0) {\
+                        kprint("Event %d\n", cond);\
+                        break;\
+                }\
+        } while (sys_timer->counter_lo - ts < (uint32_t) (us));\
+\
+} while(0)
 
 #endif
