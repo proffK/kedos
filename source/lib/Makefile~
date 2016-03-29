@@ -1,8 +1,8 @@
-TARGET=libtest.a
+TARGET=libbarebone.a
 ARM=arm-none-eabi
 
-SOURCES=mem_test.c heap_test.c timer_test.c lib_test.c
-OBJECTS=mem_test.o heap_test.o timer_test.o lib_test.o
+SOURCES=kprint.c strlen.c error.c kmalloc.c kdie.c memset.c memcpy.c
+OBJECTS=kprint.o strlen.o error.o kmalloc.o kdie.o memset.o memcpy.o
 INCLUDE=../include
 
 AS=$(ARM)-gcc
@@ -12,11 +12,11 @@ AR=$(ARM)-ar
 AR_FLAGS=rcs
 
 CC=$(ARM)-gcc
-CC_FLAGS=-Wall -mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -std=gnu99 -nostartfiles -O2 -I../include
+CC_FLAGS=-Wall -mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -std=gnu99 -nostartfiles -O2 -I$(INCLUDE)
 
 OBJ=$(ARM)-objcopy
 
-.PHONY: sources clean
+.PHONY:sources clean 
 
 $(TARGET): sources
 	$(AR) $(AR_FLAGS) $@ $(OBJECTS)

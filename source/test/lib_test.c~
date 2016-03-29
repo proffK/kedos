@@ -16,14 +16,45 @@
 *   along with kedos.  If not, see <http://www.gnu.org/licenses/>.
 
 */
-#include <lib/nostdlib.h>
-#include <lib/nostdio.h>
 
-inline void kdie(char* err_msg)
+
+#include <test/test.h>
+
+void core_dump (reg_t* regarr);
+
+int lib_test()
 {
-        reg_t regarr[REGS_NUM] = {};
-	kprint ("System failed : %s\r\n", err_msg);
-        dump_registers(regarr);
+	byte p1 = 0xff;
+	word p2 = 0xaaaa;
+	dword p3 = 0x0f0f0f0f;
+
+	reg_t regarr[REGS_NUM] = {};
+	dump_registers (regarr);
+	core_dump (regarr);
+	
+	kprint ("r5 = r6\r\n"
+		"r7 = p1\r\n");
+
+	asm ("mov %%r5, %%r6\r\n"
+	     "mov %%r7, %0\r\n" 
+	     : : "r" (p1): "r5", "r7", "memory");
+	
+	dump_registers (regarr);
+	core_dump (regarr);
+
+	p3 = p2;
+
+	kprint ("p3 = p2\r\n"
+		"r11 = pc\r\n");
+
+	asm ("mov %%r11, %%pc\n\t"
+	     : : : "r11", "memory");	
+	
+	return 0;
+}
+
+void core_dump (reg_t* regarr)
+{
 	kprint( "Core dump:\r\n"
                 "r0 = %x\r\n"
                 "r1 = %x\r\n"
@@ -57,7 +88,4 @@ inline void kdie(char* err_msg)
                 regarr[13],
                 regarr[14]
                 );
-
-
-        while (1);
 }
