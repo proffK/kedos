@@ -211,7 +211,34 @@ void* kcalloc(int n, size_t size)
 
 void* krealloc(void* block, size_t size)
 {
-        return NULL;  /* TODO: implement krealloc() */
+	kmem_chunk* re_elem;
+
+	if (block == NULL) return NULL;
+
+	re_elem = block - sizeof (kmem_chunk);
+
+	if (size < 0) {
+		errno = EINVAL;
+		kdie("krealloc get negative size");
+	}
+	
+	if (size > re_elem->size) {
+
+		if (IS_AFTER(re_elem) >= size - re_elem->size) {
+			re_elem->size = size;
+			return (void *)re_elem;
+		} else {
+			kmem_chunk* new_elem = (kmem_chunk *)kmalloc(size);
+			memcpy ((void *)re_elem, (void *)new_elem, re_elem->size);
+			kfree(void *)re_elem);
+			return (void *)new_elem;
+		}
+
+	} else {		
+		re_elem->size = size;
+		return (void *)re_elem;
+	}	 
+        return NULL;
 }
 
 int kfree(void* block)
