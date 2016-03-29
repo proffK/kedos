@@ -22,7 +22,9 @@
 inline void kdie(char* err_msg)
 {
         reg_t regarr[REGS_NUM] = {};
-	kprint ("System failed : %s\r\n", err_msg);
+
+	
+	kprint ("System failed : %s\n\t", err_msg);
         dump_registers(regarr);
 	kprint( "Core dump:\r\n"
                 "r0 = %x\r\n"
