@@ -211,7 +211,7 @@ void* kcalloc(int n, size_t size)
 
 void* krealloc(void* block, size_t size)
 {
-	kmem_chunk* re_elem;
+	kmem_chunk* re_elem = NULL;
 
 	if (block == NULL) return NULL;
       
@@ -223,6 +223,11 @@ void* krealloc(void* block, size_t size)
 	if (size < 0) {
 		errno = EINVAL;
 		kdie("krealloc get negative size");
+	}
+
+ 	if (size == 0) {
+		kfree(block);
+		return NULL;
 	}
 	
 	if (size > re_elem->size) {
