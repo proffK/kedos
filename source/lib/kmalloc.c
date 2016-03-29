@@ -214,8 +214,11 @@ void* krealloc(void* block, size_t size)
 	kmem_chunk* re_elem;
 
 	if (block == NULL) return NULL;
-
+      
 	re_elem = block - sizeof (kmem_chunk);
+	
+	if (re_elem->area_size != 0 && re_elem->size == 0)
+		return NULL;
 
 	if (size < 0) {
 		errno = EINVAL;
@@ -224,19 +227,22 @@ void* krealloc(void* block, size_t size)
 	
 	if (size > re_elem->size) {
 
-		if (IS_AFTER(re_elem) >= size - re_elem->size) {
+		if (FREE_AFTER(re_elem) >= size - re_elem->size) {
 			re_elem->size = size;
-			return (void *)re_elem;
-		} else {
-			kmem_chunk* new_elem = (kmem_chunk *)kmalloc(size);
-			memcpy ((void *)re_elem, (void *)new_elem, re_elem->size);
-			kfree(void *)re_elem);
-			return (void *)new_elem;
+			return (void*) re_elem;
+		} else if (re_elem->area_size != 0) {
+			
+			void* new_elem = kmalloc (size);
+			if (new_elem == NULL) return NULL;
+
+			memcpy ((void*) re_elem, (void*) new_elem, re_elem->size);
+			kfree ((void*) re_elem);
+			return (void*) new_elem;
 		}
 
 	} else {		
 		re_elem->size = size;
-		return (void *)re_elem;
+		return (void*) re_elem;
 	}	 
         return NULL;
 }
@@ -244,7 +250,6 @@ void* krealloc(void* block, size_t size)
 int kfree(void* block)
 {
         kmem_chunk* del_elem;
-
         if (block == NULL) return 0;
 
         del_elem = block - sizeof(kmem_chunk);
