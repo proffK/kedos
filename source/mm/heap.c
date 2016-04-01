@@ -120,8 +120,58 @@ void* phys_page_alloc(uint32_t n, uint32_t owner)
 }
 
 void* phys_page_realloc(void* old_page, uint32_t new_n, uint32_t new_owner)
-{
-        return NULL; /*TODO Not implemented */
+{	
+	if (old_page == NULL) {
+
+		errno = ENOMEM;
+#ifdef DEBUG_MEM
+	kprint("Incorrect old_page address\r\n");
+#endif
+                return NULL;
+	}
+	if (new_owner == 0) {
+#ifdef DEBUG_MEM
+	kprint ("Kernel can't realloc memory\r\n");
+#endif
+		return NULL;
+	}
+	
+	if (new_owner == -1 || new_n == 0) {
+		phys_page_free (old_page);
+		return NULL;
+	}
+
+	phys_area_info* cur_page = phys_list_findb_elem (old_page);
+	uint32_t old_n = AREA_SIZE (cur_page) / PAGE_SIZE;
+	if (new_n > old_n) {
+		if (cur_page->next != 0 &&
+		    cur_page->next->owner == -1 &&
+		    AREA_SIZE (cur_page->next) > (new_n - old_n) * PAGE_SIZE) {
+
+			cur_page->end += (new_n - old_n) * PAGE_SIZE;
+			cur_page->owner = new_owner;
+			return cur_page->begin;
+		} else {
+			void* new_page = phys_page_alloc (new_n, new_owner);
+			if (!new_page) {
+				errno = ENOMEM;
+#ifdef DEBUG_MEM
+	kprint("No free page area!\r\n");
+#endif
+				return NULL;
+			}
+
+			memcpy (cur_page->begin, new_page, old_n * PAGE_SIZE);
+
+			phys_page_free (cur_page->begin);
+			return new_page;
+		}
+	} else {
+		cur_page->end += (new_n - old_n) * PAGE_SIZE;
+		cur_page->owner = new_owner;
+		return cur_page->begin;
+	}
+        return NULL;
 }
 
 int phys_page_free(void* page_addr)
