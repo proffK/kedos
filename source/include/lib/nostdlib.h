@@ -4,6 +4,8 @@
 #include <stddef.h>
 #include <stdint.h>
 #include "error.h"
+#include "flags.h"
+#include "../lib/ringbuffer.h"
 #include "../bcm2836/defines.h"
 
 void* kmalloc(size_t size);
