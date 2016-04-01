@@ -34,4 +34,6 @@ int timer_test();
 
 int lib_test();
 
+int rbuffer_test();
+
 #endif
