@@ -32,4 +32,6 @@ int heap_test();
 
 int timer_test();
 
+int lib_test();
+
 #endif

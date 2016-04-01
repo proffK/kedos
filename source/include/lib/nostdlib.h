@@ -5,7 +5,6 @@
 #include <stdint.h>
 #include "error.h"
 #include "../bcm2836/defines.h"
-#include "../bcm2836/registers.h"
 
 void* kmalloc(size_t size);
 
@@ -20,5 +19,7 @@ int kmem_full_dump();
 void kdie(char* err_msg);
 
 int hex2str(uint32_t hex, char* str);
+
+void dump_registers(reg_t* arr);
 
 #endif
