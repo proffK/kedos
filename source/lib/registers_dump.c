@@ -21,11 +21,13 @@
 
 void dump_registers(reg_t* arr)
 {
-	asm volatile ("str %%r0, %0\n\t"
-		      "ldr %%r0, [%%fp, #-8]\n\t"
+	asm volatile ("push {%%r0}\n\t"
 		      "add %%r0, %%r0, #4\n\t"
 		      "str %%r1, [%%r0]\n\t"
-		      "add %%r0, %%r0, #4\n\t"
+		      "add %%r0, %%r0, #-4\n\t"
+		      "pop {%%r1}\n\t"
+		      "str %%r1, [%%r0]\n\t"
+		      "add %%r0, %%r0, #8\n\t"
 		      "str %%r2, [%%r0]\n\t"
 		      "add %%r0, %%r0, #4\n\t"
 		      "str %%r3, [%%r0]\n\t"
@@ -53,7 +55,7 @@ void dump_registers(reg_t* arr)
 		      "str %%lr, [%%r0]\n\t"
 		      "add %%r0, %%r0, #4\n\t"
 		      "str %%pc, [%%r0]\n\t"
-		      : "=m" (arr) : : "r0", "memory");
+		      : "=m" (arr) : : "r0", "r1", "memory");
 }
 	
 
