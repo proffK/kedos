@@ -12,6 +12,8 @@
 #define ARCH_BITS 32
 #define REGS_NUM  16
 
+#define RING_BUFFER_SIZE 32
+
 #define RPI2
 
 typedef uint32_t reg_t;
@@ -19,5 +21,6 @@ typedef uint32_t aptr_t;
 typedef uint8_t byte;
 typedef uint16_t word;
 typedef uint32_t dword;
+typedef uint8_t sflag_t;
 
 #endif

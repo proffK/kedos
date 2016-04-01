@@ -1,8 +1,8 @@
 TARGET=libbarebone.a
 ARM=arm-none-eabi
 
-SOURCES=kprint.c strlen.c error.c kmalloc.c kdie.c memset.c memcpy.c
-OBJECTS=kprint.o strlen.o error.o kmalloc.o kdie.o memset.o memcpy.o
+SOURCES=kprint.c strlen.c error.c kmalloc.c kdie.c memset.c memcpy.c registers_dump.c ringbuffer.c
+OBJECTS=kprint.o strlen.o error.o kmalloc.o kdie.o memset.o memcpy.o registers_dump.o ringbuffer.o
 INCLUDE=../include
 
 AS=$(ARM)-gcc

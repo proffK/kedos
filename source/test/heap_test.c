@@ -49,12 +49,17 @@ int heap_test()
         p2 = NULL;
 
         p1 = kcalloc(2, 64);
-
+	p1 = krealloc(p1, 128);
+	kprint("krealloc complited");
         kmem_full_dump();
-        
+
+       
         kprint("p0: %p\r\np1: %p\r\n"
                 "p2: %p\r\np3: %p\r\n"
                 "p4: %p\r\n", p0, p1, p2, p3, p4);
+	p0 = krealloc (p0, 2);
+
+	kmem_full_dump();
 
         kfree(p0);
         

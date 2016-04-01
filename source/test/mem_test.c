@@ -39,6 +39,16 @@ int mem_test()
 
         phys_area_list_dump();
 
+	p1 = phys_page_realloc (p1, 7, 2);
+	p0 = phys_page_realloc (p1, 7, 1);
+	p2 = phys_page_realloc (p1, 3, 3);
+
+	 kprint("p0: %p\r\np1: %p\r\n"
+                "p2: %p\r\np3: %p\r\n"
+                "p4: %p\r\n", p0, p1, p2, p3, p4);
+
+        phys_area_list_dump();
+
         phys_page_free(p1);
         phys_page_free(p2);
 
@@ -50,7 +60,11 @@ int mem_test()
                 "p2: %p\r\np3: %p\r\n"
                 "p4: %p\r\n", p0, p1, p2, p3, p4);
 
+	
+
         phys_area_list_dump();
+
+	
 
         p2 = phys_page_alloc(4, 3);
 
