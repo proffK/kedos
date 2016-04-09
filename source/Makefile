@@ -11,7 +11,7 @@ CC=$(ARM)-gcc
 CC_FLAGS=-mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -std=gnu99 -nostartfiles -I$(INCLUDE)
 
 LD_SCRIPT= linker.ld
-LD_FLAGS=-mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -ffreestanding -O2 -nostdlib -lgcc
+LD_FLAGS=-mfpu=neon -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -ffreestanding -O2 -nostdlib -lgcc
 
 OBJ=$(ARM)-objcopy
 
