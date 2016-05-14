@@ -9,6 +9,6 @@ void sprintf(char *buffer, const char *fmt, ...);
 
 int kvprintf(char const *fmt, void (*func)(uint8_t, void*), void *arg, int radix, va_list ap);
 
-#define TEDIOS_MAL_DEBUG
+//#define TEDIOS_MAL_DEBUG
 
 #endif

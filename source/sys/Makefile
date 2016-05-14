@@ -3,12 +3,11 @@ ARM=arm-none-eabi
 
 INCLUDE=../include
 
-SOURCES=devs.c
-OBJECTS=devs.o
+SOURCES=devs.c kscheduler.c kthread.c syscall.c
+OBJECTS=devs.o kscheduler.o kthread.o syscall.o
 INCLUDES=$(INCLUDE)/sys/*.h
 
-AS=$(ARM)-gcc
-AS_FLAGS=-mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -nostartfiles
+
 
 AR=$(ARM)-ar 
 AR_FLAGS=rcs
@@ -18,9 +17,9 @@ CC_FLAGS=-Wall -mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic 
 
 OBJ=$(ARM)-objcopy
 
-.PHONY: clean sources
+.PHONY: clean sources asm
 
-$(TARGET): sources 
+$(TARGET): sources asm
 	$(AR) $(AR_FLAGS) $@ $(OBJECTS)
 
 sources: $(SOURCES) $(INCLUDES)

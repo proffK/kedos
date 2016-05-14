@@ -43,8 +43,8 @@ void free_rbuffer (rbuffer* buffer) {
 
 	if (buffer == NULL) {
 		errno = ENOMEM;
-#ifndef DEBUG_MEM
-	kprint ("Incorrect buffer address");
+#ifdef DEBUG_MEM
+	kprint ("Incorrect buffer address\r\n");
 #endif
 		return NULL;
 	}
@@ -63,8 +63,8 @@ void dump_rbuffer (rbuffer* buffer, void (*data_dump)(void* data)) {
 
 	if (buffer == NULL) {
 		errno = ENOMEM;
-#ifndef DEBUG_MEM
-	kprint ("Incorrect buffer address");
+#ifdef DEBUG_MEM
+	kprint ("Incorrect buffer address\r\n");
 #endif
 		return NULL;
 	}
@@ -91,15 +91,15 @@ void dump_rbuffer (rbuffer* buffer, void (*data_dump)(void* data)) {
 int write_data (rbuffer* buffer, void* data) {
 	if (buffer == NULL) {
 		errno = ENOMEM;
-#ifndef DEBUG_MEM
-	kprint ("Incorrect buffer address");
+#ifdef DEBUG_MEM
+	kprint ("Incorrect buffer address\r\n");
 #endif
 		return 0;
 	}
 	if (buffer->flags & RBUFFER_IS_FULL) {
 		if (buffer->flags & RBUFFER_IS_UNDER_PROTECTION) {
 #ifdef DEBUG
-	kprint ("Can't write data. Buffer is full and protected. Lose data...");
+	kprint ("Can't write data. Buffer is full and protected. Lose data...\r\n");
 #endif
 			return 0;
 		}
@@ -123,15 +123,15 @@ int write_data (rbuffer* buffer, void* data) {
 void* read_data (rbuffer* buffer) {
 	if (buffer == NULL) {
 		errno = ENOMEM;
-#ifndef DEBUG_MEM
-	kprint ("Incorrect buffer address");
+#ifdef DEBUG_MEM
+	kprint ("Incorrect buffer address\r\n");
 #endif
 		return NULL;
 	}
 
 	if (buffer->flags & RBUFFER_IS_EMPTY) {
 #ifdef DEBUG
-	kprint ("Can't read from empty buffer");
+	kprint ("Can't read from empty buffer\r\n");
 #endif
 		return NULL;
 	}

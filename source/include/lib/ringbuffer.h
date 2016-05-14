@@ -3,6 +3,7 @@
 
 
 #include "lib/nostdlib.h"
+#include "lib/nostdio.h"
 
 typedef struct node_t {
 	void* data;
