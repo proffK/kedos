@@ -25,6 +25,7 @@
 #include <bcm2836/defines.h>
 #include <bcm2836/timer.h>
 #include <mm/heap.h>
+#include <sys/kthread.h>
 
 int mem_test();
 
@@ -35,5 +36,9 @@ int timer_test();
 int lib_test();
 
 int rbuffer_test();
+
+int thread_test();
+
+void data_message_dump(void* data);
 
 #endif

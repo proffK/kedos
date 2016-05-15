@@ -9,18 +9,20 @@
 typedef uint32_t usec_t;
 
 struct bcm2836_sys_timer {
-    volatile uint32_t control_status;
-    volatile uint32_t counter_lo;
-    volatile uint32_t counter_hi;
-    volatile uint32_t compare0;
-    volatile uint32_t compare1;
-    volatile uint32_t compare2;
-    volatile uint32_t compare3;
+    	volatile uint32_t control_status;
+    	volatile uint32_t counter_lo;
+    	volatile uint32_t counter_hi;
+	volatile uint32_t compare0;
+	volatile uint32_t compare1;
+	volatile uint32_t compare2;
+	volatile uint32_t compare3;
 };
 
 extern struct bcm2836_sys_timer* sys_timer;
 
 void usleep(usec_t us);
+void sys_timer_init();
+struct bcm2836_sys_timer* get_sys_timer();
 
 #define timeout_wait(cond, us) \
 do {\
@@ -35,3 +37,4 @@ do {\
 } while(0)
 
 #endif
+
