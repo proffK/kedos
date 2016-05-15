@@ -27,16 +27,28 @@
 #include "bcm2836/delay.h"
 #include "bcm2836/gpio.h"
 #include "bcm2836/uart.h"
-
+#include "bcm2836/interrupt.h"
+#include "sys/kthread.h"
 #include "mm/heap.h"
 
 #include "sys/devs.h"
 
 #include "test/test.h"
 
+
+int global_var = 0;
+
 #define KERNEL_HEAP_SIZE 0x10000000
 
-int global_var;
+void  __attribute__ ((interrupt ("IRQ"))) irq_handler(void) {
+	thread_exit (cur_thread->registers);
+  	_disable_interrupts();
+  	kscheduler();
+	sys_timer->compare1 = sys_timer->counter_lo + TIMER_RATE;
+	sys_timer->control_status = ~0;
+  	_enable_interrupts();
+  	thread_entry (cur_thread->registers);
+}
 
 void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 {
@@ -56,16 +68,29 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
                "Kernel global variables in %p\r\n", (void*) kernel_main, hex, &global_var);
 
         phys_area_init(&new_heap, new_heap.list, KERNEL_HEAP_START_SIZE);
-        
-        //mem_test();
-        //heap_test();
-        //timer_test();
-	//lib_test();
-	rbuffer_test();
-        kprint("Power set: %x\r\n", bcm2835_vc_set_power_state(BCM2835_VC_POWER_ID_SDCARD, BCM2835_VC_SET_POWER_STATE_ON_WAIT));
 
-        bdevs_init();
-        kdie("First succesfull death");
+
+	// mem_test();
+        //heap_test();
+	//timer_test();
+	//lib_test();
+	//rbuffer_test();
+	kprint("Power set: %x\r\n", bcm2835_vc_set_power_state(BCM2835_VC_POWER_ID_SDCARD, BCM2835_VC_SET_POWER_STATE_ON_WAIT));
+	bdevs_init();
+
+	thread_test();
+
+	InitIrqController();
+	sys_timer_init();	
+	_enable_interrupts();
+	run();
+
+
+	while (1)
+        {
+		kprint ("sp: %x\r\n", _get_stack_pointer());
+	}
+	// kdie("First succesfull death");
 
 //	while (1) {
 //            
@@ -80,3 +105,4 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 
 		//uart_putc(uart_getc());
 }
+

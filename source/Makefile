@@ -19,7 +19,7 @@ OBJ=$(ARM)-objcopy
 
 all: lib bcm2836 mm fs sys test $(TARGET)
 
-$(TARGET): kernel.o boot.o 
+$(TARGET): kernel.o boot.o
 	$(CC) -T $(LD_SCRIPT) -o $(TARGET).elf $(LD_FLAGS) $^ $(STLIBS)
 	$(OBJ) $(TARGET).elf -O binary $(TARGET).bin
 	mv $(TARGET).bin ../kernel/kernel.img

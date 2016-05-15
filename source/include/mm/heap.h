@@ -22,6 +22,7 @@
 #include <bcm2836/defines.h>
 #include <lib/error.h>
 #include <lib/nostdio.h>
+#include <lib/nostdlib.h>
 #include <stddef.h>
 #include <stdint.h>
 

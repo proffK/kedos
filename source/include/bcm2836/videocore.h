@@ -29,7 +29,7 @@
 #include <stdint.h>
 #include "defines.h"
 
-#define GPU_IO_BASE                             0x7E000000      ///<
+#define GPU_IO_BASE                     0x7E000000      ///<
 #define GPU_CACHED_BASE                 0x40000000      ///<
 #define GPU_UNCACHED_BASE               0xC0000000      ///<
 
@@ -44,7 +44,7 @@
 /// Unique clock ID
 
 typedef enum {
-	BCM2835_VC_CLOCK_ID_RESERVED	= 0,	///<
+        BCM2835_VC_CLOCK_ID_RESERVED	        = 0,	///<
 	BCM2835_VC_CLOCK_ID_EMMC 		= 1,	///<
 	BCM2835_VC_CLOCK_ID_UART 		= 2,	///<
 	BCM2835_VC_CLOCK_ID_ARM 		= 3,	///<
