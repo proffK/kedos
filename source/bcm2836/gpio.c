@@ -7,9 +7,9 @@ void gpio_set(uint8_t port)
 	*__PTR(GPSET0) = (uint32_t)(1 << port);
 }
 
-void gpio_get(uint8_t port)
+int gpio_get(uint8_t port)
 {
-	return (*__PTR(GPSET0) & (uint32_t)(1 << port));
+	return (*__PTR(GPLEV0) & (uint32_t)(1 << port));
 }
 
 void gpio_clr(uint8_t port)
@@ -19,8 +19,10 @@ void gpio_clr(uint8_t port)
 
 void gpio_inv(uint8_t port)
 {
-	if (gpio_get(port))
+	if (*__PTR(GPSET0) & (uint32_t)(1 << port))
 		gpio_clr(port);
 	else
 		gpio_set(port);
 }
+
+#undef __PTR
