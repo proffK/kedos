@@ -2,22 +2,22 @@
 
 #define __PTR(a) ((uint32_t *)((void *)(a)))
 
-void gpio_set(uint8_t port)
+void gpio_set(int port)
 {
 	*__PTR(GPSET0) = (uint32_t)(1 << port);
 }
 
-int gpio_get(uint8_t port)
+int gpio_get(int port)
 {
 	return (*__PTR(GPLEV0) & (uint32_t)(1 << port));
 }
 
-void gpio_clr(uint8_t port)
+void gpio_clr(int port)
 {
 	*__PTR(GPCLR0) = (uint32_t)(1 << port);
 }
 
-void gpio_inv(uint8_t port)
+void gpio_inv(int port)
 {
 	if (*__PTR(GPSET0) & (uint32_t)(1 << port))
 		gpio_clr(port);

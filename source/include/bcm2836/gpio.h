@@ -29,7 +29,7 @@
 #define __BCM2836_GPIO_H__
 
 #include <stdint.h>
-#include <defines.h>
+#include "defines.h"
 
 #define GPIO_BASE (PBASE + 0x200000)
 
@@ -71,7 +71,7 @@
  *
  * \see gpio_get(), gpio_clr(), gpio_inv()
  */
-void gpio_set(uint8_t port);
+void gpio_set(int port);
 
 /**
  * \ingroup io
@@ -91,7 +91,7 @@ void gpio_set(uint8_t port);
  *
  * \see gpio_set(), gpio_clr(), gpio_inv()
  */
-int gpio_get(uint8_t port);
+int gpio_get(int port);
 
 /**
  * \ingroup io
@@ -111,7 +111,7 @@ int gpio_get(uint8_t port);
  *
  * \see gpio_set(), gpio_get(), gpio_inv()
  */
-void gpio_clr(uint8_t port);
+void gpio_clr(int port);
 
 /**
  * \ingroup io
@@ -133,6 +133,6 @@ void gpio_clr(uint8_t port);
  *
  * \see gpio_set gpio_get(), gpio_clr()
  */
-void gpio_inv(uint8_t port);
+void gpio_inv(int port);
 
 #endif
