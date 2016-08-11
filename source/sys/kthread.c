@@ -2,18 +2,25 @@
 #include "lib/nostdlib.h"
 
 
-kthread_list* thread_list = NULL;
 kthread* cur_thread = NULL;
+node_head* thread_head = NULL;
+active_head* th_active_head = NULL;
+pid_t cur_pid = 0;
 
-kthread* kthread_init (sflag_t flags, dword pid, void* func) {
+extern reg_t* _get_stack_pointer();
+
+kthread* kthread_init (sflag_t flags, pid_t pid, void* func) {
 	kthread* thread = (kthread*) kcalloc (1, sizeof (kthread));
-	thread->registers = (dword*) kcalloc (15, sizeof (dword));
 	thread->flags = flags; 
 	thread->pid = pid;
-	thread->registers[13] = (dword*)phys_page_alloc (THREAD_PAGE_COUNT, pid) + PAGE_SIZE - 1;
-	thread->stack_base = thread->registers[13];
-	thread->buffer = create_rbuffer (RBUFFER_IS_EMPTY);
-	thread->registers[14] = func;
+	thread->stack_pointer = (reg_t *)phys_page_alloc (THREAD_PAGE_COUNT, pid) + PAGE_SIZE - 1;
+	thread->stack_base = thread->stack_pointer;	
+	thread->buffer = create_rbuffer (0, RING_BUFFER_SIZE);
+	thread->program_counter = (reg_t *)func;
+	init_dl_node (&thread->node);
+	init_dl_node (&thread->active);
+	if (!cur_thread)
+		cur_thread = thread;
 	return thread;
 }
 
@@ -25,151 +32,107 @@ int kthread_delete (kthread* thread) {
 	}
 	phys_page_free ((void *)thread->stack_base);
 	free_rbuffer (thread->buffer);
-	kfree (thread->registers);
+	delete_node (&thread->node);
+	delete_node (&thread->active);
 	kfree (thread);
 	return 0;
 }
 
 #ifdef DEBUG
 void kthread_dump (kthread* thread) {
-	kprint ("\r\nTHREAD %d DUMP: \r\n"
-		"STATE: %d \r\n"
-		"FLAGS: %d \r\n"
-		"REGISTERS: \r\n" 
-		"r0 = %d\r\n"
-		"r1 = %d\r\n"
-		"r2 = %d\r\n"
-		"r3 = %d\r\n"
-		"r4 = %d\r\n"
-		"r5 = %d\r\n"
-		"r6 = %d\r\n"
-		"r7 = %d\r\n"
-		"r8 = %d\r\n"
-		"r9 = %d\r\n"
-		"r10 = %d\r\n"
-		"r11 = %d\r\n"
-		"r12 = %d\r\n"
-		"sp = %d\r\n"
-		"lr = %d\r\n"
-		,thread->pid, thread->state, thread->flags,
-	       	thread->registers[0], thread->registers[1], thread->registers[2], thread->registers[3],
-	       	thread->registers[4], thread->registers[5], thread->registers[6], thread->registers[7],
-	       	thread->registers[8], thread->registers[9], thread->registers[10], thread->registers[11],
-	       	thread->registers[12], thread->registers[13], thread->registers[14]);
+	kprint ("Thread #%d\r\n SB : 0x%x\r\n SP : 0x%x\r\n PC : 0x%x\r\n", 
+		thread->pid, thread->stack_base, thread->stack_pointer, thread->program_counter);
 }
 #endif
 
-kthread_list* kthread_list_init () {
-	thread_list = (kthread_list*) kcalloc (1, sizeof (kthread_list));
-	thread_list->head = NULL;
-	thread_list->tail = NULL;
-	thread_list->cur_pid = 0;
-	return thread_list;
+node_head* kthread_list_init () {
+	thread_head = (node_head*) kcalloc (1, sizeof (node_head));
+	node_init (thread_head);
+	th_active_head = (active_head*) kcalloc (1, sizeof (active_head));
+	active_init (th_active_head);
+	return thread_head;
 }
 
 int kthread_list_delete () {
-        if (thread_list == NULL) {
+        if (thread_head == NULL) {
 	        kprint ("Thread list doesn't exist\r\n");
 		errno = ENOMEM;
 		return -1;
 	}
-	kthread* cur = thread_list->head;
-	while (cur != thread_list->tail || cur != NULL) {
-	        cur = cur->next;
-		kthread_delete (cur);
-	}
-	if (cur != NULL)
-	        kthread_delete (cur);
-	kfree (thread_list);
+	kthread* i = NULL;
+	for (i = node_head_first(thread_head);
+        	node_is_last(thread_head, i); i = node_next(i)) {
+        	kthread_delete (i);
+    	}
+	kfree (thread_head);
+	kfree (th_active_head);
 	return 0;
 }
 
-kthread_list* add_kthread (sflag_t flags, void* func) {
-	if (thread_list == NULL) {
+void add_kthread (sflag_t flags, void* func) {
+	if (thread_head == NULL) {
 		kprint ("Thread list doesn't exist\r\n");
 		errno = ENOMEM;
-		return NULL;
+		return;
 	}
-	
-	kthread* thread = kthread_init (flags, thread_list->cur_pid, func);
-	thread_list->cur_pid++;
-	if (thread_list->head == NULL || thread_list->tail == NULL) {
-		thread_list->head = thread;
-		thread_list->tail = thread;
-		thread->prev = thread;
-		thread->next = thread;
-		cur_thread = thread;
-	} else {
-		thread->prev = thread_list->tail;
-		thread_list->head->prev = thread;
-		thread_list->tail->next = thread;
-		thread->next = thread_list->head;
-		thread_list->tail = thread;
+	if (th_active_head == NULL) {
+		kprint ("Thread active list doesn't exist\r\n");
+		errno = ENOMEM;
+		return;
 	}
-	return thread_list;
+	kthread* thread = kthread_init (flags, cur_pid, func);
+	node_add_tail (thread_head, thread);
+	active_add_tail (th_active_head, thread);
+	cur_pid++;
 }
 
-kthread_list* delete_kthread (dword pid) {
-	if (thread_list == NULL) {
+void delete_kthread (pid_t pid) {
+	if (thread_head == NULL) {
 		kprint ("Thread list doesn't exist\r\n");
 		errno = ENOMEM;
-		return NULL;
+		return;
 	}
-	kthread* thread = find_thread_pid (pid);
-       
-	thread->next->prev = thread->prev;
-	thread->prev->next = thread->next;
-	if (thread == thread_list->head && thread == thread_list->tail) {
-	        thread_list->head = NULL;
-	        thread_list->tail = NULL;
-		kprint ("head = tail, thread # %d\r\n", thread->pid);
-	}
-	else if (thread == thread_list->head) 
-		thread_list->head = thread->next;
-	else if (thread == thread_list->tail)
-		thread_list->tail = thread->prev;
-	kthread_delete (thread);
 
-	return thread_list;
+	if (th_active_head == NULL) {
+		kprint ("Thread active list doesn't exist\r\n");
+		errno = ENOMEM;
+		return;
+	}
+
+	kthread* thread = find_thread_pid (pid);
+	kthread_delete (thread);
 }
 
 void kthread_list_dump () {
-	if (thread_list->head == NULL || thread_list->tail == NULL) {
+	if (thread_head == NULL) {
 		kprint ("List is empty\r\n");
 		return;
 	}
 	kprint ("\r\nThread list: \r\n");
-	kthread* cur = thread_list->head;
-	if (cur != NULL)
-	        do {
-		        kthread_dump (cur);
-		        cur = cur->next;
-		} while (cur != thread_list->head);
+	for (kthread *i = node_head_first(thread_head);
+        	node_is_last(thread_head, i); i = node_next(i)) {
+		kthread_dump (i);        	
+    	}
 }
 
-kthread* find_thread_pid (dword pid) {
-	kthread* cur = thread_list->head;
-	do {
-		if (cur->pid == pid)
-			return cur;
-		cur = cur->next;
-	} while (cur != thread_list->head);
+kthread* find_thread_pid (pid_t pid) {
+	kthread* i = NULL;
+	for (i = node_head_first(thread_head);
+        	node_is_last(thread_head, i); i = node_next(i)) {
+        	if (i->pid == pid)
+			return i;
+    	}
 #ifdef DEBUG
 	kprint ("There are no thread with pid = %d\r\n", pid);
 #endif
 	return NULL;
 }
 
-void run() {
-	_set_sp (cur_thread->registers[13]);
-	kprint ("sp :%x\r\n", _get_stack_pointer());
-	thread_set_pc (cur_thread->registers[14]);
-}
+extern void _set_sp(reg_t* sp);
 
-void context_switch (void) {
-	thread_exit (cur_thread->registers);
-	kscheduler();
-	thread_entry (cur_thread->registers);
+void __attribute__((naked())) run() {
+	_set_sp (cur_thread->stack_pointer);
+	thread_set_pc (cur_thread->program_counter);
 }
 
 

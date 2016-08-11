@@ -24,11 +24,9 @@
 //  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 //  POSSIBILITY OF SUCH DAMAGE.
 
-
 .section ".text.boot"
 
 .globl _start
-
 
 // From the ARM ARM (Architecture Reference Manual). Make sure you get the
 // ARMv5 documentation which includes the ARMv6 documentation which is the
@@ -85,7 +83,6 @@ _reset_:
     	.word	0xE160006E				
 2:  	msr cpsr_c, r0
 3:
-
     	mov r0, #0x0000
     	mov r1, #0x8000
     	ldmia r1!, {r2-r9}
@@ -148,11 +145,8 @@ _get_irq_sp:
 	
 .globl _get_stack_pointer	
 _get_stack_pointer:
-    	// Return the stack pointer value
     	str     sp, [sp]
     	ldr     r0, [sp]
-
-    	// Return from the function
     	mov     pc, lr
 
 
@@ -161,7 +155,6 @@ _enable_interrupts:
     	mrs r0, cpsr
     	bic r0, r0, #I_BIT
     	msr cpsr_c, r0
-    	//cpsie i
     	mov pc, lr
 	
 .globl _disable_interrupts
@@ -169,7 +162,6 @@ _disable_interrupts:
     	mrs r0, cpsr
     	orr r0, #I_BIT
     	msr cpsr_c, r0
-    	//cpsid i
     	mov pc, lr
 
 	
@@ -182,10 +174,6 @@ _get_cpsr:
 .globl _set_sp
 _set_sp:
 	mov sp, r0
-	bx lr
-
-.globl _set_pc
-_set_pc:
 	bx lr
 
 .globl _set_svc_mode
@@ -205,11 +193,18 @@ _set_usr_mode:
 
 .globl PUT32
 PUT32:
-    	str r1,[r0]
+    	str r1, [r0]
     	bx lr
 
 .globl GET32
 GET32:
-    	ldr r0,[r0]
+    	ldr r0, [r0]
     	bx lr
 
+.globl _kernel_entry
+_kernel_entry:
+	push {r0-r12}
+	ldr r0, =kernel_entry
+	bx r0
+
+			

@@ -22,10 +22,13 @@
 
 #include <lib/nostdio.h>
 #include <lib/nostdlib.h>
+#include <lib/string.h>
 #include <bcm2836/defines.h>
 #include <bcm2836/timer.h>
 #include <mm/heap.h>
 #include <sys/kthread.h>
+#include <sys/syscall.h>
+
 
 int mem_test();
 

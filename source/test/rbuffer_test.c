@@ -25,25 +25,25 @@ void data_dump (void* data) {
 
 int rbuffer_test() {
 
-	rbuffer* test_buf = create_rbuffer (RBUFFER_IS_EMPTY); 	//(RBUFFER_IS_EMPTY | RBUFFER_IS_UNDER_PROTECTION)
-	dump_rbuffer (test_buf, data_dump);			//But it doesn't work, Protection flag become false after second iteration
-	int i = 0;						// TODO Fix it
+	rbuffer* test_buf = create_rbuffer (0, RING_BUFFER_SIZE); 	
+	dump_rbuffer (test_buf, data_dump);			
+	int i = 0;						
 	int arr[50] = {};
 	for (i = 0; i < 50; i++) {
 		arr[i] = i;
 	}					
 	for (i = 0; i < 35; i++) {
-		write_data (test_buf, &arr[i]);
+		write_data (test_buf, &arr[i], sizeof (int));
 	}
 
-	void* data;
+	void* data = kcalloc (1, sizeof (int));
 
 	dump_rbuffer (test_buf, data_dump);
 
 	for (i = 0; i < 5; i++) {
 		if (i % 2 == 0)
-			write_data (test_buf, &arr[i]);
-		data = read_data (test_buf);
+			write_data (test_buf, &arr[i], sizeof (int));
+		read_data (test_buf, data);
 		kprint ("Data = %d\r\n", *((int*)data));
 	}
 
@@ -51,20 +51,21 @@ int rbuffer_test() {
 
 	for (i = 0; i < 5; i++) {
 		if (i % 2 == 0)
-			write_data (test_buf, &arr[i]);
-		data = read_data (test_buf);
+			write_data (test_buf, &arr[i], sizeof (int));
+		read_data (test_buf, data);
 		kprint ("Data = %d\r\n", *((int*)data));
 	}
 
 	dump_rbuffer (test_buf, data_dump);
 
 	for (i = 0; i < 45; i++) {
-		data = read_data (test_buf);
+		read_data (test_buf, data);
 		kprint ("Data = %d\r\n", *((int*)data));
 	}
 
 	dump_rbuffer (test_buf, data_dump);
 
 	free_rbuffer (test_buf);
+	kfree (data);
 	return 0;
 }	

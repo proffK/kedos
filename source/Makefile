@@ -2,7 +2,7 @@ TARGET=kernel
 ARM=arm-none-eabi
 
 INCLUDE=include
-STLIBS=-L./lib -L./bcm2836 -L./mm -L./test -L./fs -L./sys -ltest -lsys -lfs -lmem -lbcm2836 -lbarebone -lbcm2836 -lgcc
+STLIBS=-L./lib -L./bcm2836 -L./mm -L./test -L./fs -L./sys -ltest -lsys -lfs -lmem -lbcm2836 -lsys -lbarebone -lbcm2836 -lgcc
 
 AS=$(ARM)-gcc
 AS_FLAGS=-mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -nostartfiles
@@ -22,7 +22,7 @@ all: lib bcm2836 mm fs sys test $(TARGET)
 $(TARGET): kernel.o boot.o
 	$(CC) -T $(LD_SCRIPT) -o $(TARGET).elf $(LD_FLAGS) $^ $(STLIBS)
 	$(OBJ) $(TARGET).elf -O binary $(TARGET).bin
-	mv $(TARGET).bin ../kernel/kernel.img
+	mv $(TARGET).bin ../kernel/kernel7.img
 
 kernel.o: kernel.c 
 	$(CC) $(CC_FLAGS) -c $^ -o $@ -O2 -Wall -Wextra -lgcc

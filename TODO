@@ -1,10 +1,12 @@
-1. Implement kernel realloc (easy) (optional)
-2. Implement phys page realloc (medium) (optional)
 
-3. Write block device interface.
-4. Write file system.
-5. Write tty system.
-6. Write elf loader.
-7. Write scheduler.
+1. Write block device interface.
+2. Write file system.
+3. Write tty system.
+4. Write elf loader.
+5. Write scheduler.
 
-8. Build all.
+6. Build all.
+
+7. Decide method to alloc rbuffer bucket (optional)
+8. Researh: how return value from syscall 
+9. Write spinlock

@@ -3,8 +3,8 @@ ARM=arm-none-eabi
 
 INCLUDE=../include
 
-SOURCES=devs.c kscheduler.c kthread.c syscall.c
-OBJECTS=devs.o kscheduler.o kthread.o syscall.o
+SOURCES=devs.c kscheduler.c kthread.c syscall.c kernel_lib.c
+OBJECTS=devs.o kscheduler.o kthread.o syscall.o kernel_lib.o
 INCLUDES=$(INCLUDE)/sys/*.h
 
 

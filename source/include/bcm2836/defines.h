@@ -25,7 +25,7 @@ typedef uint32_t aptr_t;
 typedef uint8_t byte;
 typedef uint16_t word;
 typedef uint32_t dword;
-typedef uint32_t pid;
+typedef uint32_t pid_t;
 typedef uint8_t sflag_t;
 
 #endif

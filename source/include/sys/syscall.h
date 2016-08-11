@@ -3,14 +3,11 @@
 
 #include "sys/kthread.h"
 #include "lib/nostdlib.h"
+#include "lib/string.h"
 
-void syscall_write (void* param);
-void syscall_read (dword param1, void* param2);
-
-
-
-void sc_th_read (void* str);
-void sc_th_write (pid sender, pid receiver, void* str);
+int send (pid_t receiver, void* str, size_t size);
+int receive (void* str);
+int try_receive (void* str);
 
 #endif
 
