@@ -13,7 +13,7 @@ int k_send (void* param) {
 	}
 
 	byte ret = write_data (receiver->buffer, data, sizeof (data_message));
-	if (!ret) {
+	if (ret) {
 #ifdef DEBUG
 	kprint ("Can't write data to thread with %d pid\r\n", receiver->pid);
 #endif
@@ -25,13 +25,10 @@ int k_send (void* param) {
 		active_add_tail (th_active_head, receiver);
 	}
 	retv = data->size;
-	kprint ("SEND\r\n");
 	return retv;
 }	
 
 void thread_exit_shell() { 
-	asm volatile (	"mov %%fp, %%sp\t\n"
-			:::"%fp", "memory");
 	thread_exit();
 }
 
@@ -47,17 +44,16 @@ int k_receive (dword param1, void* param2) {
 	}
 
 	byte ret = read_data (receiver->buffer, (void *) data); 
-	if (ret == 0) 
+	if (!ret) 
 		memcpy (data->data, param2, data->size);
 	else {
 		cur_thread->state = BLOCKED;
-		unpin_node (&cur_thread->active);
 		thread_exit_shell ();
+		read_data (receiver->buffer, (void *) data);
 		memcpy (data->data, param2, data->size);
 	}
-	kfree (data);
 	retv = data->size;
-	kprint ("RECEIVE\r\n");
+	kfree (data);
 	return retv;
 }
 
@@ -77,15 +73,12 @@ int k_try_receive (dword param1, void* param2) {
 		return retv;
 	}
 
-//	dump_rbuffer (receiver->buffer, data_dump);		
 	byte ret = read_data (receiver->buffer, (void *) data); 
-	if (ret == 0) {
+	if (!ret) {
 		memcpy (data->data, param2, data->size);
-		kprint ("%s\r\n",(char*) param2);	
 		retv = data->size;
 	}
 	kfree (data);
-	kprint ("TRY RECEIVE\r\n");
 	return retv;
 }
 

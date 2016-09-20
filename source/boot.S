@@ -152,17 +152,13 @@ _get_stack_pointer:
 
 .globl _enable_interrupts	
 _enable_interrupts:
-    	mrs r0, cpsr
-    	bic r0, r0, #I_BIT
-    	msr cpsr_c, r0
-    	mov pc, lr
+	cpsie i
+	mov pc, lr
 	
 .globl _disable_interrupts
 _disable_interrupts:
-    	mrs r0, cpsr
-    	orr r0, #I_BIT
-    	msr cpsr_c, r0
-    	mov pc, lr
+	cpsid i
+	mov pc, lr
 
 	
 .globl _get_cpsr
@@ -203,7 +199,9 @@ GET32:
 
 .globl _kernel_entry
 _kernel_entry:
-	push {r0-r12}
+	push {r0-r11, lr}
+	mrs r0, spsr
+	push {r0}
 	ldr r0, =kernel_entry
 	bx r0
 

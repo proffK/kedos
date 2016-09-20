@@ -95,10 +95,9 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 }
 
 void __attribute__((naked())) kernel (void) {
-	kprint ("cur thread: sp = 0x%x\tpc = 0x%x\r\n", cur_thread->stack_pointer, cur_thread->program_counter);
+	//kprint ("cur thread: sp = 0x%x\tpc = 0x%x\r\n", cur_thread->stack_pointer, cur_thread->program_counter);
 	kscheduler();
-	kprint ("cur thread: sp = 0x%x\tpc = 0x%x\r\n", cur_thread->stack_pointer, cur_thread->program_counter);
-	_enable_interrupts();
+	//kprint ("cur thread: sp = 0x%x\tpc = 0x%x\r\n", cur_thread->stack_pointer, cur_thread->program_counter);
 	thread_entry(cur_thread->stack_pointer, cur_thread->program_counter);
 }
 

@@ -32,12 +32,12 @@ void uart_init()
 	// Set integer & fractional part of baud rate.
 	// Divider = UART_CLOCK/(16 * Baud)
 	// Fraction part register = (Fractional part * 64) + 0.5
-	// UART_CLOCK = 3000000; Baud = 115200.
+	// UART_CLOCK = 48000000; Baud = 115200.
  
-	// Divider = 3000000 / (16 * 115200) = 1.627 = ~1.
-	// Fractional part register = (.627 * 64) + 0.5 = 40.6 = ~40.
-	mmio_write(UART0_IBRD, 1);
-	mmio_write(UART0_FBRD, 40);
+	// Divider = 48000000 / (16 * 115200) = 26.042 = ~26.
+	// Fractional part register = (.042 * 64) + 0.5 = 3.188 = ~3
+	mmio_write(UART0_IBRD, 26);
+	mmio_write(UART0_FBRD, 3);
  
 	// Enable FIFO & 8 bit data transmissio (1 stop bit, no parity).
 	mmio_write(UART0_LCRH, (1 << 4) | (1 << 5) | (1 << 6));

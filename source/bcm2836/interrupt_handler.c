@@ -24,7 +24,7 @@ void __attribute__((interrupt("UNDEF"))) undefined_instruction_vector(void)
 
 void  __attribute__ ((interrupt ("IRQ"))) irq_handler(void) 
 {
-	kprint ("IRQ\r\n");
+	//kprint ("IRQ\r\n");
 	sys_timer->compare1 = sys_timer->counter_lo + TIMER_RATE;
 	sys_timer->control_status = ~0;	
 	thread_exit();
@@ -35,25 +35,25 @@ void __attribute__((interrupt("SWI"))) software_handler(void)
 	byte swi_num = 0;
 	dword param1;
 	void* param2;
-	int* retv;
-	asm volatile (  "mov %0, %%r0" : "=r" (swi_num)::"memory");
-	asm volatile (  "mov %0, %%r1\t\n"
-			"mov %1, %%r2\t\n"
-			"mov %2, %%r3\t\n":
-			"=r"(param1), "=r"(param2), "=r"(retv):: "memory");
-	
+	int retv = -1;
+	asm volatile (  "ldr %%r3, [%%lr, #-4]\t\n"
+		        "bic %%r3, %%r3, #0xff000000\t\n"
+			"mov %0, %%r3\t\n" : "=r" (swi_num)::"%r3", "memory");
+
+	asm volatile (  "mov %0, %%r0\t\n"
+			"mov %1, %%r1\t\n":
+			"=r"(param1), "=r"(param2)::"%r0", "%r1", "memory");
 	switch (swi_num) {
 		case 0:
-		  	*retv = k_send (param2);
+		  	retv = k_send (param2);
 			break;
 		case 1:
-		  	*retv = k_receive (param1, param2);
+		  	retv = k_receive (param1, param2);
 			break;
 		case 2: 
-			*retv = k_try_receive (param1, param2);
+			retv = k_try_receive (param1, param2);
 			break;
 	}
-	
 }
 
 void __attribute__((interrupt("ABORT"))) prefetch_abort_vector(void)

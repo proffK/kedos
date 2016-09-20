@@ -7,7 +7,7 @@ int p2 = 1;
 
 #define SEND_STR(param, size) {\
 	memcpy (param, str, size);\
-	send (2, str, size);\
+	send (1, str, size);\
 }
 
 uint32_t reg = 1 << 21;
@@ -18,12 +18,10 @@ void thread_1_func() {
 	while(1) {
 		if (p1 == 1) {
 			p1 = 0;
-			size_t size = strlen ("Hello#1\r\n") + 1;
-			memcpy ("Hello#1\r\n", str, size);
-			kprint ("%d\n", send (2, str, size));
+			if (sys_timer->counter_lo % 10 > sys_timer->counter_lo % 5)
+				SEND_STR ("Hello #1\r\n", strlen ("Hello #1\r\n") + 1);
 		}
 		p2 = 1;
-//		mmio_write(GPSET1, reg);
 	}
 }
 
@@ -32,31 +30,34 @@ void thread_2_func() {
 	while(1) {
 		if (p2 == 1) {
 			p2 = 0;
-			SEND_STR ("Hello #2\r\n", strlen ("Hello #2\r\n") + 1);
+			if (sys_timer->counter_lo % 10 > sys_timer->counter_lo % 5)
+				SEND_STR ("Hello #2\r\n", strlen ("Hello #2\r\n") + 1);
 		}
 		p1 = 1;
-//		mmio_write(GPCLR1, reg);
 	}
 }
+
+
+void data_d (void* data) {
+	data_message* d = (data_message *) data;
+	kprint ("sender %d receiver %d msg %s\r\n", d->sender, d->receiver, d->data);
+}
+
 
 void terminal_func() {
 	char* str = (char*) kcalloc (256, sizeof (char));
+	*str = '\0';
+	dump_rbuffer (cur_thread->buffer, data_d);
 	while(1) {
-		int ret = try_receive (str);
-		if (ret > 0)
-			kprint ("%s\r\n", str);
+		receive (str);
+
+		_disable_interrupts();
+		kprint ("%s", str);
+		_enable_interrupts();
+		
 	}
 }
 
-void bled_func() {
-	while (1) {
-		if (p2 == 0)
-			mmio_write(GPSET1, reg);
-
-		if (p1 == 0)
-			mmio_write(GPCLR1, reg);
-	}
-}
 
 void data_message_dump (void* data) {
 	data_message* message = (data_message*) data;
@@ -65,20 +66,11 @@ void data_message_dump (void* data) {
 
 int thread_test() {
 
-	mmio_write (GPFSEL4, reg);
-	reg = 1 << 15;
-
 	node_head* tlist = kthread_list_init();
 	add_kthread (0, &thread_1_func);
-	//tlist = add_kthread (0, &bled_func);
-       	add_kthread (0, &thread_2_func);
 	add_kthread (0, &terminal_func);
-
+	add_kthread (0, &thread_2_func);
 	kthread_list_dump ();
-	//thread_set_pc (&thread_1_func);
-	//delete_kthread (1);
-
-
 	return 0;
 }
 

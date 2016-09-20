@@ -101,10 +101,10 @@ void dump_rbuffer (rbuffer* buffer, void (*data_dump)(void* data)) {
 			kprint ("NO DATA\r\n");
 		tmp = tmp->next;
 	} while (tmp != buffer->id_in);
-	kprint ("Is full      : %d\r\n", buffer->flags & RBUFFER_IS_FULL);
-	kprint ("Is empty     : %d\r\n", (buffer->flags & RBUFFER_IS_EMPTY) / RBUFFER_IS_EMPTY);
-	kprint ("Is protected : %d\r\n", (buffer->flags & RBUFFER_IS_UNDER_PROTECTION) / RBUFFER_IS_UNDER_PROTECTION);
-	kprint ("Is overflow  : %d\r\n", (buffer->flags & RBUFFER_IS_OVERFLOW) / RBUFFER_IS_OVERFLOW);
+	kprint ("Is full      : %d\r\n", FLAG_DUMP(buffer->flags & RBUFFER_IS_FULL));
+	kprint ("Is empty     : %d\r\n", FLAG_DUMP(buffer->flags & RBUFFER_IS_EMPTY));
+	kprint ("Is protected : %d\r\n", FLAG_DUMP(buffer->flags & RBUFFER_IS_UNDER_PROTECTION));
+	kprint ("Is overflow  : %d\r\n", FLAG_DUMP(buffer->flags & RBUFFER_IS_OVERFLOW));
 }
 
 byte write_data (rbuffer* buffer, void* data, size_t size) {

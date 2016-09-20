@@ -21,6 +21,14 @@ kthread* kthread_init (sflag_t flags, pid_t pid, void* func) {
 	init_dl_node (&thread->active);
 	if (!cur_thread)
 		cur_thread = thread;
+	asm volatile (	"mov %%r1, %%sp\t\n"
+			"mov %%sp, %0\t\n"
+			"mov %%r0, %1\t\n"
+			"push {%%r0-%%r11, %%r0}\t\n"
+			"mrs %%r0, cpsr\t\n"
+			"push {%%r0}\t\n" 
+			"mov %%sp, %%r1\t\n"::"r"(thread->stack_base), "r"(thread->program_counter):"memory", "%r0", "%r1", "%sp");
+	thread->stack_pointer -= 14 * ARCH_BITS / 8;
 	return thread;
 }
 
@@ -128,7 +136,7 @@ kthread* find_thread_pid (pid_t pid) {
 	return NULL;
 }
 
-extern void _set_sp(reg_t* sp);
+extern void _set_sp(reg_t sp);
 
 void __attribute__((naked())) run() {
 	_set_sp (cur_thread->stack_pointer);

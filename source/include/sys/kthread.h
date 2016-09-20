@@ -18,9 +18,9 @@ typedef struct kthread_t {
 	dl_node node;
 	dl_node active;
 	rbuffer* buffer;
-	reg_t* program_counter;
-	reg_t* stack_base;        
-	reg_t* stack_pointer;	
+	reg_t program_counter;
+	reg_t stack_base;        
+	reg_t stack_pointer;	
 	pid_t pid;
 	byte state;
 	sflag_t flags;
@@ -67,13 +67,17 @@ void run();
 
 static inline void thread_entry (reg_t sp, reg_t lr) {
 	asm volatile (  "mov %%sp, %0\t\n"
-			"mov %%lr, %1\t\n"
-			"pop {%%r0-%%r12}\t\n"
-			"mov %%pc, %%lr\t\n"
-			:: "r"(sp), "r"(lr): "%sp", "memory");
+			"pop {%%r0}\t\n"
+			"msr cpsr_xsf, %%r0\t\n":: "r"(sp):"%sp", "%r0");
+
+	asm volatile(	"pop {%%r0-%%r11, %%lr}\t\n"
+			"cpsie i\t\n"
+			"mov %%pc, %0\t\n"
+			:: "r"(lr): "%r0", "%r1", "%r2", "%r3", "%r4", "%r5", "%r6", 
+					"%r7", "%r8", "%r9", "%r10", "%r11", "%lr");
 }
 
-inline void thread_set_pc (reg_t* func) {
+inline void thread_set_pc (reg_t func) {
 	asm volatile (  "bx %0\t\n"
 			::"r"(func));
 }
