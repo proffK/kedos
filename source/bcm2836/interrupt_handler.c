@@ -54,6 +54,13 @@ void __attribute__((interrupt("SWI"))) software_handler(void)
 			retv = k_try_receive (param1, param2);
 			break;
 	}
+	asm volatile (	"mov %%r1, %%sp\t\n"
+			"mov %%sp, %1\t\n"
+			"pop {%%r0}\t\n"
+			"mov %%r0, %0\t\n"
+			"push {%%r0}\t\n"
+			"mov %%sp, %%r1\t\n"
+			::"r"(retv), "r"(cur_thread->stack_pointer):"%r0", "%r1", "%sp", "memory");
 }
 
 void __attribute__((interrupt("ABORT"))) prefetch_abort_vector(void)

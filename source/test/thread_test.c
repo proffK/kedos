@@ -46,14 +46,13 @@ void data_d (void* data) {
 
 void terminal_func() {
 	char* str = (char*) kcalloc (256, sizeof (char));
-	*str = '\0';
+	int retv = -1;
 	dump_rbuffer (cur_thread->buffer, data_d);
 	while(1) {
-		receive (str);
-
-		_disable_interrupts();
-		kprint ("%s", str);
-		_enable_interrupts();
+		retv = try_receive (str);
+		kprint ("%d ", retv);
+		if (retv >= 0)
+			kprint ("%s", str);
 		
 	}
 }
