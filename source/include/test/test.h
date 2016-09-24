@@ -28,6 +28,7 @@
 #include <mm/heap.h>
 #include <sys/kthread.h>
 #include <sys/syscall.h>
+#include <sys/devs.h>
 
 
 int mem_test();
@@ -41,6 +42,8 @@ int lib_test();
 int rbuffer_test();
 
 int thread_test();
+
+int sd_test();
 
 void data_message_dump(void* data);
 

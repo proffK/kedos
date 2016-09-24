@@ -26,7 +26,6 @@ int lib_test()
 {
 	byte p1 = 0xff;
 	word p2 = 0xaaaa;
-	dword p3 = 0x0f0f0f0f;
 
 	reg_t regarr[REGS_NUM] = {};
 	dump_registers (regarr);
@@ -41,11 +40,6 @@ int lib_test()
 	
 	dump_registers (regarr);
 	core_dump (regarr);
-
-	p3 = p2;
-
-	kprint ("p3 = p2\r\n"
-		"r11 = pc\r\n");
 
 	asm ("mov %%r11, %%pc\n\t"
 	     : : : "r11", "memory");	

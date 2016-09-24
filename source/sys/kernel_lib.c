@@ -57,7 +57,7 @@ int k_receive (dword param1, void* param2) {
 	return retv;
 }
 
-void data_dump (void* data) {
+static void data_dump (void* data) {
 	data_message* d = (data_message *) data;
 	kprint ("sender %d receiver %d msg %s\r\n", d->sender, d->receiver, d->data);
 }

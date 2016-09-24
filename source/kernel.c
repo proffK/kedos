@@ -35,7 +35,6 @@
 
 #include "test/test.h"
 
-
 int global_var = 0;
 reg_t kernel_sp = 0;
 
@@ -49,6 +48,7 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 
         char hex[9] = {};
         uint32_t volatile ra;
+
 	ra = 1 << 21;
         phys_area_list new_heap;
 
@@ -61,43 +61,44 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
         phys_area_init(&new_heap, new_heap.list, KERNEL_HEAP_START_SIZE);
 
 
-	// mem_test();
-        //heap_test();
+	mem_test();
+        heap_test();
+
+	kprint("Power set: %x\r\n", bcm2835_vc_set_power_state(BCM2835_VC_POWER_ID_SDCARD, BCM2835_VC_SET_POWER_STATE_ON_WAIT));
+	bdevs_init();
+
 	//timer_test();
-	//lib_test();
-	//rbuffer_test();
-	//kprint("Power set: %x\r\n", bcm2835_vc_set_power_state(BCM2835_VC_POWER_ID_SDCARD, BCM2835_VC_SET_POWER_STATE_ON_WAIT));
-	//bdevs_init();
+	lib_test(); 
+	//rbuffer_test();	
+	sd_test();
+	//thread_test();
 
-	thread_test();
 
-	InitIrqController();
-	sys_timer_init();	
-	_enable_interrupts();
-	kernel_sp = _get_stack_pointer();
-	kprint ("Kernel sp 0x%x\r\n", kernel_sp);
-	mmio_write (GPFSEL4, ra);
-	ra = 1 << 15;
-	run();
-	
+	//InitIrqController();
+	//sys_timer_init();	
+	//_enable_interrupts();
+	//kernel_sp = _get_stack_pointer();
+	//kprint ("Kernel sp 0x%x\r\n", kernel_sp);
+	//mmio_write (GPFSEL4, ra);
+	//ra = 1 << 15;
+	//run();
+	//
 
-	while (1)
-        {
-		mmio_write(GPSET1, ra);
-                usleep(1000000);
-                mmio_write(GPCLR1, ra);
-                usleep(1000000);
+	//while (1)
+        //{
+	//	mmio_write(GPSET1, ra);
+        //        usleep(1000000);
+        //        mmio_write(GPCLR1, ra);
+        //        usleep(1000000);
 
-		//kprint ("sp: %x\r\n", _get_stack_pointer());
-	}
-	// kdie("First succesfull death");
-	//uart_putc(uart_getc());
+	//	//kprint ("sp: %x\r\n", _get_stack_pointer());
+	//}
+	kdie("First succesfull death");
+	uart_putc(uart_getc());
 }
 
 void __attribute__((naked())) kernel (void) {
-	//kprint ("cur thread: sp = 0x%x\tpc = 0x%x\r\n", cur_thread->stack_pointer, cur_thread->program_counter);
 	kscheduler();
-	//kprint ("cur thread: sp = 0x%x\tpc = 0x%x\r\n", cur_thread->stack_pointer, cur_thread->program_counter);
 	thread_entry(cur_thread->stack_pointer, cur_thread->program_counter);
 }
 

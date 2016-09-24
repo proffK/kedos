@@ -262,6 +262,7 @@ struct emmc_block_dev {
 extern int kprint(const char *format, ...);
 #endif
 
+#define DEBUG
 #ifdef DEBUG
 #define EMMC_DEBUG
 #define SD_DEBUG

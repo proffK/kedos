@@ -214,6 +214,10 @@ void* krealloc(void* block, size_t size)
 	kmem_chunk* re_elem = NULL;
 
 	if (block == NULL) return NULL;
+
+        size = (size % sizeof(dword)) ? 
+                (size / sizeof(dword) + 1) * sizeof(dword) :
+                size;
       
 	re_elem = block - sizeof (kmem_chunk);
 	
