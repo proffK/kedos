@@ -920,12 +920,13 @@ static int sd_do_data_command(struct emmc_block_dev *edev,
  */
 int sd_card_init(block_dev* dev) {
 	struct emmc_block_dev* ret = 
-                (struct emmc_block_dev*) kmalloc (sizeof(ret));
+                (struct emmc_block_dev*) kmalloc (sizeof(struct emmc_block_dev));
 
+	kprint ("Checked\r\n");
 	if (sd_card_sanity_check() != 0) {
 		return SD_ERROR;
 	}
-
+	
 	if (emmc_get_version() < 2) {
 		SD_TRACE("Only SDHCI versions >= 3.0 are supported");
 		return SD_ERROR;

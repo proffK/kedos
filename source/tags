@@ -1,0 +1,1158 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ACMD	include/bcm2836/sd.h	247;"	d
+ACMD12_ERROR	include/bcm2836/sd.h	206;"	d
+ACTIVE	include/sys/kthread.h	/^enum thread_state {ACTIVE, WAIT, BLOCKED};$/;"	e	enum:thread_state
+ADMA_ERROR	include/bcm2836/sd.h	207;"	d
+ALL_SEND_CID	include/bcm2836/sd.h	212;"	d
+APP_CMD	include/bcm2836/sd.h	243;"	d
+AR	bcm2836/Makefile	/^AR=$(ARM)-ar $/;"	m
+AR	fs/Makefile	/^AR=$(ARM)-ar $/;"	m
+AR	lib/Makefile	/^AR=$(ARM)-ar $/;"	m
+AR	mm/Makefile	/^AR=$(ARM)-ar $/;"	m
+AR	sys/Makefile	/^AR=$(ARM)-ar $/;"	m
+AR	test/Makefile	/^AR=$(ARM)-ar $/;"	m
+ARCH_BITS	include/bcm2836/defines.h	14;"	d
+AREA_SIZE	include/mm/heap.h	34;"	d
+ARG1	include/bcm2836/emmc.h	/^	__IO uint32_t ARG1;				\/\/\/< 0x08$/;"	m	struct:__anon6
+ARG2	include/bcm2836/emmc.h	/^	__IO uint32_t ARG2;				\/\/\/< 0x00$/;"	m	struct:__anon6
+ARM	Makefile	/^ARM=arm-none-eabi$/;"	m
+ARM	bcm2836/Makefile	/^ARM=arm-none-eabi$/;"	m
+ARM	fs/Makefile	/^ARM=arm-none-eabi$/;"	m
+ARM	lib/Makefile	/^ARM=arm-none-eabi$/;"	m
+ARM	mm/Makefile	/^ARM=arm-none-eabi$/;"	m
+ARM	sys/Makefile	/^ARM=arm-none-eabi$/;"	m
+ARM	test/Makefile	/^ARM=arm-none-eabi$/;"	m
+ARMTIMER_BASE	include/bcm2836/armtimer.h	6;"	d
+ARMTIMER_CTRL_23BIT	include/bcm2836/armtimer.h	9;"	d
+ARMTIMER_CTRL_DISABLE	include/bcm2836/armtimer.h	21;"	d
+ARMTIMER_CTRL_ENABLE	include/bcm2836/armtimer.h	20;"	d
+ARMTIMER_CTRL_INT_DISABLE	include/bcm2836/armtimer.h	17;"	d
+ARMTIMER_CTRL_INT_ENABLE	include/bcm2836/armtimer.h	16;"	d
+ARMTIMER_CTRL_PRESCALE_1	include/bcm2836/armtimer.h	11;"	d
+ARMTIMER_CTRL_PRESCALE_16	include/bcm2836/armtimer.h	12;"	d
+ARMTIMER_CTRL_PRESCALE_256	include/bcm2836/armtimer.h	13;"	d
+ARMTIMER_H	include/bcm2836/armtimer.h	2;"	d
+AR_FLAGS	bcm2836/Makefile	/^AR_FLAGS=rcs$/;"	m
+AR_FLAGS	fs/Makefile	/^AR_FLAGS=rcs$/;"	m
+AR_FLAGS	lib/Makefile	/^AR_FLAGS=rcs$/;"	m
+AR_FLAGS	mm/Makefile	/^AR_FLAGS=rcs$/;"	m
+AR_FLAGS	sys/Makefile	/^AR_FLAGS=rcs$/;"	m
+AR_FLAGS	test/Makefile	/^AR_FLAGS=rcs$/;"	m
+AS	Makefile	/^AS=$(ARM)-gcc$/;"	m
+AS	bcm2836/Makefile	/^AS=$(ARM)-gcc$/;"	m
+AS	fs/Makefile	/^AS=$(ARM)-gcc$/;"	m
+AS	lib/Makefile	/^AS=$(ARM)-gcc$/;"	m
+AS	mm/Makefile	/^AS=$(ARM)-gcc$/;"	m
+AS	test/Makefile	/^AS=$(ARM)-gcc$/;"	m
+AS_FLAGS	Makefile	/^AS_FLAGS=-mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -nostartfiles$/;"	m
+AS_FLAGS	bcm2836/Makefile	/^AS_FLAGS=-mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -nostartfiles$/;"	m
+AS_FLAGS	fs/Makefile	/^AS_FLAGS=-mfpu=neon-vfpv4 -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -nostartfiles$/;"	m
+AS_FLAGS	lib/Makefile	/^AS_FLAGS=-mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -nostartfiles$/;"	m
+AS_FLAGS	mm/Makefile	/^AS_FLAGS=-mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -nostartfiles$/;"	m
+AS_FLAGS	test/Makefile	/^AS_FLAGS=-mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -nostartfiles$/;"	m
+AS_SOURCES	bcm2836/Makefile	/^AS_SOURCES=mmio.S$/;"	m
+ArmTimer	bcm2836/armtimer.c	/^arm_timer* ArmTimer = (arm_timer *)ARMTIMER_BASE;$/;"	v
+ArmTimerInit	bcm2836/armtimer.c	/^void ArmTimerInit(void)$/;"	f
+BASIC_ACCESS_ERROR_0_IRQ	include/bcm2836/interrupt.h	18;"	d
+BASIC_ACCESS_ERROR_1_IRQ	include/bcm2836/interrupt.h	17;"	d
+BASIC_ARM_DOORBELL_0_IRQ	include/bcm2836/interrupt.h	13;"	d
+BASIC_ARM_DOORBELL_1_IRQ	include/bcm2836/interrupt.h	14;"	d
+BASIC_ARM_MAILBOX_IRQ	include/bcm2836/interrupt.h	12;"	d
+BASIC_ARM_TIMER_IRQ	include/bcm2836/interrupt.h	11;"	d
+BASIC_GPU_0_HALTED_IRQ	include/bcm2836/interrupt.h	15;"	d
+BASIC_GPU_1_HALTED_IRQ	include/bcm2836/interrupt.h	16;"	d
+BCM2835_CORE_CLK_HZ	include/bcm2836/videocore.h	43;"	d
+BCM2835_EMMC	include/bcm2836/emmc.h	108;"	d
+BCM2835_EMMC_BASE	include/bcm2836/emmc.h	67;"	d
+BCM2835_EMMC_BLKSIZECNT_BLKCNT_MASK	include/bcm2836/emmc.h	33;"	d
+BCM2835_EMMC_BLKSIZECNT_BLKSIZE_MASK	include/bcm2836/emmc.h	32;"	d
+BCM2835_EMMC_CONTROL0_POWER_ON	include/bcm2836/emmc.h	42;"	d
+BCM2835_EMMC_CONTROL0_USE_4BITBUS	include/bcm2836/emmc.h	41;"	d
+BCM2835_EMMC_CONTROL1_CLK_EN	include/bcm2836/emmc.h	47;"	d
+BCM2835_EMMC_CONTROL1_CLK_INTLEN	include/bcm2836/emmc.h	45;"	d
+BCM2835_EMMC_CONTROL1_CLK_STABLE	include/bcm2836/emmc.h	46;"	d
+BCM2835_EMMC_CONTROL1_DATA_TOUNIT_MAX	include/bcm2836/emmc.h	53;"	d
+BCM2835_EMMC_CONTROL1_RESET_CMD	include/bcm2836/emmc.h	50;"	d
+BCM2835_EMMC_CONTROL1_RESET_DATA	include/bcm2836/emmc.h	51;"	d
+BCM2835_EMMC_CONTROL1_SRST_HC	include/bcm2836/emmc.h	49;"	d
+BCM2835_EMMC_H_	include/bcm2836/emmc.h	27;"	d
+BCM2835_EMMC_SLOTISR_VER_SDVERSION_MASK	include/bcm2836/emmc.h	64;"	d
+BCM2835_EMMC_SLOTISR_VER_SDVERSION_SHIFT	include/bcm2836/emmc.h	65;"	d
+BCM2835_EMMC_SLOTISR_VER_SLOT_STATUS_MASK	include/bcm2836/emmc.h	61;"	d
+BCM2835_EMMC_SLOTISR_VER_VENDOR_MASK	include/bcm2836/emmc.h	62;"	d
+BCM2835_EMMC_SLOTISR_VER_VENDOR_SHIFT	include/bcm2836/emmc.h	63;"	d
+BCM2835_EMMC_STATUS_CARD_PRESENT	include/bcm2836/emmc.h	38;"	d
+BCM2835_EMMC_STATUS_CMD_INHIBIT	include/bcm2836/emmc.h	36;"	d
+BCM2835_EMMC_STATUS_DATA_INHIBIT	include/bcm2836/emmc.h	37;"	d
+BCM2835_EMMC_TypeDef	include/bcm2836/emmc.h	/^} BCM2835_EMMC_TypeDef;$/;"	t	typeref:struct:__anon6
+BCM2835_EMMC_WRITE_DELAY	include/bcm2836/sd.h	259;"	d
+BCM2835_GPIO_H_	include/bcm2836/gpio.h	25;"	d
+BCM2835_VC_CLOCK_ID_ARM	include/bcm2836/videocore.h	/^	BCM2835_VC_CLOCK_ID_ARM 		= 3,	\/\/\/<$/;"	e	enum:__anon1
+BCM2835_VC_CLOCK_ID_CORE	include/bcm2836/videocore.h	/^	BCM2835_VC_CLOCK_ID_CORE 		= 4,	\/\/\/<$/;"	e	enum:__anon1
+BCM2835_VC_CLOCK_ID_EMMC	include/bcm2836/videocore.h	/^	BCM2835_VC_CLOCK_ID_EMMC 		= 1,	\/\/\/<$/;"	e	enum:__anon1
+BCM2835_VC_CLOCK_ID_H264	include/bcm2836/videocore.h	/^	BCM2835_VC_CLOCK_ID_H264 		= 6,	\/\/\/<$/;"	e	enum:__anon1
+BCM2835_VC_CLOCK_ID_ISP	include/bcm2836/videocore.h	/^	BCM2835_VC_CLOCK_ID_ISP 		= 7,	\/\/\/<$/;"	e	enum:__anon1
+BCM2835_VC_CLOCK_ID_PIXEL	include/bcm2836/videocore.h	/^	BCM2835_VC_CLOCK_ID_PIXEL 		= 9,	\/\/\/<$/;"	e	enum:__anon1
+BCM2835_VC_CLOCK_ID_PWM	include/bcm2836/videocore.h	/^	BCM2835_VC_CLOCK_ID_PWM 		= 10	\/\/\/<$/;"	e	enum:__anon1
+BCM2835_VC_CLOCK_ID_RESERVED	include/bcm2836/videocore.h	/^        BCM2835_VC_CLOCK_ID_RESERVED	        = 0,	\/\/\/<$/;"	e	enum:__anon1
+BCM2835_VC_CLOCK_ID_SDRAM	include/bcm2836/videocore.h	/^	BCM2835_VC_CLOCK_ID_SDRAM 		= 8,	\/\/\/<$/;"	e	enum:__anon1
+BCM2835_VC_CLOCK_ID_UART	include/bcm2836/videocore.h	/^	BCM2835_VC_CLOCK_ID_UART 		= 2,	\/\/\/<$/;"	e	enum:__anon1
+BCM2835_VC_CLOCK_ID_V3D	include/bcm2836/videocore.h	/^	BCM2835_VC_CLOCK_ID_V3D 		= 5,	\/\/\/<$/;"	e	enum:__anon1
+BCM2835_VC_POWER_ID_CCP2TX	include/bcm2836/videocore.h	/^	BCM2835_VC_POWER_ID_CCP2TX 	= 8 	\/\/\/<$/;"	e	enum:__anon2
+BCM2835_VC_POWER_ID_I2C0	include/bcm2836/videocore.h	/^	BCM2835_VC_POWER_ID_I2C0 	= 4,	\/\/\/<$/;"	e	enum:__anon2
+BCM2835_VC_POWER_ID_I2C1	include/bcm2836/videocore.h	/^	BCM2835_VC_POWER_ID_I2C1 	= 5,	\/\/\/<$/;"	e	enum:__anon2
+BCM2835_VC_POWER_ID_I2C2	include/bcm2836/videocore.h	/^	BCM2835_VC_POWER_ID_I2C2 	= 6,	\/\/\/<$/;"	e	enum:__anon2
+BCM2835_VC_POWER_ID_SDCARD	include/bcm2836/videocore.h	/^	BCM2835_VC_POWER_ID_SDCARD 	= 0,	\/\/\/<$/;"	e	enum:__anon2
+BCM2835_VC_POWER_ID_SPI	include/bcm2836/videocore.h	/^	BCM2835_VC_POWER_ID_SPI 	= 7,	\/\/\/<$/;"	e	enum:__anon2
+BCM2835_VC_POWER_ID_UART0	include/bcm2836/videocore.h	/^	BCM2835_VC_POWER_ID_UART0 	= 1,	\/\/\/<$/;"	e	enum:__anon2
+BCM2835_VC_POWER_ID_UART1	include/bcm2836/videocore.h	/^	BCM2835_VC_POWER_ID_UART1 	= 2,	\/\/\/<$/;"	e	enum:__anon2
+BCM2835_VC_POWER_ID_USBHCD	include/bcm2836/videocore.h	/^	BCM2835_VC_POWER_ID_USBHCD 	= 3,	\/\/\/<$/;"	e	enum:__anon2
+BCM2835_VC_POWER_STATE_RESP_NODEV	include/bcm2836/videocore.h	92;"	d
+BCM2835_VC_POWER_STATE_RESP_ON	include/bcm2836/videocore.h	91;"	d
+BCM2835_VC_SET_POWER_STATE_OFF_NO_WAIT	include/bcm2836/videocore.h	/^	BCM2835_VC_SET_POWER_STATE_OFF_NO_WAIT 	= 0,	\/\/\/<$/;"	e	enum:__anon3
+BCM2835_VC_SET_POWER_STATE_OFF_WAIT	include/bcm2836/videocore.h	/^	BCM2835_VC_SET_POWER_STATE_OFF_WAIT 	= 2,	\/\/\/<$/;"	e	enum:__anon3
+BCM2835_VC_SET_POWER_STATE_ON_NO_WAIT	include/bcm2836/videocore.h	/^	BCM2835_VC_SET_POWER_STATE_ON_NO_WAIT 	= 1,	\/\/\/<$/;"	e	enum:__anon3
+BCM2835_VC_SET_POWER_STATE_ON_WAIT	include/bcm2836/videocore.h	/^	BCM2835_VC_SET_POWER_STATE_ON_WAIT 		= 3		\/\/\/<$/;"	e	enum:__anon3
+BCM2835_VC_SET_POWER_STATE_REQ_OFF	include/bcm2836/videocore.h	87;"	d
+BCM2835_VC_SET_POWER_STATE_REQ_ON	include/bcm2836/videocore.h	88;"	d
+BCM2835_VC_SET_POWER_STATE_REQ_WAIT	include/bcm2836/videocore.h	89;"	d
+BCM2835_VC_TAG_ALLOCATE_BUFFER	include/bcm2836/videocore.h	120;"	d
+BCM2835_VC_TAG_BLANK_SCREEN	include/bcm2836/videocore.h	122;"	d
+BCM2835_VC_TAG_GET_ALPHA_MODE	include/bcm2836/videocore.h	135;"	d
+BCM2835_VC_TAG_GET_ARM_MEMORY	include/bcm2836/videocore.h	101;"	d
+BCM2835_VC_TAG_GET_BOARD_MAC_ADDRESS	include/bcm2836/videocore.h	99;"	d
+BCM2835_VC_TAG_GET_BOARD_MODEL	include/bcm2836/videocore.h	97;"	d
+BCM2835_VC_TAG_GET_BOARD_REV	include/bcm2836/videocore.h	98;"	d
+BCM2835_VC_TAG_GET_BOARD_SERIAL	include/bcm2836/videocore.h	100;"	d
+BCM2835_VC_TAG_GET_CLOCKS	include/bcm2836/videocore.h	103;"	d
+BCM2835_VC_TAG_GET_CLOCK_RATE	include/bcm2836/videocore.h	106;"	d
+BCM2835_VC_TAG_GET_CLOCK_STATE	include/bcm2836/videocore.h	105;"	d
+BCM2835_VC_TAG_GET_DEPTH	include/bcm2836/videocore.h	129;"	d
+BCM2835_VC_TAG_GET_FIRMWARE_REV	include/bcm2836/videocore.h	95;"	d
+BCM2835_VC_TAG_GET_MAX_CLOCK_RATE	include/bcm2836/videocore.h	107;"	d
+BCM2835_VC_TAG_GET_MAX_TEMP	include/bcm2836/videocore.h	118;"	d
+BCM2835_VC_TAG_GET_MIN_CLOCK_RATE	include/bcm2836/videocore.h	108;"	d
+BCM2835_VC_TAG_GET_OVERSCAN	include/bcm2836/videocore.h	142;"	d
+BCM2835_VC_TAG_GET_PALETTE	include/bcm2836/videocore.h	145;"	d
+BCM2835_VC_TAG_GET_PHYS_WH	include/bcm2836/videocore.h	123;"	d
+BCM2835_VC_TAG_GET_PITCH	include/bcm2836/videocore.h	138;"	d
+BCM2835_VC_TAG_GET_PIXEL_ORDER	include/bcm2836/videocore.h	132;"	d
+BCM2835_VC_TAG_GET_POWER_STATE	include/bcm2836/videocore.h	114;"	d
+BCM2835_VC_TAG_GET_TEMP	include/bcm2836/videocore.h	117;"	d
+BCM2835_VC_TAG_GET_TURBO	include/bcm2836/videocore.h	109;"	d
+BCM2835_VC_TAG_GET_VC_MEMORY	include/bcm2836/videocore.h	102;"	d
+BCM2835_VC_TAG_GET_VIRT_OFFSET	include/bcm2836/videocore.h	139;"	d
+BCM2835_VC_TAG_GET_VIRT_WH	include/bcm2836/videocore.h	126;"	d
+BCM2835_VC_TAG_RELEASE_BUFFER	include/bcm2836/videocore.h	121;"	d
+BCM2835_VC_TAG_SET_ALPHA_MODE	include/bcm2836/videocore.h	137;"	d
+BCM2835_VC_TAG_SET_CLOCK_RATE	include/bcm2836/videocore.h	111;"	d
+BCM2835_VC_TAG_SET_CLOCK_STATE	include/bcm2836/videocore.h	110;"	d
+BCM2835_VC_TAG_SET_DEPTH	include/bcm2836/videocore.h	131;"	d
+BCM2835_VC_TAG_SET_OVERSCAN	include/bcm2836/videocore.h	144;"	d
+BCM2835_VC_TAG_SET_PALETTE	include/bcm2836/videocore.h	147;"	d
+BCM2835_VC_TAG_SET_PHYS_WH	include/bcm2836/videocore.h	125;"	d
+BCM2835_VC_TAG_SET_PIXEL_ORDER	include/bcm2836/videocore.h	134;"	d
+BCM2835_VC_TAG_SET_POWER_STATE	include/bcm2836/videocore.h	115;"	d
+BCM2835_VC_TAG_SET_TURBO	include/bcm2836/videocore.h	112;"	d
+BCM2835_VC_TAG_SET_VIRT_OFFSET	include/bcm2836/videocore.h	141;"	d
+BCM2835_VC_TAG_SET_VIRT_WH	include/bcm2836/videocore.h	128;"	d
+BCM2835_VC_TAG_TEST_ALPHA_MODE	include/bcm2836/videocore.h	136;"	d
+BCM2835_VC_TAG_TEST_DEPTH	include/bcm2836/videocore.h	130;"	d
+BCM2835_VC_TAG_TEST_OVERSCAN	include/bcm2836/videocore.h	143;"	d
+BCM2835_VC_TAG_TEST_PALETTE	include/bcm2836/videocore.h	146;"	d
+BCM2835_VC_TAG_TEST_PHYS_WH	include/bcm2836/videocore.h	124;"	d
+BCM2835_VC_TAG_TEST_PIXEL_ORDER	include/bcm2836/videocore.h	133;"	d
+BCM2835_VC_TAG_TEST_VIRT_OFFSET	include/bcm2836/videocore.h	140;"	d
+BCM2835_VC_TAG_TEST_VIRT_WH	include/bcm2836/videocore.h	127;"	d
+BLKSIZECNT	include/bcm2836/emmc.h	/^	__IO uint32_t BLKSIZECNT;		\/\/\/< 0x04$/;"	m	struct:__anon6
+BLOCKED	include/sys/kthread.h	/^enum thread_state {ACTIVE, WAIT, BLOCKED};$/;"	e	enum:thread_state
+BLOCK_DEVS_NUM	include/sys/devs.h	27;"	d
+BLOCK_EMMC	include/fs/block.h	/^        BLOCK_EMMC$/;"	e	enum:dev_type
+BLOCK_UNDEFINED	include/fs/block.h	/^        BLOCK_UNDEFINED = 0,$/;"	e	enum:dev_type
+BOOT_TIMEOUT	include/bcm2836/emmc.h	/^	__IO uint32_t BOOT_TIMEOUT;		\/\/\/< 0x70$/;"	m	struct:__anon6
+CAPABILITIES_0	include/bcm2836/emmc.h	/^	__IO uint32_t CAPABILITIES_0;	\/\/\/< 0x40$/;"	m	struct:__anon6
+CAPABILITIES_1	include/bcm2836/emmc.h	/^	__IO uint32_t CAPABILITIES_1;	\/\/\/< 0x44$/;"	m	struct:__anon6
+CC	Makefile	/^CC=$(ARM)-gcc$/;"	m
+CC	bcm2836/Makefile	/^CC=$(ARM)-gcc$/;"	m
+CC	fs/Makefile	/^CC=$(ARM)-gcc$/;"	m
+CC	lib/Makefile	/^CC=$(ARM)-gcc$/;"	m
+CC	mm/Makefile	/^CC=$(ARM)-gcc$/;"	m
+CC	sys/Makefile	/^CC=$(ARM)-gcc$/;"	m
+CC	test/Makefile	/^CC=$(ARM)-gcc$/;"	m
+CC_FLAGS	Makefile	/^CC_FLAGS=-mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -std=gnu99 -nostartfiles -I$(INCLUDE)$/;"	m
+CC_FLAGS	bcm2836/Makefile	/^CC_FLAGS=-mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -std=gnu99 -nostartfiles -O0 -I$(INCLUDE)$/;"	m
+CC_FLAGS	fs/Makefile	/^CC_FLAGS=-Wall -mfpu=neon-vfpv4 -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -std=gnu99 -nostartfiles -O2 -I$(INCLUDE)$/;"	m
+CC_FLAGS	lib/Makefile	/^CC_FLAGS=-Wall -mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -std=gnu99 -nostartfiles -O2 -I$(INCLUDE)$/;"	m
+CC_FLAGS	mm/Makefile	/^CC_FLAGS=-Wall -mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -std=gnu99 -nostartfiles -O2 -I$(INCLUDE)$/;"	m
+CC_FLAGS	sys/Makefile	/^CC_FLAGS=-Wall -mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -std=gnu99 -nostartfiles -O2 -I$(INCLUDE)$/;"	m
+CC_FLAGS	test/Makefile	/^CC_FLAGS=-Wall -mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -std=gnu99 -nostartfiles -O2 -I..\/include$/;"	m
+CHUNK_INIT	lib/kmalloc.c	27;"	d	file:
+CLR_WRITE_PROT	include/bcm2836/sd.h	237;"	d
+CMDTM	include/bcm2836/emmc.h	/^	__IO uint32_t CMDTM;			\/\/\/< 0x0C$/;"	m	struct:__anon6
+CMD_CRC	include/bcm2836/sd.h	199;"	d
+CMD_END_BIT	include/bcm2836/sd.h	200;"	d
+CMD_INDEX	include/bcm2836/sd.h	201;"	d
+CMD_TIMEOUT	include/bcm2836/sd.h	198;"	d
+CONTROL0	include/bcm2836/emmc.h	/^	__IO uint32_t CONTROL0;			\/\/\/< 0x28$/;"	m	struct:__anon6
+CONTROL1	include/bcm2836/emmc.h	/^	__IO uint32_t CONTROL1;			\/\/\/< 0x2C$/;"	m	struct:__anon6
+CONTROL2	include/bcm2836/emmc.h	/^	__IO uint32_t CONTROL2;			\/\/\/< 0x3C$/;"	m	struct:__anon6
+CORE0_FIQ_SOURCE	include/bcm2836/mbox.h	77;"	d
+CORE0_IRQ_SOURCE	include/bcm2836/mbox.h	73;"	d
+CORE0_MBOX0_RDCLR	include/bcm2836/mbox.h	112;"	d
+CORE0_MBOX0_SET	include/bcm2836/mbox.h	95;"	d
+CORE0_MBOX1_RDCLR	include/bcm2836/mbox.h	113;"	d
+CORE0_MBOX1_SET	include/bcm2836/mbox.h	96;"	d
+CORE0_MBOX2_RDCLR	include/bcm2836/mbox.h	114;"	d
+CORE0_MBOX2_SET	include/bcm2836/mbox.h	97;"	d
+CORE0_MBOX3_RDCLR	include/bcm2836/mbox.h	115;"	d
+CORE0_MBOX3_SET	include/bcm2836/mbox.h	98;"	d
+CORE0_MBOX_IRQCNTL	include/bcm2836/mbox.h	58;"	d
+CORE0_TIMER_IRQCNTL	include/bcm2836/mbox.h	43;"	d
+CORE1_FIQ_SOURCE	include/bcm2836/mbox.h	78;"	d
+CORE1_IRQ_SOURCE	include/bcm2836/mbox.h	74;"	d
+CORE1_MBOX0_RDCLR	include/bcm2836/mbox.h	116;"	d
+CORE1_MBOX0_SET	include/bcm2836/mbox.h	99;"	d
+CORE1_MBOX1_RDCLR	include/bcm2836/mbox.h	117;"	d
+CORE1_MBOX1_SET	include/bcm2836/mbox.h	100;"	d
+CORE1_MBOX2_RDCLR	include/bcm2836/mbox.h	118;"	d
+CORE1_MBOX2_SET	include/bcm2836/mbox.h	101;"	d
+CORE1_MBOX3_RDCLR	include/bcm2836/mbox.h	119;"	d
+CORE1_MBOX3_SET	include/bcm2836/mbox.h	102;"	d
+CORE1_MBOX_IRQCNTL	include/bcm2836/mbox.h	59;"	d
+CORE1_TIMER_IRQCNTL	include/bcm2836/mbox.h	44;"	d
+CORE2_FIQ_SOURCE	include/bcm2836/mbox.h	79;"	d
+CORE2_IRQ_SOURCE	include/bcm2836/mbox.h	75;"	d
+CORE2_MBOX0_RDCLR	include/bcm2836/mbox.h	120;"	d
+CORE2_MBOX0_SET	include/bcm2836/mbox.h	103;"	d
+CORE2_MBOX1_RDCLR	include/bcm2836/mbox.h	121;"	d
+CORE2_MBOX1_SET	include/bcm2836/mbox.h	104;"	d
+CORE2_MBOX2_RDCLR	include/bcm2836/mbox.h	122;"	d
+CORE2_MBOX2_SET	include/bcm2836/mbox.h	105;"	d
+CORE2_MBOX3_RDCLR	include/bcm2836/mbox.h	123;"	d
+CORE2_MBOX3_SET	include/bcm2836/mbox.h	106;"	d
+CORE2_MBOX_IRQCNTL	include/bcm2836/mbox.h	60;"	d
+CORE2_TIMER_IRQCNTL	include/bcm2836/mbox.h	45;"	d
+CORE3_FIQ_SOURCE	include/bcm2836/mbox.h	80;"	d
+CORE3_IRQ_SOURCE	include/bcm2836/mbox.h	76;"	d
+CORE3_MBOX0_RDCLR	include/bcm2836/mbox.h	124;"	d
+CORE3_MBOX0_SET	include/bcm2836/mbox.h	107;"	d
+CORE3_MBOX1_RDCLR	include/bcm2836/mbox.h	125;"	d
+CORE3_MBOX1_SET	include/bcm2836/mbox.h	108;"	d
+CORE3_MBOX2_RDCLR	include/bcm2836/mbox.h	126;"	d
+CORE3_MBOX2_SET	include/bcm2836/mbox.h	109;"	d
+CORE3_MBOX3_RDCLR	include/bcm2836/mbox.h	127;"	d
+CORE3_MBOX3_SET	include/bcm2836/mbox.h	110;"	d
+CORE3_MBOX_IRQCNTL	include/bcm2836/mbox.h	61;"	d
+CORE3_TIMER_IRQCNTL	include/bcm2836/mbox.h	46;"	d
+CURRENT_LIMIT	include/bcm2836/sd.h	205;"	d
+Control	include/bcm2836/armtimer.h	/^	volatile uint32_t Control;$/;"	m	struct:arm_timer_t
+DATA	include/bcm2836/emmc.h	/^	__IO uint32_t DATA;				\/\/\/< 0x20$/;"	m	struct:__anon6
+DATA_CACHE_LINE_LENGTH_MIN	bcm2836/cache.c	61;"	d	file:
+DATA_CRC	include/bcm2836/sd.h	203;"	d
+DATA_END_BIT	include/bcm2836/sd.h	204;"	d
+DATA_TIMEOUT	include/bcm2836/sd.h	202;"	d
+DBG_SEL	include/bcm2836/emmc.h	/^	__IO uint32_t DBG_SEL;			\/\/\/< 0x74$/;"	m	struct:__anon6
+DEBUG	include/bcm2836/sd.h	37;"	d
+DEBUG	include/mm/heap.h	32;"	d
+DEBUG_MEM	mm/heap.c	25;"	d	file:
+DESELECT_CARD	include/bcm2836/sd.h	218;"	d
+DLLIST_H	include/lib/dlink_list.h	2;"	d
+D_ALIGNED	lib/memcpy.c	23;"	d	file:
+D_ALIGNED	lib/memset.c	23;"	d	file:
+Disable_Basic_IRQs	include/bcm2836/interrupt.h	/^	volatile uint32_t Disable_Basic_IRQs;$/;"	m	struct:__anon4
+Disable_IRQs_1	include/bcm2836/interrupt.h	/^	volatile uint32_t Disable_IRQs_1;$/;"	m	struct:__anon4
+Disable_IRQs_2	include/bcm2836/interrupt.h	/^	volatile uint32_t Disable_IRQs_2;$/;"	m	struct:__anon4
+E2BIG	include/lib/error.h	/^	E2BIG = 1,$/;"	e	enum:errors
+EACCES	include/lib/error.h	/^	EACCES,$/;"	e	enum:errors
+EADDRINUSE	include/lib/error.h	/^	EADDRINUSE,$/;"	e	enum:errors
+EADDRNOTAVAIL	include/lib/error.h	/^	EADDRNOTAVAIL,$/;"	e	enum:errors
+EAFNOSUPPORT	include/lib/error.h	/^	EAFNOSUPPORT,$/;"	e	enum:errors
+EAGAIN	include/lib/error.h	/^	EAGAIN,$/;"	e	enum:errors
+EALREADY	include/lib/error.h	/^	EALREADY,$/;"	e	enum:errors
+EBADF	include/lib/error.h	/^	EBADF,$/;"	e	enum:errors
+EBADMSG	include/lib/error.h	/^	EBADMSG,$/;"	e	enum:errors
+EBUSY	include/lib/error.h	/^	EBUSY,$/;"	e	enum:errors
+ECANCELED	include/lib/error.h	/^	ECANCELED,$/;"	e	enum:errors
+ECHILD	include/lib/error.h	/^	ECHILD,$/;"	e	enum:errors
+ECONNABORTED	include/lib/error.h	/^	ECONNABORTED,$/;"	e	enum:errors
+ECONNREFUSED	include/lib/error.h	/^	ECONNREFUSED,$/;"	e	enum:errors
+ECONNRESET	include/lib/error.h	/^	ECONNRESET,$/;"	e	enum:errors
+EDEADLK	include/lib/error.h	/^	EDEADLK,$/;"	e	enum:errors
+EDESTADDRREQ	include/lib/error.h	/^	EDESTADDRREQ,$/;"	e	enum:errors
+EDOM	include/lib/error.h	/^	EDOM,$/;"	e	enum:errors
+EDQUOT	include/lib/error.h	/^	EDQUOT,$/;"	e	enum:errors
+EEXIST	include/lib/error.h	/^	EEXIST,$/;"	e	enum:errors
+EFAULT	include/lib/error.h	/^	EFAULT,$/;"	e	enum:errors
+EFBIG	include/lib/error.h	/^	EFBIG,$/;"	e	enum:errors
+EHOSTUNREACH	include/lib/error.h	/^	EHOSTUNREACH,$/;"	e	enum:errors
+EIDRM	include/lib/error.h	/^	EIDRM,$/;"	e	enum:errors
+EILSEQ	include/lib/error.h	/^	EILSEQ,$/;"	e	enum:errors
+EINPROGRESS	include/lib/error.h	/^	EINPROGRESS,$/;"	e	enum:errors
+EINTR	include/lib/error.h	/^	EINTR,$/;"	e	enum:errors
+EINVAL	include/lib/error.h	/^	EINVAL,$/;"	e	enum:errors
+EIO	include/lib/error.h	/^	EIO,$/;"	e	enum:errors
+EISCONN	include/lib/error.h	/^	EISCONN,$/;"	e	enum:errors
+EISDIR	include/lib/error.h	/^	EISDIR,$/;"	e	enum:errors
+ELOOP	include/lib/error.h	/^	ELOOP,$/;"	e	enum:errors
+EMFILE	include/lib/error.h	/^	EMFILE,$/;"	e	enum:errors
+EMLINK	include/lib/error.h	/^	EMLINK,$/;"	e	enum:errors
+EMMC_DEBUG	include/bcm2836/sd.h	266;"	d
+EMMC_TRACE	include/bcm2836/sd.h	273;"	d
+EMMC_TRACE	include/bcm2836/sd.h	278;"	d
+EMSGSIZE	include/lib/error.h	/^	EMSGSIZE,$/;"	e	enum:errors
+EMULTIHOP	include/lib/error.h	/^	EMULTIHOP,$/;"	e	enum:errors
+ENAMETOOLONG	include/lib/error.h	/^	ENAMETOOLONG,$/;"	e	enum:errors
+ENETDOWN	include/lib/error.h	/^	ENETDOWN,$/;"	e	enum:errors
+ENETRESET	include/lib/error.h	/^	ENETRESET,$/;"	e	enum:errors
+ENETUNREACH	include/lib/error.h	/^	ENETUNREACH,$/;"	e	enum:errors
+ENFILE	include/lib/error.h	/^	ENFILE,$/;"	e	enum:errors
+ENOBUFS	include/lib/error.h	/^	ENOBUFS,$/;"	e	enum:errors
+ENODATA	include/lib/error.h	/^	ENODATA,$/;"	e	enum:errors
+ENODEV	include/lib/error.h	/^	ENODEV,$/;"	e	enum:errors
+ENOENT	include/lib/error.h	/^	ENOENT,$/;"	e	enum:errors
+ENOEXEC	include/lib/error.h	/^	ENOEXEC,$/;"	e	enum:errors
+ENOLCK	include/lib/error.h	/^	ENOLCK,$/;"	e	enum:errors
+ENOLINK	include/lib/error.h	/^	ENOLINK,$/;"	e	enum:errors
+ENOMEM	include/lib/error.h	/^	ENOMEM,$/;"	e	enum:errors
+ENOMSG	include/lib/error.h	/^	ENOMSG,$/;"	e	enum:errors
+ENOPROTOOPT	include/lib/error.h	/^	ENOPROTOOPT,$/;"	e	enum:errors
+ENOSPC	include/lib/error.h	/^	ENOSPC,$/;"	e	enum:errors
+ENOSR	include/lib/error.h	/^	ENOSR,$/;"	e	enum:errors
+ENOSTR	include/lib/error.h	/^	ENOSTR,$/;"	e	enum:errors
+ENOSYS	include/lib/error.h	/^	ENOSYS,$/;"	e	enum:errors
+ENOTCONN	include/lib/error.h	/^	ENOTCONN,$/;"	e	enum:errors
+ENOTDIR	include/lib/error.h	/^	ENOTDIR,$/;"	e	enum:errors
+ENOTEMPTY	include/lib/error.h	/^	ENOTEMPTY,$/;"	e	enum:errors
+ENOTRECOVERABLE	include/lib/error.h	/^	ENOTRECOVERABLE,$/;"	e	enum:errors
+ENOTSOCK	include/lib/error.h	/^	ENOTSOCK,$/;"	e	enum:errors
+ENOTSUP	include/lib/error.h	/^	ENOTSUP,$/;"	e	enum:errors
+ENOTTY	include/lib/error.h	/^	ENOTTY,$/;"	e	enum:errors
+ENXIO	include/lib/error.h	/^	ENXIO,$/;"	e	enum:errors
+EOPNOTSUPP	include/lib/error.h	/^	EOPNOTSUPP,$/;"	e	enum:errors
+EOVERFLOW	include/lib/error.h	/^	EOVERFLOW,$/;"	e	enum:errors
+EOWNERDEAD	include/lib/error.h	/^	EOWNERDEAD,$/;"	e	enum:errors
+EPERM	include/lib/error.h	/^	EPERM,$/;"	e	enum:errors
+EPIPE	include/lib/error.h	/^	EPIPE,$/;"	e	enum:errors
+EPROTO	include/lib/error.h	/^	EPROTO,$/;"	e	enum:errors
+EPROTONOSUPPORT	include/lib/error.h	/^	EPROTONOSUPPORT,$/;"	e	enum:errors
+EPROTOTYPE	include/lib/error.h	/^	EPROTOTYPE,$/;"	e	enum:errors
+ERANGE	include/lib/error.h	/^	ERANGE,$/;"	e	enum:errors
+ERASE	include/bcm2836/sd.h	241;"	d
+ERASE_WR_BLK_END	include/bcm2836/sd.h	240;"	d
+ERASE_WR_BLK_START	include/bcm2836/sd.h	239;"	d
+EROFS	include/lib/error.h	/^	EROFS,$/;"	e	enum:errors
+ESPIPE	include/lib/error.h	/^	ESPIPE,$/;"	e	enum:errors
+ESRCH	include/lib/error.h	/^	ESRCH,$/;"	e	enum:errors
+ESTALE	include/lib/error.h	/^	ESTALE,$/;"	e	enum:errors
+ETIME	include/lib/error.h	/^	ETIME,$/;"	e	enum:errors
+ETIMEDOUT	include/lib/error.h	/^	ETIMEDOUT,$/;"	e	enum:errors
+ETXTBSY	include/lib/error.h	/^	ETXTBSY,$/;"	e	enum:errors
+EWOULDBLOCK	include/lib/error.h	/^	EWOULDBLOCK,$/;"	e	enum:errors
+EXDEV	include/lib/error.h	/^	EXDEV$/;"	e	enum:errors
+EXRDFIFO_CFG	include/bcm2836/emmc.h	/^	__IO uint32_t EXRDFIFO_CFG;		\/\/\/< 0x80$/;"	m	struct:__anon6
+EXRDFIFO_EN	include/bcm2836/emmc.h	/^	__IO uint32_t EXRDFIFO_EN;		\/\/\/< 0x84$/;"	m	struct:__anon6
+Enable_Basic_IRQs	include/bcm2836/interrupt.h	/^	volatile uint32_t Enable_Basic_IRQs;$/;"	m	struct:__anon4
+Enable_IRQs_1	include/bcm2836/interrupt.h	/^	volatile uint32_t Enable_IRQs_1;$/;"	m	struct:__anon4
+Enable_IRQs_2	include/bcm2836/interrupt.h	/^	volatile uint32_t Enable_IRQs_2;$/;"	m	struct:__anon4
+FAIL	include/bcm2836/sd.h	196;"	d
+FIQ_control	include/bcm2836/interrupt.h	/^	volatile uint32_t FIQ_control;$/;"	m	struct:__anon4
+FLAG_DUMP	include/lib/nostdlib.h	14;"	d
+FORCE_IRPT	include/bcm2836/emmc.h	/^	__IO uint32_t FORCE_IRPT;		\/\/\/< 0x50$/;"	m	struct:__anon6
+FREE	mm/heap.c	23;"	d	file:
+FREE_AFTER	lib/kmalloc.c	52;"	d	file:
+FreeRunningCounter	include/bcm2836/armtimer.h	/^	volatile uint32_t FreeRunningCounter;$/;"	m	struct:arm_timer_t
+GEN_CMD	include/bcm2836/sd.h	244;"	d
+GET32	boot.S	/^GET32:$/;"	l
+GO_IDLE_STATE	include/bcm2836/sd.h	211;"	d
+GO_INACTIVE_STATE	include/bcm2836/sd.h	226;"	d
+GPCLR0	include/bcm2836/gpio.h	42;"	d
+GPCLR1	include/bcm2836/gpio.h	43;"	d
+GPFSEL0	include/bcm2836/gpio.h	32;"	d
+GPFSEL1	include/bcm2836/gpio.h	33;"	d
+GPFSEL2	include/bcm2836/gpio.h	34;"	d
+GPFSEL3	include/bcm2836/gpio.h	35;"	d
+GPFSEL4	include/bcm2836/gpio.h	36;"	d
+GPFSEL5	include/bcm2836/gpio.h	37;"	d
+GPIO_BASE	include/bcm2836/gpio.h	30;"	d
+GPIO_CD	bcm2836/sd.c	190;"	d	file:
+GPLEV0	include/bcm2836/gpio.h	45;"	d
+GPLEV1	include/bcm2836/gpio.h	46;"	d
+GPPUD	include/bcm2836/gpio.h	48;"	d
+GPPUDCLK0	include/bcm2836/gpio.h	49;"	d
+GPPUDCLK1	include/bcm2836/gpio.h	50;"	d
+GPSET0	include/bcm2836/gpio.h	39;"	d
+GPSET1	include/bcm2836/gpio.h	40;"	d
+GPU_CACHED_BASE	include/bcm2836/videocore.h	33;"	d
+GPU_IO_BASE	include/bcm2836/videocore.h	32;"	d
+GPU_MEM_BASE	include/bcm2836/videocore.h	37;"	d
+GPU_MEM_BASE	include/bcm2836/videocore.h	39;"	d
+GPU_UNCACHED_BASE	include/bcm2836/videocore.h	34;"	d
+GetArmTimer	bcm2836/armtimer.c	/^arm_timer* GetArmTimer()$/;"	f
+GetIrqController	bcm2836/interrupt_handler.c	/^irq_controller* GetIrqController() {$/;"	f
+HEAP_END	include/bcm2836/defines.h	9;"	d
+HEAP_LIST_SIZE	include/mm/heap.h	29;"	d
+HEAP_SIZE	include/bcm2836/defines.h	10;"	d
+HEAP_START	include/bcm2836/defines.h	8;"	d
+INCLUDE	Makefile	/^INCLUDE=include$/;"	m
+INCLUDE	bcm2836/Makefile	/^INCLUDE=..\/include$/;"	m
+INCLUDE	fs/Makefile	/^INCLUDE=..\/include$/;"	m
+INCLUDE	lib/Makefile	/^INCLUDE=..\/include$/;"	m
+INCLUDE	mm/Makefile	/^INCLUDE=..\/include$/;"	m
+INCLUDE	sys/Makefile	/^INCLUDE=..\/include$/;"	m
+INCLUDE	test/Makefile	/^INCLUDE=..\/include$/;"	m
+INCLUDES	fs/Makefile	/^INCLUDES=$(INCLUDE)\/fs\/*.h$/;"	m
+INCLUDES	mm/Makefile	/^INCLUDES=$(INCLUDE)\/mm\/*.h$/;"	m
+INCLUDES	sys/Makefile	/^INCLUDES=$(INCLUDE)\/sys\/*.h$/;"	m
+INTERRUPT	include/bcm2836/emmc.h	/^	__IO uint32_t INTERRUPT;		\/\/\/< 0x30$/;"	m	struct:__anon6
+INTERRUPTS_H	include/bcm2836/interrupt.h	2;"	d
+INTERRUPT_CONTROLLER_BASE	include/bcm2836/interrupt.h	10;"	d
+INT_SRC_GPU	include/bcm2836/mbox.h	92;"	d
+INT_SRC_MBOX0	include/bcm2836/mbox.h	88;"	d
+INT_SRC_MBOX1	include/bcm2836/mbox.h	89;"	d
+INT_SRC_MBOX2	include/bcm2836/mbox.h	90;"	d
+INT_SRC_MBOX3	include/bcm2836/mbox.h	91;"	d
+INT_SRC_PMU	include/bcm2836/mbox.h	93;"	d
+INT_SRC_TIMER0	include/bcm2836/mbox.h	84;"	d
+INT_SRC_TIMER1	include/bcm2836/mbox.h	85;"	d
+INT_SRC_TIMER2	include/bcm2836/mbox.h	86;"	d
+INT_SRC_TIMER3	include/bcm2836/mbox.h	87;"	d
+IO_SET_OP_COND	include/bcm2836/sd.h	215;"	d
+IRPT_EN	include/bcm2836/emmc.h	/^	__IO uint32_t IRPT_EN;			\/\/\/< 0x38$/;"	m	struct:__anon6
+IRPT_MASK	include/bcm2836/emmc.h	/^	__IO uint32_t IRPT_MASK;		\/\/\/< 0x34$/;"	m	struct:__anon6
+IRQClear	include/bcm2836/armtimer.h	/^	volatile uint32_t IRQClear;$/;"	m	struct:arm_timer_t
+IRQController	bcm2836/interrupt_handler.c	/^static irq_controller* IRQController =$/;"	v	file:
+IRQ_basic_pending	include/bcm2836/interrupt.h	/^	volatile uint32_t IRQ_basic_pending;$/;"	m	struct:__anon4
+IRQ_pending_1	include/bcm2836/interrupt.h	/^	volatile uint32_t IRQ_pending_1;$/;"	m	struct:__anon4
+IRQ_pending_2	include/bcm2836/interrupt.h	/^	volatile uint32_t IRQ_pending_2;$/;"	m	struct:__anon4
+IS_APP_CMD	include/bcm2836/sd.h	246;"	d
+IS_BEGIN	lib/kmalloc.c	48;"	d	file:
+IS_DEV_SUPPORT	include/fs/block.h	10;"	d
+IS_END	lib/kmalloc.c	50;"	d	file:
+InitIrqController	bcm2836/interrupt_handler.c	/^void InitIrqController (void) {$/;"	f
+KERNEL	mm/heap.c	22;"	d	file:
+KERNEL_HEAP_SIZE	kernel.c	42;"	d	file:
+KERNEL_HEAP_START_SIZE	include/mm/heap.h	30;"	d
+KERNEL_LIB_H	include/sys/kernel_lib.h	2;"	d
+KSCHEDULER_H	include/sys/kscheduler.h	2;"	d
+KTHREAD_H	include/sys/kthread.h	2;"	d
+L1_DATA_CACHE_LINE_LENGTH	bcm2836/cache.c	52;"	d	file:
+L1_DATA_CACHE_SETS	bcm2836/cache.c	49;"	d	file:
+L1_DATA_CACHE_WAYS	bcm2836/cache.c	50;"	d	file:
+L1_SETWAY_SET_SHIFT	bcm2836/cache.c	53;"	d	file:
+L1_SETWAY_WAY_SHIFT	bcm2836/cache.c	51;"	d	file:
+L2_CACHE_LINE_LENGTH	bcm2836/cache.c	58;"	d	file:
+L2_CACHE_SETS	bcm2836/cache.c	55;"	d	file:
+L2_CACHE_WAYS	bcm2836/cache.c	56;"	d	file:
+L2_SETWAY_SET_SHIFT	bcm2836/cache.c	59;"	d	file:
+L2_SETWAY_WAY_SHIFT	bcm2836/cache.c	57;"	d	file:
+LD_FLAGS	Makefile	/^LD_FLAGS=-mfpu=neon -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -ffreestanding -O2 -nostdlib -lgcc$/;"	m
+LD_SCRIPT	Makefile	/^LD_SCRIPT= linker.ld$/;"	m
+LOCK_UNLOCK	include/bcm2836/sd.h	242;"	d
+Load	include/bcm2836/armtimer.h	/^	volatile uint32_t Load;$/;"	m	struct:arm_timer_t
+MAILBOX_EMPTY	bcm2836/mbox.c	7;"	d	file:
+MAILBOX_FULL	bcm2836/mbox.c	6;"	d	file:
+MAXNBUF	lib/kprint.c	67;"	d	file:
+MAX_COUNT	test/timer_test.c	22;"	d	file:
+MAX_COUNT	test/timer_test.c	47;"	d	file:
+MBOX0_FIQ	include/bcm2836/mbox.h	68;"	d
+MBOX0_IRQ	include/bcm2836/mbox.h	64;"	d
+MBOX1_FIQ	include/bcm2836/mbox.h	69;"	d
+MBOX1_IRQ	include/bcm2836/mbox.h	65;"	d
+MBOX2_FIQ	include/bcm2836/mbox.h	70;"	d
+MBOX2_IRQ	include/bcm2836/mbox.h	66;"	d
+MBOX3_FIQ	include/bcm2836/mbox.h	71;"	d
+MBOX3_IRQ	include/bcm2836/mbox.h	67;"	d
+MBOX_BASE	include/bcm2836/mbox.h	5;"	d
+MBOX_BUTTONS	include/bcm2836/mbox.h	/^        MBOX_BUTTONS,$/;"	e	enum:mail_chan
+MBOX_FRAMEBUFFER	include/bcm2836/mbox.h	/^        MBOX_FRAMEBUFFER,$/;"	e	enum:mail_chan
+MBOX_LEDS	include/bcm2836/mbox.h	/^        MBOX_LEDS,$/;"	e	enum:mail_chan
+MBOX_NUSED	include/bcm2836/mbox.h	/^        MBOX_NUSED,$/;"	e	enum:mail_chan
+MBOX_POWER	include/bcm2836/mbox.h	/^        MBOX_POWER,$/;"	e	enum:mail_chan
+MBOX_PROP	include/bcm2836/mbox.h	/^        MBOX_PROP,$/;"	e	enum:mail_chan
+MBOX_REVPROP	include/bcm2836/mbox.h	/^        MBOX_REVPROP$/;"	e	enum:mail_chan
+MBOX_SUCCESS	include/bcm2836/mbox.h	7;"	d
+MBOX_TOUCH	include/bcm2836/mbox.h	/^        MBOX_TOUCH,$/;"	e	enum:mail_chan
+MBOX_UART	include/bcm2836/mbox.h	/^        MBOX_UART,$/;"	e	enum:mail_chan
+MBOX_VCHIQ	include/bcm2836/mbox.h	/^        MBOX_VCHIQ,$/;"	e	enum:mail_chan
+MIN_FREQ	include/bcm2836/sd.h	258;"	d
+MREAD_SUPPORT	include/fs/block.h	7;"	d
+MWRITE_SUPPORT	include/fs/block.h	8;"	d
+MaskedIRQ	include/bcm2836/armtimer.h	/^	volatile uint32_t MaskedIRQ;$/;"	m	struct:arm_timer_t
+NBBY	lib/kprint.c	49;"	d	file:
+NOTINUSE1	include/bcm2836/emmc.h	/^	__IO uint32_t NOTINUSE1[2];$/;"	m	struct:__anon6
+NOTINUSE2	include/bcm2836/emmc.h	/^	__IO uint32_t NOTINUSE2[7];$/;"	m	struct:__anon6
+NOTINUSE3	include/bcm2836/emmc.h	/^	__IO uint32_t NOTINUSE3[2];$/;"	m	struct:__anon6
+NOTINUSE4	include/bcm2836/emmc.h	/^	__IO uint32_t NOTINUSE4[23];$/;"	m	struct:__anon6
+NOTINUSE5	include/bcm2836/emmc.h	/^	__IO uint32_t NOTINUSE5[2];$/;"	m	struct:__anon6
+OBJ	Makefile	/^OBJ=$(ARM)-objcopy$/;"	m
+OBJ	bcm2836/Makefile	/^OBJ=$(ARM)-objcopy$/;"	m
+OBJ	fs/Makefile	/^OBJ=$(ARM)-objcopy$/;"	m
+OBJ	lib/Makefile	/^OBJ=$(ARM)-objcopy$/;"	m
+OBJ	mm/Makefile	/^OBJ=$(ARM)-objcopy$/;"	m
+OBJ	sys/Makefile	/^OBJ=$(ARM)-objcopy$/;"	m
+OBJ	test/Makefile	/^OBJ=$(ARM)-objcopy$/;"	m
+OBJECTS	bcm2836/Makefile	/^OBJECTS=uart.o timer.o sd.o mbox.o cache.o videocore.o armtimer.o interrupt_handler.o mmio.o $/;"	m
+OBJECTS	fs/Makefile	/^OBJECTS=block.o$/;"	m
+OBJECTS	lib/Makefile	/^OBJECTS=kprint.o strlen.o error.o kmalloc.o kdie.o memset.o memcpy.o registers_dump.o ringbuffer.o $/;"	m
+OBJECTS	mm/Makefile	/^OBJECTS=heap.o$/;"	m
+OBJECTS	sys/Makefile	/^OBJECTS=devs.o kscheduler.o kthread.o syscall.o kernel_lib.o$/;"	m
+OBJECTS	test/Makefile	/^OBJECTS=mem_test.o heap_test.o timer_test.o lib_test.o rbuffer_test.o thread_test.o$/;"	m
+PAGE_SIZE	include/bcm2836/defines.h	7;"	d
+PBASE	include/bcm2836/defines.h	5;"	d
+PCHAR	lib/kprint.c	126;"	d	file:
+PCHAR	lib/kprint.c	432;"	d	file:
+PERIOD	test/timer_test.c	23;"	d	file:
+PERIOD	test/timer_test.c	48;"	d	file:
+POISON	lib/kmalloc.c	61;"	d	file:
+PROGRAM_CSD	include/bcm2836/sd.h	235;"	d
+PUT32	boot.S	/^PUT32:$/;"	l
+PreDivider	include/bcm2836/armtimer.h	/^	volatile uint32_t PreDivider;$/;"	m	struct:arm_timer_t
+RAWIRQ	include/bcm2836/armtimer.h	/^	volatile uint32_t RAWIRQ;$/;"	m	struct:arm_timer_t
+RBUFFER_IS_EMPTY	include/bcm2836/flags.h	5;"	d
+RBUFFER_IS_FULL	include/bcm2836/flags.h	4;"	d
+RBUFFER_IS_OVERFLOW	include/bcm2836/flags.h	7;"	d
+RBUFFER_IS_UNDER_PROTECTION	include/bcm2836/flags.h	6;"	d
+READ_MULTIPLE_BLOCK	include/bcm2836/sd.h	229;"	d
+READ_SINGLE_BLOCK	include/bcm2836/sd.h	228;"	d
+REGS_NUM	include/bcm2836/defines.h	15;"	d
+RESP0	include/bcm2836/emmc.h	/^	__O uint32_t RESP0;				\/\/\/< 0x10$/;"	m	struct:__anon6
+RESP1	include/bcm2836/emmc.h	/^	__O uint32_t RESP1;				\/\/\/< 0x14$/;"	m	struct:__anon6
+RESP2	include/bcm2836/emmc.h	/^	__O uint32_t RESP2;				\/\/\/< 0x18$/;"	m	struct:__anon6
+RESP3	include/bcm2836/emmc.h	/^	__O uint32_t RESP3;				\/\/\/< 0x1C$/;"	m	struct:__anon6
+RING_BUFFER_SIZE	include/bcm2836/defines.h	17;"	d
+RPI2	include/bcm2836/defines.h	21;"	d
+Reload	include/bcm2836/armtimer.h	/^	volatile uint32_t Reload;$/;"	m	struct:arm_timer_t
+SDHCI_DIVIDER_HI_SHIFT	include/bcm2836/sdhci.h	30;"	d
+SDHCI_DIVIDER_SHIFT	include/bcm2836/sdhci.h	29;"	d
+SDHCI_DIV_HI_MASK	include/bcm2836/sdhci.h	33;"	d
+SDHCI_DIV_MASK	include/bcm2836/sdhci.h	31;"	d
+SDHCI_DIV_MASK_LEN	include/bcm2836/sdhci.h	32;"	d
+SDHCI_H_	include/bcm2836/sdhci.h	27;"	d
+SDHCI_INT_ACMD12ERR	include/bcm2836/sdhci.h	56;"	d
+SDHCI_INT_ADMA_ERROR	include/bcm2836/sdhci.h	57;"	d
+SDHCI_INT_BLK_GAP	include/bcm2836/sdhci.h	40;"	d
+SDHCI_INT_BUS_POWER	include/bcm2836/sdhci.h	55;"	d
+SDHCI_INT_CARD_INSERT	include/bcm2836/sdhci.h	44;"	d
+SDHCI_INT_CARD_INT	include/bcm2836/sdhci.h	46;"	d
+SDHCI_INT_CARD_REMOVE	include/bcm2836/sdhci.h	45;"	d
+SDHCI_INT_CRC	include/bcm2836/sdhci.h	49;"	d
+SDHCI_INT_DATA_AVAIL	include/bcm2836/sdhci.h	43;"	d
+SDHCI_INT_DATA_CRC	include/bcm2836/sdhci.h	53;"	d
+SDHCI_INT_DATA_END	include/bcm2836/sdhci.h	39;"	d
+SDHCI_INT_DATA_END_BIT	include/bcm2836/sdhci.h	54;"	d
+SDHCI_INT_DATA_TIMEOUT	include/bcm2836/sdhci.h	52;"	d
+SDHCI_INT_DMA_END	include/bcm2836/sdhci.h	41;"	d
+SDHCI_INT_END_BIT	include/bcm2836/sdhci.h	50;"	d
+SDHCI_INT_ERROR	include/bcm2836/sdhci.h	47;"	d
+SDHCI_INT_INDEX	include/bcm2836/sdhci.h	51;"	d
+SDHCI_INT_RESPONSE	include/bcm2836/sdhci.h	38;"	d
+SDHCI_INT_SPACE_AVAIL	include/bcm2836/sdhci.h	42;"	d
+SDHCI_INT_TIMEOUT	include/bcm2836/sdhci.h	48;"	d
+SDHCI_MAX_DIV_SPEC_200	include/bcm2836/sdhci.h	35;"	d
+SDHCI_MAX_DIV_SPEC_300	include/bcm2836/sdhci.h	36;"	d
+SDXC_MAXIMUM_PERFORMANCE	include/bcm2836/sd.h	299;"	d
+SD_4BIT_DATA	include/bcm2836/sd.h	296;"	d
+SD_BLOCK_GAP_EVENT	include/bcm2836/sd.h	187;"	d
+SD_BUFFER_READ_READY	include/bcm2836/sd.h	190;"	d
+SD_BUFFER_WRITE_READY	include/bcm2836/sd.h	189;"	d
+SD_BUSY	include/bcm2836/sd.h	44;"	d
+SD_CARD	include/sys/devs.h	/^        SD_CARD = 0$/;"	e	enum:block_dev_list
+SD_CARD_ABSENT	include/bcm2836/sd.h	51;"	d
+SD_CARD_CHANGED	include/bcm2836/sd.h	50;"	d
+SD_CARD_INSERTION	include/bcm2836/sd.h	191;"	d
+SD_CARD_INTERRUPT	include/bcm2836/sd.h	193;"	d
+SD_CARD_REINSERTED	include/bcm2836/sd.h	52;"	d
+SD_CARD_REMOVAL	include/bcm2836/sd.h	192;"	d
+SD_CLOCK_100	include/bcm2836/sd.h	111;"	d
+SD_CLOCK_208	include/bcm2836/sd.h	112;"	d
+SD_CLOCK_HIGH	include/bcm2836/sd.h	110;"	d
+SD_CLOCK_ID	include/bcm2836/sd.h	108;"	d
+SD_CLOCK_NORMAL	include/bcm2836/sd.h	109;"	d
+SD_CMD_AUTO_CMD_EN_CMD12	include/bcm2836/sd.h	139;"	d
+SD_CMD_AUTO_CMD_EN_CMD23	include/bcm2836/sd.h	140;"	d
+SD_CMD_AUTO_CMD_EN_NONE	include/bcm2836/sd.h	138;"	d
+SD_CMD_BLKCNT_EN	include/bcm2836/sd.h	141;"	d
+SD_CMD_CRCCHK_EN	include/bcm2836/sd.h	129;"	d
+SD_CMD_DAT_DIR_CH	include/bcm2836/sd.h	137;"	d
+SD_CMD_DAT_DIR_HC	include/bcm2836/sd.h	136;"	d
+SD_CMD_DMA	include/bcm2836/sd.h	142;"	d
+SD_CMD_INDEX	include/bcm2836/sd.h	121;"	d
+SD_CMD_ISDATA	include/bcm2836/sd.h	127;"	d
+SD_CMD_IXCHK_EN	include/bcm2836/sd.h	128;"	d
+SD_CMD_MULTI_BLOCK	include/bcm2836/sd.h	135;"	d
+SD_CMD_RESERVED	include/bcm2836/sd.h	183;"	d
+SD_CMD_RSPNS_TYPE_136	include/bcm2836/sd.h	131;"	d
+SD_CMD_RSPNS_TYPE_48	include/bcm2836/sd.h	132;"	d
+SD_CMD_RSPNS_TYPE_48B	include/bcm2836/sd.h	133;"	d
+SD_CMD_RSPNS_TYPE_MASK	include/bcm2836/sd.h	134;"	d
+SD_CMD_RSPNS_TYPE_NONE	include/bcm2836/sd.h	130;"	d
+SD_CMD_TYPE_ABORT	include/bcm2836/sd.h	125;"	d
+SD_CMD_TYPE_MASK	include/bcm2836/sd.h	126;"	d
+SD_CMD_TYPE_NORMAL	include/bcm2836/sd.h	122;"	d
+SD_CMD_TYPE_RESUME	include/bcm2836/sd.h	124;"	d
+SD_CMD_TYPE_SUSPEND	include/bcm2836/sd.h	123;"	d
+SD_COMMAND_COMPLETE	include/bcm2836/sd.h	185;"	d
+SD_DATA_READ	include/bcm2836/sd.h	180;"	d
+SD_DATA_WRITE	include/bcm2836/sd.h	181;"	d
+SD_DEBUG	include/bcm2836/sd.h	267;"	d
+SD_DMA_INTERRUPT	include/bcm2836/sd.h	188;"	d
+SD_ERROR	include/bcm2836/sd.h	42;"	d
+SD_ERROR_APP_CMD	include/bcm2836/sd.h	49;"	d
+SD_ERROR_CLOCK	include/bcm2836/sd.h	47;"	d
+SD_ERROR_RESET	include/bcm2836/sd.h	46;"	d
+SD_ERROR_VOLTAGE	include/bcm2836/sd.h	48;"	d
+SD_ERR_ADMA	include/bcm2836/sd.h	153;"	d
+SD_ERR_AUTO_CMD12	include/bcm2836/sd.h	152;"	d
+SD_ERR_CMD_CRC	include/bcm2836/sd.h	145;"	d
+SD_ERR_CMD_END_BIT	include/bcm2836/sd.h	146;"	d
+SD_ERR_CMD_INDEX	include/bcm2836/sd.h	147;"	d
+SD_ERR_CMD_TIMEOUT	include/bcm2836/sd.h	144;"	d
+SD_ERR_CURRENT_LIMIT	include/bcm2836/sd.h	151;"	d
+SD_ERR_DATA_CRC	include/bcm2836/sd.h	149;"	d
+SD_ERR_DATA_END_BIT	include/bcm2836/sd.h	150;"	d
+SD_ERR_DATA_TIMEOUT	include/bcm2836/sd.h	148;"	d
+SD_ERR_MASK_ADMA	include/bcm2836/sd.h	166;"	d
+SD_ERR_MASK_AUTO_CMD12	include/bcm2836/sd.h	165;"	d
+SD_ERR_MASK_CMD_CRC	include/bcm2836/sd.h	158;"	d
+SD_ERR_MASK_CMD_END_BIT	include/bcm2836/sd.h	159;"	d
+SD_ERR_MASK_CMD_INDEX	include/bcm2836/sd.h	160;"	d
+SD_ERR_MASK_CMD_TIMEOUT	include/bcm2836/sd.h	157;"	d
+SD_ERR_MASK_CURRENT_LIMIT	include/bcm2836/sd.h	164;"	d
+SD_ERR_MASK_DATA_CRC	include/bcm2836/sd.h	162;"	d
+SD_ERR_MASK_DATA_END_BIT	include/bcm2836/sd.h	163;"	d
+SD_ERR_MASK_DATA_TIMEOUT	include/bcm2836/sd.h	161;"	d
+SD_ERR_MASK_TUNING	include/bcm2836/sd.h	167;"	d
+SD_ERR_RSVD	include/bcm2836/sd.h	155;"	d
+SD_ERR_TUNING	include/bcm2836/sd.h	154;"	d
+SD_GET_CLOCK_DIVIDER_FAIL	include/bcm2836/sd.h	256;"	d
+SD_H_	include/bcm2836/sd.h	29;"	d
+SD_NO_RESP	include/bcm2836/sd.h	45;"	d
+SD_OK	include/bcm2836/sd.h	41;"	d
+SD_RESP_NONE	include/bcm2836/sd.h	169;"	d
+SD_RESP_R1	include/bcm2836/sd.h	170;"	d
+SD_RESP_R1b	include/bcm2836/sd.h	171;"	d
+SD_RESP_R2	include/bcm2836/sd.h	172;"	d
+SD_RESP_R3	include/bcm2836/sd.h	173;"	d
+SD_RESP_R4	include/bcm2836/sd.h	174;"	d
+SD_RESP_R5	include/bcm2836/sd.h	175;"	d
+SD_RESP_R5b	include/bcm2836/sd.h	176;"	d
+SD_RESP_R6	include/bcm2836/sd.h	177;"	d
+SD_RESP_R7	include/bcm2836/sd.h	178;"	d
+SD_SEND_OP_COND	include/bcm2836/sd.h	252;"	d
+SD_STATUS	include/bcm2836/sd.h	249;"	d
+SD_TIMEOUT	include/bcm2836/sd.h	43;"	d
+SD_TRACE	include/bcm2836/sd.h	284;"	d
+SD_TRACE	include/bcm2836/sd.h	289;"	d
+SD_TRANSFER_COMPLETE	include/bcm2836/sd.h	186;"	d
+SD_VER_1	include/bcm2836/sd.h	115;"	d
+SD_VER_1_1	include/bcm2836/sd.h	116;"	d
+SD_VER_2	include/bcm2836/sd.h	117;"	d
+SD_VER_3	include/bcm2836/sd.h	118;"	d
+SD_VER_4	include/bcm2836/sd.h	119;"	d
+SD_VER_UNKNOWN	include/bcm2836/sd.h	114;"	d
+SD_WRITE_SUPPORT	include/bcm2836/sd.h	39;"	d
+SELECT_CARD	include/bcm2836/sd.h	217;"	d
+SELECT_DESELECT_CARD	include/bcm2836/sd.h	219;"	d
+SEND_CID	include/bcm2836/sd.h	222;"	d
+SEND_CSD	include/bcm2836/sd.h	221;"	d
+SEND_IF_COND	include/bcm2836/sd.h	220;"	d
+SEND_NUM_WR_BLOCKS	include/bcm2836/sd.h	250;"	d
+SEND_RELATIVE_ADDR	include/bcm2836/sd.h	213;"	d
+SEND_SCR	include/bcm2836/sd.h	254;"	d
+SEND_STATUS	include/bcm2836/sd.h	225;"	d
+SEND_STR	test/thread_test.c	8;"	d	file:
+SEND_TUNING_BLOCK	include/bcm2836/sd.h	230;"	d
+SEND_WRITE_PROT	include/bcm2836/sd.h	238;"	d
+SETWAY_LEVEL_SHIFT	bcm2836/cache.c	47;"	d	file:
+SET_BLOCKLEN	include/bcm2836/sd.h	227;"	d
+SET_BLOCK_COUNT	include/bcm2836/sd.h	232;"	d
+SET_BUS_WIDTH	include/bcm2836/sd.h	248;"	d
+SET_CLR_CARD_DETECT	include/bcm2836/sd.h	253;"	d
+SET_DSR	include/bcm2836/sd.h	214;"	d
+SET_WRITE_PROT	include/bcm2836/sd.h	236;"	d
+SET_WR_BLK_ERASE_COUNT	include/bcm2836/sd.h	251;"	d
+SLOTISR_VER	include/bcm2836/emmc.h	/^	__IO uint32_t SLOTISR_VER;		\/\/\/< 0xFC$/;"	m	struct:__anon6
+SOURCES	bcm2836/Makefile	/^SOURCES=uart.c timer.c sd.c mbox.c cache.c videocore.c armtimer.c interrupt_handler.c$/;"	m
+SOURCES	fs/Makefile	/^SOURCES=block.c$/;"	m
+SOURCES	lib/Makefile	/^SOURCES=kprint.c strlen.c error.c kmalloc.c kdie.c memset.c memcpy.c registers_dump.c ringbuffer.c $/;"	m
+SOURCES	mm/Makefile	/^SOURCES=heap.c$/;"	m
+SOURCES	sys/Makefile	/^SOURCES=devs.c kscheduler.c kthread.c syscall.c kernel_lib.c$/;"	m
+SOURCES	test/Makefile	/^SOURCES=mem_test.c heap_test.c timer_test.c lib_test.c rbuffer_test.c thread_test.c$/;"	m
+SPEED_CLASS_CONTROL	include/bcm2836/sd.h	231;"	d
+SPI_INT_SPT	include/bcm2836/emmc.h	/^	__IO uint32_t SPI_INT_SPT;		\/\/\/< 0xF0$/;"	m	struct:__anon6
+STATUS	include/bcm2836/emmc.h	/^	__O uint32_t STATUS;			\/\/\/< 0x24$/;"	m	struct:__anon6
+STLIBS	Makefile	/^STLIBS=-L.\/lib -L.\/bcm2836 -L.\/mm -L.\/test -L.\/fs -L.\/sys -ltest -lsys -lfs -lmem -lbcm2836 -lsys -lbarebone -lbcm2836 -lgcc$/;"	m
+STOP_TRANSMISSION	include/bcm2836/sd.h	224;"	d
+SUCCESS	include/bcm2836/sd.h	195;"	d
+SWITCH_FUNC	include/bcm2836/sd.h	216;"	d
+SYNCHRONIZE_H_	include/bcm2836/cache.h	27;"	d
+SYSCALL_H	include/sys/syscall.h	2;"	d
+SYS_TIMER_BASE	include/bcm2836/timer.h	7;"	d
+TARGET	Makefile	/^TARGET=kernel$/;"	m
+TARGET	bcm2836/Makefile	/^TARGET=libbcm2836.a$/;"	m
+TARGET	fs/Makefile	/^TARGET=libfs.a$/;"	m
+TARGET	lib/Makefile	/^TARGET=libbarebone.a$/;"	m
+TARGET	mm/Makefile	/^TARGET=libmem.a$/;"	m
+TARGET	sys/Makefile	/^TARGET=libsys.a$/;"	m
+TARGET	test/Makefile	/^TARGET=libtest.a$/;"	m
+THREAD_PAGE_COUNT	include/bcm2836/defines.h	19;"	d
+TIMEOUT	include/bcm2836/sd.h	197;"	d
+TIMEOUT_WAIT	include/bcm2836/sd.h	65;"	d
+TIMER0_FIQ	include/bcm2836/mbox.h	53;"	d
+TIMER0_IRQ	include/bcm2836/mbox.h	49;"	d
+TIMER1_FIQ	include/bcm2836/mbox.h	54;"	d
+TIMER1_IRQ	include/bcm2836/mbox.h	50;"	d
+TIMER2_FIQ	include/bcm2836/mbox.h	55;"	d
+TIMER2_IRQ	include/bcm2836/mbox.h	51;"	d
+TIMER3_FIQ	include/bcm2836/mbox.h	56;"	d
+TIMER3_IRQ	include/bcm2836/mbox.h	52;"	d
+TIMER_RATE	include/bcm2836/defines.h	12;"	d
+TUNE_STEP	include/bcm2836/emmc.h	/^	__IO uint32_t TUNE_STEP;		\/\/\/< 0x88$/;"	m	struct:__anon6
+TUNE_STEPS_DDR	include/bcm2836/emmc.h	/^	__IO uint32_t TUNE_STEPS_DDR;	\/\/\/< 0x90$/;"	m	struct:__anon6
+TUNE_STEPS_STD	include/bcm2836/emmc.h	/^	__IO uint32_t TUNE_STEPS_STD;	\/\/\/< 0x8C$/;"	m	struct:__anon6
+TUNING_ERROR	include/bcm2836/sd.h	208;"	d
+UART0_BASE	include/bcm2836/uart.h	6;"	d
+UART0_CR	include/bcm2836/uart.h	15;"	d
+UART0_DMACR	include/bcm2836/uart.h	21;"	d
+UART0_DR	include/bcm2836/uart.h	8;"	d
+UART0_FBRD	include/bcm2836/uart.h	13;"	d
+UART0_FR	include/bcm2836/uart.h	10;"	d
+UART0_IBRD	include/bcm2836/uart.h	12;"	d
+UART0_ICR	include/bcm2836/uart.h	20;"	d
+UART0_IFLS	include/bcm2836/uart.h	16;"	d
+UART0_ILPR	include/bcm2836/uart.h	11;"	d
+UART0_IMSC	include/bcm2836/uart.h	17;"	d
+UART0_ITCR	include/bcm2836/uart.h	22;"	d
+UART0_ITIP	include/bcm2836/uart.h	23;"	d
+UART0_ITOP	include/bcm2836/uart.h	24;"	d
+UART0_LCRH	include/bcm2836/uart.h	14;"	d
+UART0_MIS	include/bcm2836/uart.h	19;"	d
+UART0_RIS	include/bcm2836/uart.h	18;"	d
+UART0_RSRECR	include/bcm2836/uart.h	9;"	d
+UART0_TDR	include/bcm2836/uart.h	25;"	d
+VOLTAGE_SWITCH	include/bcm2836/sd.h	223;"	d
+Value	include/bcm2836/armtimer.h	/^	volatile uint32_t Value;$/;"	m	struct:arm_timer_t
+WAIT	include/sys/kthread.h	/^enum thread_state {ACTIVE, WAIT, BLOCKED};$/;"	e	enum:thread_state
+WRITE_BLOCK	include/bcm2836/sd.h	233;"	d
+WRITE_MULTIPLE_BLOCK	include/bcm2836/sd.h	234;"	d
+W_ALIGNED	lib/memcpy.c	24;"	d	file:
+W_ALIGNED	lib/memset.c	24;"	d	file:
+_BCM2835_VC_H_	include/bcm2836/videocore.h	27;"	d
+_DEVS_	include/sys/devs.h	21;"	d
+_FLAGS_	include/bcm2836/flags.h	2;"	d
+_MBOX_	include/bcm2836/mbox.h	2;"	d
+_REGISTERS_	include/bcm2836/registers.h	2;"	d
+_STRING_	include/lib/string.h	2;"	d
+_TEST_	include/test/test.h	21;"	d
+_TIMER_	include/bcm2836/timer.h	2;"	d
+__BCM2836_DEFS__	include/bcm2836/defines.h	2;"	d
+__BCM2836_UART__	include/bcm2836/uart.h	2;"	d
+__BLOCK__	include/fs/block.h	2;"	d
+__DELAY__	include/bcm2836/delay.h	2;"	d
+__ERROR_	include/lib/error.h	21;"	d
+__HEAP__	include/mm/heap.h	20;"	d
+__IO	include/bcm2836/emmc.h	69;"	d
+__MMIO__	include/bcm2836/mmio.h	2;"	d
+__NOSTDIO__	include/lib/nostdio.h	2;"	d
+__NOSTDLIB__	include/lib/nostdlib.h	2;"	d
+__O	include/bcm2836/emmc.h	70;"	d
+__RINGBUFFER__	include/lib/ringbuffer.h	2;"	d
+_data_abort_vector_h	boot.S	/^_data_abort_vector_h:               .word   _inf_loop$/;"	l
+_disable_interrupts	boot.S	/^_disable_interrupts:$/;"	l
+_enable_interrupts	boot.S	/^_enable_interrupts:$/;"	l
+_fast_interrupt_vector_h	boot.S	/^_fast_interrupt_vector_h:           .word   _inf_loop$/;"	l
+_get_cpsr	boot.S	/^_get_cpsr:$/;"	l
+_get_irq_sp	boot.S	/^_get_irq_sp:$/;"	l
+_get_pc	boot.S	/^_get_pc:$/;"	l
+_get_stack_pointer	boot.S	/^_get_stack_pointer:$/;"	l
+_inf_loop	boot.S	/^_inf_loop:$/;"	l
+_interrupt_vector_h	boot.S	/^_interrupt_vector_h:                .word   irq_handler$/;"	l
+_kernel_entry	boot.S	/^_kernel_entry:$/;"	l
+_prefetch_abort_vector_h	boot.S	/^_prefetch_abort_vector_h:           .word   _inf_loop$/;"	l
+_reset_	boot.S	/^_reset_:$/;"	l
+_reset_h	boot.S	/^_reset_h:                           .word   _reset_$/;"	l
+_set_irq_mode	boot.S	/^_set_irq_mode:$/;"	l
+_set_sp	boot.S	/^_set_sp:$/;"	l
+_set_svc_mode	boot.S	/^_set_svc_mode:$/;"	l
+_set_usr_mode	boot.S	/^_set_usr_mode:$/;"	l
+_software_interrupt_vector_h	boot.S	/^_software_interrupt_vector_h:       .word   software_handler$/;"	l
+_start	boot.S	/^_start:$/;"	l
+_undefined_instruction_vector_h	boot.S	/^_undefined_instruction_vector_h:    .word   _inf_loop$/;"	l
+_unused_handler_h	boot.S	/^_unused_handler_h:                  .word   _inf_loop$/;"	l
+active	include/sys/kthread.h	/^	dl_node active;$/;"	m	struct:kthread_t
+add_kthread	sys/kthread.c	/^void add_kthread (sflag_t flags, void* func) {$/;"	f
+add_node	include/lib/dlink_list.h	/^static inline void add_node (dl_node* before, dl_node* after, dl_node* node) {$/;"	f
+add_tail	include/lib/dlink_list.h	/^static inline void add_tail (dl_node* head, dl_node* node) {$/;"	f
+aptr_t	include/bcm2836/defines.h	/^typedef uint32_t aptr_t;$/;"	t
+area_size	lib/kmalloc.c	/^        size_t area_size;         \/* if area_size == 0 its $/;"	m	struct:kmem_chunk_t	file:
+arm_timer	include/bcm2836/armtimer.h	/^} arm_timer;$/;"	t	typeref:struct:arm_timer_t
+arm_timer_t	include/bcm2836/armtimer.h	/^typedef struct arm_timer_t{$/;"	s
+base_address	bcm2836/videocore.c	/^	uint32_t base_address;		\/\/\/< base address in bytes$/;"	m	struct:vc_msg_tag_ram	file:
+base_clock	include/bcm2836/sd.h	/^	unsigned base_clock;$/;"	m	struct:emmc_block_dev
+bcm2835SetPowerState	include/bcm2836/videocore.h	/^} bcm2835SetPowerState;$/;"	t	typeref:enum:__anon3
+bcm2835VideoCoreClockId	include/bcm2836/videocore.h	/^} bcm2835VideoCoreClockId;$/;"	t	typeref:enum:__anon1
+bcm2835VideoCorePowerId	include/bcm2836/videocore.h	/^} bcm2835VideoCorePowerId;$/;"	t	typeref:enum:__anon2
+bcm2835_vc_get	bcm2836/videocore.c	/^inline static int32_t bcm2835_vc_get(const uint32_t tag_id, const uint32_t dev_id) {$/;"	f	file:
+bcm2835_vc_get_board_mac_address	bcm2836/videocore.c	/^int32_t bcm2835_vc_get_board_mac_address(uint8_t *mac_address) {$/;"	f
+bcm2835_vc_get_clock_rate	bcm2836/videocore.c	/^int32_t bcm2835_vc_get_clock_rate(const uint32_t clock_id) {$/;"	f
+bcm2835_vc_get_get_board_model	bcm2836/videocore.c	/^int32_t bcm2835_vc_get_get_board_model(void) {$/;"	f
+bcm2835_vc_get_get_board_revision	bcm2836/videocore.c	/^int32_t bcm2835_vc_get_get_board_revision(void) {$/;"	f
+bcm2835_vc_get_get_firmware_revision	bcm2836/videocore.c	/^int32_t bcm2835_vc_get_get_firmware_revision(void) {$/;"	f
+bcm2835_vc_get_memory	bcm2836/videocore.c	/^int32_t bcm2835_vc_get_memory(const uint32_t tag_id) {$/;"	f
+bcm2835_vc_get_power_state	bcm2836/videocore.c	/^int32_t bcm2835_vc_get_power_state(const uint32_t dev_id) {$/;"	f
+bcm2835_vc_get_temperature	bcm2836/videocore.c	/^int32_t bcm2835_vc_get_temperature(void) {$/;"	f
+bcm2835_vc_get_temperature_max	bcm2836/videocore.c	/^int32_t bcm2835_vc_get_temperature_max(void) {$/;"	f
+bcm2835_vc_get_uint32_t	bcm2836/videocore.c	/^inline static int32_t bcm2835_vc_get_uint32_t(uint32_t tag_id) {$/;"	f	file:
+bcm2835_vc_set	bcm2836/videocore.c	/^inline static int32_t bcm2835_vc_set(const uint32_t tag_id, const uint32_t dev_id, const uint32_t val) {$/;"	f	file:
+bcm2835_vc_set_clock_rate	bcm2836/videocore.c	/^int32_t bcm2835_vc_set_clock_rate(const uint32_t clock_id, const uint32_t clock_rate) {$/;"	f
+bcm2835_vc_set_power_state	bcm2836/videocore.c	/^int32_t bcm2835_vc_set_power_state(const uint32_t dev_id, const uint32_t state) {$/;"	f
+bcm2836_sys_timer	include/bcm2836/timer.h	/^struct bcm2836_sys_timer {$/;"	s
+bd	include/bcm2836/sd.h	/^	block_dev* bd;$/;"	m	struct:emmc_block_dev
+bdevs_init	sys/devs.c	/^int bdevs_init()$/;"	f
+begin	include/mm/heap.h	/^        void* begin; \/* if begin = NULL this struct not used *\/$/;"	m	struct:phys_area_info_t
+block_dev	include/fs/block.h	/^typedef struct block_dev_t block_dev;$/;"	t	typeref:struct:block_dev_t
+block_dev_list	include/sys/devs.h	/^enum block_dev_list {$/;"	g
+block_dev_t	include/fs/block.h	/^struct block_dev_t {$/;"	s
+block_dev_table	sys/devs.c	/^block_dev block_dev_table[BLOCK_DEVS_NUM];$/;"	v
+block_read	fs/block.c	/^size_t block_read (block_dev* dev, uint8_t* buf, size_t buf_size, uint32_t starting_block)$/;"	f
+block_size	include/bcm2836/sd.h	/^	size_t block_size;$/;"	m	struct:emmc_block_dev
+block_size	include/fs/block.h	/^        size_t block_size;$/;"	m	struct:block_dev_t
+block_write	fs/block.c	/^size_t block_write (block_dev* dev, uint8_t* buf, $/;"	f
+blocks_to_transfer	include/bcm2836/sd.h	/^	int blocks_to_transfer;$/;"	m	struct:emmc_block_dev
+buf	include/bcm2836/sd.h	/^	void *buf;$/;"	m	struct:emmc_block_dev
+buffer	include/sys/kthread.h	/^	rbuffer* buffer;$/;"	m	struct:kthread_t
+buffer_size	bcm2836/videocore.c	/^	uint32_t buffer_size;		\/\/\/< size of the buffer (which in this case is always 8 bytes)$/;"	m	struct:vc_msg_tag_board_mac_address	file:
+buffer_size	bcm2836/videocore.c	/^	uint32_t buffer_size;		\/\/\/< size of the buffer (which in this case is always 8 bytes)$/;"	m	struct:vc_msg_tag_ram	file:
+buffer_size	bcm2836/videocore.c	/^	uint32_t buffer_size;		\/\/\/< size of the buffer (which in this case is always 8 bytes)$/;"	m	struct:vc_msg_tag_uint32_t	file:
+buffer_size	bcm2836/videocore.c	/^	uint32_t buffer_size;	\/\/\/< size of the buffer (which in this case is always 8 bytes)$/;"	m	struct:vc_msg_tag_uint32	file:
+byte	include/bcm2836/defines.h	/^typedef uint8_t byte;$/;"	t
+byte	include/lib/string.h	/^typedef uint8_t byte;$/;"	t
+byte_swap	include/bcm2836/mmio.h	/^static inline uint32_t byte_swap(uint32_t num)$/;"	f
+card_ocr	include/bcm2836/sd.h	/^	uint32_t card_ocr;$/;"	m	struct:emmc_block_dev
+card_rca	include/bcm2836/sd.h	/^	uint32_t card_rca;$/;"	m	struct:emmc_block_dev
+card_removal	include/bcm2836/sd.h	/^	int card_removal;$/;"	m	struct:emmc_block_dev
+card_supports_18v	include/bcm2836/sd.h	/^	uint32_t card_supports_18v;$/;"	m	struct:emmc_block_dev
+card_supports_sdhc	include/bcm2836/sd.h	/^	uint32_t card_supports_sdhc;$/;"	m	struct:emmc_block_dev
+clean_data_cache	bcm2836/cache.c	/^void clean_data_cache(void) {$/;"	f
+clean_data_cache	include/bcm2836/cache.h	50;"	d
+compare0	include/bcm2836/timer.h	/^	volatile uint32_t compare0;$/;"	m	struct:bcm2836_sys_timer
+compare1	include/bcm2836/timer.h	/^	volatile uint32_t compare1;$/;"	m	struct:bcm2836_sys_timer
+compare2	include/bcm2836/timer.h	/^	volatile uint32_t compare2;$/;"	m	struct:bcm2836_sys_timer
+compare3	include/bcm2836/timer.h	/^	volatile uint32_t compare3;$/;"	m	struct:bcm2836_sys_timer
+config	include/bcm2836/mbox.h	/^        uint32_t config;$/;"	m	struct:__anon5
+container_of	include/lib/dlink_list.h	53;"	d
+control_status	include/bcm2836/timer.h	/^    	volatile uint32_t control_status;$/;"	m	struct:bcm2836_sys_timer
+core_dump	test/lib_test.c	/^void core_dump (reg_t* regarr)$/;"	f
+counter_hi	include/bcm2836/timer.h	/^    	volatile uint32_t counter_hi;$/;"	m	struct:bcm2836_sys_timer
+counter_lo	include/bcm2836/timer.h	/^    	volatile uint32_t counter_lo;$/;"	m	struct:bcm2836_sys_timer
+create_rbuffer	lib/ringbuffer.c	/^rbuffer* create_rbuffer (sflag_t FLAGS, size_t size) {$/;"	f
+cur_pid	sys/kthread.c	/^pid_t cur_pid = 0;$/;"	v
+cur_size	include/mm/heap.h	/^        size_t cur_size;$/;"	m	struct:__anon7
+cur_thread	sys/kthread.c	/^kthread* cur_thread = NULL;$/;"	v
+data	include/lib/ringbuffer.h	/^	void* data;$/;"	m	struct:rdata_t
+data	include/sys/kthread.h	/^	char data[256];$/;"	m	struct:data_message_t
+data_abort_vector	bcm2836/interrupt_handler.c	/^void __attribute__((interrupt("ABORT"))) data_abort_vector(void)$/;"	f
+data_d	test/thread_test.c	/^void data_d (void* data) {$/;"	f
+data_dump	sys/kernel_lib.c	/^static void data_dump (void* data) {$/;"	f	file:
+data_dump	test/rbuffer_test.c	/^void data_dump (void* data) {$/;"	f
+data_message	include/sys/kthread.h	/^} data_message;$/;"	t	typeref:struct:data_message_t
+data_message_dump	test/thread_test.c	/^void data_message_dump (void* data) {$/;"	f
+data_message_t	include/sys/kthread.h	/^typedef struct data_message_t {$/;"	s
+data_size	bcm2836/videocore.c	/^	uint32_t data_size;			\/\/\/< amount of data being sent or received$/;"	m	struct:vc_msg_tag_board_mac_address	file:
+data_size	bcm2836/videocore.c	/^	uint32_t data_size;			\/\/\/< amount of data being sent or received$/;"	m	struct:vc_msg_tag_ram	file:
+data_size	bcm2836/videocore.c	/^	uint32_t data_size;			\/\/\/< amount of data being sent or received$/;"	m	struct:vc_msg_tag_uint32_t	file:
+data_size	bcm2836/videocore.c	/^	uint32_t data_size;		\/\/\/< amount of data being sent or received$/;"	m	struct:vc_msg_tag_uint32	file:
+define_list	include/lib/dlink_list.h	64;"	d
+delay	include/bcm2836/delay.h	/^static inline void delay(volatile uint32_t count)$/;"	f
+delete_kthread	sys/kthread.c	/^void delete_kthread (pid_t pid) {$/;"	f
+delete_node	include/lib/dlink_list.h	/^static inline void delete_node (dl_node* node) {$/;"	f
+delete_tail	include/lib/dlink_list.h	/^static inline void delete_tail (dl_node* head) {$/;"	f
+dev	include/fs/block.h	/^        void* dev;$/;"	m	struct:block_dev_t
+dev_id	bcm2836/videocore.c	/^	uint32_t dev_id;		\/\/\/< the ID of the clock\/voltage to get or set$/;"	m	struct:vc_msg_tag_uint32	file:
+dev_id	include/fs/block.h	/^        uint8_t* dev_id;$/;"	m	struct:block_dev_t
+dev_id_len	include/fs/block.h	/^        uint32_t dev_id_len;$/;"	m	struct:block_dev_t
+dev_name	include/fs/block.h	/^        char* dev_name;$/;"	m	struct:block_dev_t
+dev_type	include/fs/block.h	/^enum dev_type {$/;"	g
+dl_node	include/lib/dlink_list.h	/^} dl_node;$/;"	t	typeref:struct:dl_node_t
+dl_node_t	include/lib/dlink_list.h	/^typedef struct dl_node_t {$/;"	s
+dmb	include/bcm2836/cache.h	34;"	d
+dmb	include/bcm2836/cache.h	54;"	d
+driver_id	include/fs/block.h	/^        unsigned long driver_id;$/;"	m	struct:block_dev_t
+dsb	include/bcm2836/cache.h	33;"	d
+dsb	include/bcm2836/cache.h	53;"	d
+dump_rbuffer	lib/ringbuffer.c	/^void dump_rbuffer (rbuffer* buffer, void (*data_dump)(void* data)) {$/;"	f
+dump_registers	lib/registers_dump.c	/^void dump_registers(reg_t* arr)$/;"	f
+dword	include/bcm2836/defines.h	/^typedef uint32_t dword;$/;"	t
+dword	include/lib/string.h	/^typedef uint32_t dword;$/;"	t
+emmc_4bit_mode_change_bit	bcm2836/sd.c	/^static void emmc_4bit_mode_change_bit(uint32_t old_irpt_mask) {$/;"	f	file:
+emmc_block_dev	include/bcm2836/sd.h	/^struct emmc_block_dev {$/;"	s
+emmc_disable_card_interrupt	bcm2836/sd.c	/^static uint32_t emmc_disable_card_interrupt(void) {$/;"	f	file:
+emmc_get_clock_divider	bcm2836/sd.c	/^static uint32_t emmc_get_clock_divider(uint32_t base_clock, $/;"	f	file:
+emmc_get_version	bcm2836/sd.c	/^static uint32_t emmc_get_version(void) {$/;"	f	file:
+emmc_handle_card_interrupt	bcm2836/sd.c	/^static void emmc_handle_card_interrupt(struct emmc_block_dev *dev) {$/;"	f	file:
+emmc_handle_interrupts	bcm2836/sd.c	/^static void emmc_handle_interrupts(struct emmc_block_dev *dev) {$/;"	f	file:
+emmc_issue_command	bcm2836/sd.c	/^static void emmc_issue_command(struct emmc_block_dev *dev, $/;"	f	file:
+emmc_reset	bcm2836/sd.c	/^static uint32_t emmc_reset(void) {$/;"	f	file:
+emmc_reset_cmd	bcm2836/sd.c	/^static int emmc_reset_cmd(void) {$/;"	f	file:
+emmc_reset_dat	bcm2836/sd.c	/^static int emmc_reset_dat(void) {$/;"	f	file:
+emmc_reset_interrupt_register	bcm2836/sd.c	/^static void emmc_reset_interrupt_register(void) {$/;"	f	file:
+emmc_set_block_size	bcm2836/sd.c	/^static void emmc_set_block_size(uint32_t block_size) {$/;"	f	file:
+emmc_set_clock	bcm2836/sd.c	/^static uint32_t emmc_set_clock(const uint32_t target_clock) {$/;"	f	file:
+emmc_switch_voltage	bcm2836/sd.c	/^static uint32_t emmc_switch_voltage(void) {$/;"	f	file:
+end	include/mm/heap.h	/^        void* end;$/;"	m	struct:phys_area_info_t
+end_tag	bcm2836/videocore.c	/^	uint32_t end_tag;							\/\/\/< an end identifier, should be set to NULL$/;"	m	struct:vc_msg_board_mac_address	file:
+end_tag	bcm2836/videocore.c	/^	uint32_t end_tag;							\/\/\/< an end identifier, should be set to NULL$/;"	m	struct:vc_msg_board_ram	file:
+end_tag	bcm2836/videocore.c	/^	uint32_t end_tag;					\/\/\/< an end identifier, should be set to NULL$/;"	m	struct:vc_msg_uint32_t	file:
+end_tag	bcm2836/videocore.c	/^	uint32_t end_tag;				\/\/\/< an end identifier, should be set to NULL$/;"	m	struct:vc_msg_uint32	file:
+err_irpts	include/bcm2836/sd.h	/^static char *err_irpts[] = { "CMD_TIMEOUT", "CMD_CRC", "CMD_END_BIT", "CMD_INDEX",$/;"	v
+errno	include/lib/error.h	24;"	d
+errno	lib/error.c	/^int errno = 0;$/;"	v
+errors	include/lib/error.h	/^enum errors {$/;"	g
+failed_voltage_switch	include/bcm2836/sd.h	/^	int failed_voltage_switch;$/;"	m	struct:emmc_block_dev
+fast_interrupt_vector	bcm2836/interrupt_handler.c	/^void __attribute__((interrupt("FIQ"))) fast_interrupt_vector(void)$/;"	f
+find_thread_pid	sys/kthread.c	/^kthread* find_thread_pid (pid_t pid) {$/;"	f
+first_elem	include/mm/heap.h	/^        phys_area_info* first_elem;$/;"	m	struct:__anon7
+flags	include/lib/ringbuffer.h	/^	sflag_t flags;  \/\/1st bit - buffer is full$/;"	m	struct:rbuffer_t
+flags	include/sys/kthread.h	/^	sflag_t flags;$/;"	m	struct:kthread_t
+flush_branch_target_cache	include/bcm2836/cache.h	38;"	d
+flush_branch_target_cache	include/bcm2836/cache.h	48;"	d
+flush_prefetch_buffer	include/bcm2836/cache.h	37;"	d
+flush_prefetch_buffer	include/bcm2836/cache.h	47;"	d
+free_rbuffer	lib/ringbuffer.c	/^void free_rbuffer (rbuffer* buffer) {$/;"	f
+get_sys_timer	bcm2836/timer.c	/^struct bcm2836_sys_timer* get_sys_timer()$/;"	f
+global_var	kernel.c	/^int global_var = 0;$/;"	v
+gmailbox	bcm2836/mbox.c	11;"	d	file:
+heap_list	mm/heap.c	/^phys_area_list* heap_list;$/;"	v
+heap_test	test/heap_test.c	/^int heap_test()$/;"	f
+hex2ascii	lib/kprint.c	51;"	d	file:
+hex2ascii_data	lib/kprint.c	/^char const hex2ascii_data[] = "0123456789abcdefghijklmnopqrstuvwxyz";$/;"	v
+id_in	include/lib/ringbuffer.h	/^	node* id_in;$/;"	m	struct:rbuffer_t
+id_out	include/lib/ringbuffer.h	/^	node* id_out;$/;"	m	struct:rbuffer_t
+info	include/fs/block.h	/^        uint32_t info;$/;"	m	struct:block_dev_t
+init	include/fs/block.h	/^        int (*init)  (struct block_dev_t* dev);$/;"	m	struct:block_dev_t
+init_dl_node	include/lib/dlink_list.h	/^static inline void init_dl_node (dl_node* node) {$/;"	f
+invalidate_data_cache	bcm2836/cache.c	/^void invalidate_data_cache(void) {$/;"	f
+invalidate_data_cache	include/bcm2836/cache.h	49;"	d
+invalidate_data_cache_l1_only	bcm2836/cache.c	/^void invalidate_data_cache_l1_only(void) {$/;"	f
+invalidate_instruction_cache	include/bcm2836/cache.h	36;"	d
+invalidate_instruction_cache	include/bcm2836/cache.h	46;"	d
+irq_controller	include/bcm2836/interrupt.h	/^} irq_controller;$/;"	t	typeref:struct:__anon4
+irq_handler	bcm2836/interrupt_handler.c	/^void  __attribute__ ((interrupt ("IRQ"))) irq_handler(void) $/;"	f
+isb	include/bcm2836/cache.h	32;"	d
+isb	include/bcm2836/cache.h	52;"	d
+k_receive	sys/kernel_lib.c	/^int k_receive (dword param1, void* param2) {$/;"	f
+k_send	sys/kernel_lib.c	/^int k_send (void* param) {$/;"	f
+k_try_receive	sys/kernel_lib.c	/^int k_try_receive (dword param1, void* param2) {$/;"	f
+kcalloc	lib/kmalloc.c	/^void* kcalloc(int n, size_t size)$/;"	f
+kdie	lib/kdie.c	/^inline void kdie(char* err_msg)$/;"	f
+kernel	kernel.c	/^void __attribute__((naked())) kernel (void) {$/;"	f
+kernel_entry	kernel.c	/^void __attribute__((naked())) kernel_entry(void) {$/;"	f
+kernel_heap	lib/kmalloc.c	/^static kmem_chunk* kernel_heap = NULL; $/;"	v	file:
+kernel_main	kernel.c	/^void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)$/;"	f
+kernel_sp	kernel.c	/^reg_t kernel_sp = 0;$/;"	v
+kfree	lib/kmalloc.c	/^int kfree(void* block)$/;"	f
+kmalloc	lib/kmalloc.c	/^void* kmalloc(size_t size)$/;"	f
+kmem_chunk	lib/kmalloc.c	/^typedef struct kmem_chunk_t kmem_chunk;$/;"	t	typeref:struct:kmem_chunk_t	file:
+kmem_chunk_dump	lib/kmalloc.c	/^static int kmem_chunk_dump(kmem_chunk* ch)$/;"	f	file:
+kmem_chunk_t	lib/kmalloc.c	/^struct kmem_chunk_t {$/;"	s	file:
+kmem_full_dump	lib/kmalloc.c	/^int kmem_full_dump()$/;"	f
+kmem_init	lib/kmalloc.c	/^static int kmem_init()$/;"	f	file:
+kprint	lib/kprint.c	/^kprint(const char *fmt, ...)$/;"	f
+kputc	lib/kprint.c	/^static void kputc(uint8_t byte, void* desc)$/;"	f	file:
+krealloc	lib/kmalloc.c	/^void* krealloc(void* block, size_t size)$/;"	f
+kscheduler	sys/kscheduler.c	/^void kscheduler() {$/;"	f
+ksprintn	lib/kprint.c	/^ksprintn(char *nbuf, uintmax_t num, int base, int *lenp, int upper)$/;"	f	file:
+kthread	include/sys/kthread.h	/^} kthread;$/;"	t	typeref:struct:kthread_t
+kthread_delete	sys/kthread.c	/^int kthread_delete (kthread* thread) {$/;"	f
+kthread_dump	sys/kthread.c	/^void kthread_dump (kthread* thread) {$/;"	f
+kthread_init	sys/kthread.c	/^kthread* kthread_init (sflag_t flags, pid_t pid, void* func) {$/;"	f
+kthread_list_delete	sys/kthread.c	/^int kthread_list_delete () {$/;"	f
+kthread_list_dump	sys/kthread.c	/^void kthread_list_dump () {$/;"	f
+kthread_list_init	sys/kthread.c	/^node_head* kthread_list_init () {$/;"	f
+kthread_t	include/sys/kthread.h	/^typedef struct kthread_t {$/;"	s
+kvprintf	lib/kprint.c	/^kvprintf(char const *fmt, void (*func)(uint8_t byte, void* desc) , void *arg, int radix, va_list ap)$/;"	f
+last_cmd	include/bcm2836/sd.h	/^	uint32_t last_cmd;$/;"	m	struct:emmc_block_dev
+last_cmd_reg	include/bcm2836/sd.h	/^	uint32_t last_cmd_reg;$/;"	m	struct:emmc_block_dev
+last_cmd_success	include/bcm2836/sd.h	/^	uint32_t last_cmd_success;$/;"	m	struct:emmc_block_dev
+last_error	include/bcm2836/sd.h	/^	uint32_t last_error;$/;"	m	struct:emmc_block_dev
+last_interrupt	include/bcm2836/sd.h	/^	uint32_t last_interrupt;$/;"	m	struct:emmc_block_dev
+last_r0	include/bcm2836/sd.h	/^	uint32_t last_r0;$/;"	m	struct:emmc_block_dev
+last_r1	include/bcm2836/sd.h	/^	uint32_t last_r1;$/;"	m	struct:emmc_block_dev
+last_r2	include/bcm2836/sd.h	/^	uint32_t last_r2;$/;"	m	struct:emmc_block_dev
+last_r3	include/bcm2836/sd.h	/^	uint32_t last_r3;$/;"	m	struct:emmc_block_dev
+lib_test	test/lib_test.c	/^int lib_test()$/;"	f
+list	include/mm/heap.h	/^        phys_area_info list[HEAP_LIST_SIZE];$/;"	m	struct:__anon7
+list_entry	include/lib/dlink_list.h	61;"	d
+mac_address	bcm2836/videocore.c	/^	uint8_t  mac_address[6];	\/\/\/< MAC address$/;"	m	struct:vc_msg_tag_board_mac_address	file:
+mail_chan	include/bcm2836/mbox.h	/^enum mail_chan {$/;"	g
+mailbox_t	include/bcm2836/mbox.h	/^} mailbox_t;$/;"	t	typeref:struct:__anon5
+mbox_flush	bcm2836/mbox.c	/^void mbox_flush(void) {$/;"	f
+mbox_read	bcm2836/mbox.c	/^uint32_t mbox_read(uint8_t chan)$/;"	f
+mbox_write	bcm2836/mbox.c	/^void mbox_write(uint8_t chan, uint32_t data)$/;"	f
+mem_test	test/mem_test.c	/^int mem_test()$/;"	f
+memcpy	lib/memcpy.c	/^void* memcpy(void* src, void* dst, size_t size) $/;"	f
+memory_barier	bcm2836/mmio.S	/^memory_barier:$/;"	l
+memory_flush	bcm2836/mmio.S	/^memory_flush:$/;"	l
+memset	lib/memset.c	/^void* memset(void* dst, byte z, size_t size)$/;"	f
+mmio_dword_read	include/bcm2836/mmio.h	/^static inline uint32_t mmio_dword_read(byte* addr)$/;"	f
+mmio_dword_write	include/bcm2836/mmio.h	/^static inline void mmio_dword_write(byte* addr, reg_t data)$/;"	f
+mmio_read	include/bcm2836/mmio.h	/^static inline reg_t mmio_read(aptr_t addr)$/;"	f
+mmio_write	include/bcm2836/mmio.h	/^static inline void mmio_write(aptr_t addr, reg_t data)$/;"	f
+msg_size	bcm2836/videocore.c	/^	uint32_t msg_size;							\/\/\/< simply, sizeof(struct vc_msg)$/;"	m	struct:vc_msg_board_mac_address	file:
+msg_size	bcm2836/videocore.c	/^	uint32_t msg_size;							\/\/\/< simply, sizeof(struct vc_msg)$/;"	m	struct:vc_msg_board_ram	file:
+msg_size	bcm2836/videocore.c	/^	uint32_t msg_size;					\/\/\/< simply, sizeof(struct vc_msg)$/;"	m	struct:vc_msg_uint32_t	file:
+msg_size	bcm2836/videocore.c	/^	uint32_t msg_size;				\/\/\/< simply, sizeof(struct vc_msg)$/;"	m	struct:vc_msg_uint32	file:
+next	include/lib/dlink_list.h	/^	struct dl_node_t* next;$/;"	m	struct:dl_node_t	typeref:struct:dl_node_t::dl_node_t
+next	include/lib/ringbuffer.h	/^	struct node_t* next;$/;"	m	struct:node_t	typeref:struct:node_t::node_t
+next	include/mm/heap.h	/^        struct phys_area_info_t* next;$/;"	m	struct:phys_area_info_t	typeref:struct:phys_area_info_t::phys_area_info_t
+next	lib/kmalloc.c	/^        struct kmem_chunk_t* next;$/;"	m	struct:kmem_chunk_t	typeref:struct:kmem_chunk_t::kmem_chunk_t	file:
+node	include/lib/ringbuffer.h	/^} node;$/;"	t	typeref:struct:node_t
+node	include/sys/kthread.h	/^	dl_node node;$/;"	m	struct:kthread_t
+node_t	include/lib/ringbuffer.h	/^typedef struct node_t {$/;"	s
+num_blocks	include/fs/block.h	/^        size_t num_blocks;$/;"	m	struct:block_dev_t
+offsetof	include/lib/dlink_list.h	46;"	d
+offsetof	include/lib/dlink_list.h	48;"	d
+offsetof	include/lib/dlink_list.h	50;"	d
+owner	include/mm/heap.h	/^        int owner; \/*-1 for free, $/;"	m	struct:phys_area_info_t
+p1	test/thread_test.c	/^int p1 = 1;$/;"	v
+p2	test/thread_test.c	/^int p2 = 1;$/;"	v
+page_chunk_init	lib/kmalloc.c	/^static int page_chunk_init(phys_area_info* elem, kmem_chunk* next$/;"	f	file:
+peek	include/bcm2836/mbox.h	/^        uint32_t peek;$/;"	m	struct:__anon5
+phys_area_info	include/mm/heap.h	/^} phys_area_info;$/;"	t	typeref:struct:phys_area_info_t
+phys_area_info_dump	mm/heap.c	/^int phys_area_info_dump(phys_area_info* info) $/;"	f
+phys_area_info_init	include/mm/heap.h	88;"	d
+phys_area_info_t	include/mm/heap.h	/^typedef struct phys_area_info_t {$/;"	s
+phys_area_init	mm/heap.c	/^int phys_area_init(phys_area_list* new_list, phys_area_info* info_arr, $/;"	f
+phys_area_list	include/mm/heap.h	/^} phys_area_list;$/;"	t	typeref:struct:__anon7
+phys_area_list_dump	mm/heap.c	/^int phys_area_list_dump()$/;"	f
+phys_list_findb_elem	mm/heap.c	/^phys_area_info* phys_list_findb_elem(void* begin)$/;"	f
+phys_list_findb_pelem	mm/heap.c	/^phys_area_info* phys_list_findb_pelem(void* begin)$/;"	f
+phys_list_finde_elem	mm/heap.c	/^phys_area_info* phys_list_finde_elem(void* end)$/;"	f
+phys_list_finde_pelem	mm/heap.c	/^phys_area_info* phys_list_finde_pelem(void* end)$/;"	f
+phys_list_findn_elem	mm/heap.c	/^phys_area_info* phys_list_findn_elem(phys_area_info* next)$/;"	f
+phys_list_free_elem	mm/heap.c	/^phys_area_info* phys_list_free_elem()$/;"	f
+phys_page_alloc	mm/heap.c	/^void* phys_page_alloc(uint32_t n, uint32_t owner)$/;"	f
+phys_page_free	mm/heap.c	/^int phys_page_free(void* page_addr)$/;"	f
+phys_page_realloc	mm/heap.c	/^void* phys_page_realloc(void* old_page, uint32_t new_n, uint32_t new_owner)$/;"	f
+pid	include/sys/kthread.h	/^	pid_t pid;$/;"	m	struct:kthread_t
+pid_t	include/bcm2836/defines.h	/^typedef uint32_t pid_t;$/;"	t
+prefetch_abort_vector	bcm2836/interrupt_handler.c	/^void __attribute__((interrupt("ABORT"))) prefetch_abort_vector(void)$/;"	f
+prev	include/lib/dlink_list.h	/^	struct dl_node_t* prev;$/;"	m	struct:dl_node_t	typeref:struct:dl_node_t::dl_node_t
+prev	include/lib/ringbuffer.h	/^	struct node_t* prev;$/;"	m	struct:node_t	typeref:struct:node_t::node_t
+prev	lib/kmalloc.c	/^        struct kmem_chunk_t* prev;$/;"	m	struct:kmem_chunk_t	typeref:struct:kmem_chunk_t::kmem_chunk_t	file:
+program_counter	include/sys/kthread.h	/^	reg_t program_counter;$/;"	m	struct:kthread_t
+putchar	lib/kprint.c	41;"	d	file:
+quad_t	lib/kprint.c	/^typedef long long quad_t;$/;"	t	file:
+rbdata	include/lib/ringbuffer.h	/^	rdata* rbdata;$/;"	m	struct:node_t
+rbuffer	include/lib/ringbuffer.h	/^} rbuffer;$/;"	t	typeref:struct:rbuffer_t
+rbuffer_t	include/lib/ringbuffer.h	/^typedef struct rbuffer_t {$/;"	s
+rbuffer_test	test/rbuffer_test.c	/^int rbuffer_test() {$/;"	f
+rdata	include/lib/ringbuffer.h	/^} rdata;$/;"	t	typeref:struct:rdata_t
+rdata_t	include/lib/ringbuffer.h	/^typedef struct rdata_t { $/;"	s
+read	include/bcm2836/mbox.h	/^        uint32_t read;$/;"	m	struct:__anon5
+read	include/fs/block.h	/^        size_t (*read) (struct block_dev_t* dev, uint8_t* buf, $/;"	m	struct:block_dev_t
+read_data	lib/ringbuffer.c	/^byte read_data (rbuffer* buffer, void* data) {$/;"	f
+receive	sys/syscall.c	/^int receive (void* str) {$/;"	f
+receiver	include/sys/kthread.h	/^	pid_t receiver;$/;"	m	struct:data_message_t
+reg	test/thread_test.c	/^uint32_t reg = 1 << 21;$/;"	v
+reg2arr	bcm2836/registers.c	/^void reg2arr(reg_t* arr)$/;"	f
+reg_t	include/bcm2836/defines.h	/^typedef uint32_t reg_t;$/;"	t
+request_code	bcm2836/videocore.c	/^	uint32_t request_code;						\/\/\/< holds various information like the success and number of bytes returned (refer to mailboxes wiki)$/;"	m	struct:vc_msg_board_mac_address	file:
+request_code	bcm2836/videocore.c	/^	uint32_t request_code;						\/\/\/< holds various information like the success and number of bytes returned (refer to mailboxes wiki)$/;"	m	struct:vc_msg_board_ram	file:
+request_code	bcm2836/videocore.c	/^	uint32_t request_code;				\/\/\/< holds various information like the success and number of bytes returned (refer to mailboxes wiki)$/;"	m	struct:vc_msg_uint32_t	file:
+request_code	bcm2836/videocore.c	/^	uint32_t request_code;			\/\/\/< holds various information like the success and number of bytes returned (refer to mailboxes wiki)$/;"	m	struct:vc_msg_uint32	file:
+res1	include/bcm2836/mbox.h	/^        uint32_t res1;$/;"	m	struct:__anon5
+res2	include/bcm2836/mbox.h	/^        uint32_t res2;$/;"	m	struct:__anon5
+res3	include/bcm2836/mbox.h	/^        uint32_t res3;$/;"	m	struct:__anon5
+run	sys/kthread.c	/^void __attribute__((naked())) run() {$/;"	f
+scr	include/bcm2836/sd.h	/^	struct sd_scr scr;$/;"	m	struct:emmc_block_dev	typeref:struct:emmc_block_dev::sd_scr
+scr	include/bcm2836/sd.h	/^	uint32_t scr[2];$/;"	m	struct:sd_scr
+sd_acommands	bcm2836/sd.c	/^static const uint32_t sd_acommands[] __attribute__((aligned(4))) = {$/;"	v	file:
+sd_bus_widths	include/bcm2836/sd.h	/^	uint32_t sd_bus_widths;$/;"	m	struct:sd_scr
+sd_card_init	bcm2836/sd.c	/^int sd_card_init(block_dev* dev) {$/;"	f
+sd_card_sanity_check	bcm2836/sd.c	/^static int sd_card_sanity_check(void) {$/;"	f	file:
+sd_commands	bcm2836/sd.c	/^const uint32_t sd_commands[] __attribute__((aligned(4))) = {$/;"	v
+sd_do_data_command	bcm2836/sd.c	/^static int sd_do_data_command(struct emmc_block_dev *edev, $/;"	f	file:
+sd_ensure_data_mode	bcm2836/sd.c	/^static int sd_ensure_data_mode(struct emmc_block_dev *edev) {$/;"	f	file:
+sd_issue_command	bcm2836/sd.c	/^static void sd_issue_command(struct emmc_block_dev *dev, $/;"	f	file:
+sd_read	bcm2836/sd.c	/^size_t sd_read(block_dev* dev, uint8_t *buf, $/;"	f
+sd_scr	include/bcm2836/sd.h	/^struct sd_scr {$/;"	s
+sd_version	include/bcm2836/sd.h	/^	int sd_version;$/;"	m	struct:sd_scr
+sd_versions	include/bcm2836/sd.h	/^static char *sd_versions[] = { "unknown", "1.0 and 1.01", "1.10", "2.00", "3.0x", "4.xx" };$/;"	v
+sd_write	bcm2836/sd.c	/^size_t sd_write(block_dev* dev, uint8_t *buf, $/;"	f
+send	sys/syscall.c	/^int send (pid_t receiver, void* str, size_t size) {$/;"	f
+sender	include/bcm2836/mbox.h	/^        uint32_t sender;$/;"	m	struct:__anon5
+sender	include/sys/kthread.h	/^	pid_t sender;$/;"	m	struct:data_message_t
+sflag_t	include/bcm2836/defines.h	/^typedef uint8_t sflag_t;$/;"	t
+size	bcm2836/videocore.c	/^	uint32_t size;				\/\/\/< size in bytes$/;"	m	struct:vc_msg_tag_ram	file:
+size	include/lib/ringbuffer.h	/^	dword size;$/;"	m	struct:rbuffer_t
+size	include/lib/ringbuffer.h	/^	size_t size;$/;"	m	struct:rdata_t
+size	include/sys/kthread.h	/^	dword size;$/;"	m	struct:data_message_t
+size	lib/kmalloc.c	/^        size_t size;$/;"	m	struct:kmem_chunk_t	file:
+software_handler	bcm2836/interrupt_handler.c	/^void __attribute__((interrupt("SWI"))) software_handler(void)$/;"	f
+sprintf	lib/kprint.c	/^sprintf(char *buffer, const char *fmt, ...)$/;"	f
+stack_base	include/sys/kthread.h	/^	reg_t stack_base;        $/;"	m	struct:kthread_t
+stack_pointer	include/sys/kthread.h	/^	reg_t stack_pointer;	$/;"	m	struct:kthread_t
+state	include/sys/kthread.h	/^	byte state;$/;"	m	struct:kthread_t
+status	include/bcm2836/mbox.h	/^        uint32_t status;$/;"	m	struct:__anon5
+strlen	lib/kprint.c	/^strlen(const char *s)$/;"	f	file:
+strlen	lib/strlen.c	/^size_t strlen(const char* str)$/;"	f
+sys_timer	bcm2836/timer.c	/^struct bcm2836_sys_timer* sys_timer = (void*) SYS_TIMER_BASE;$/;"	v	typeref:struct:bcm2836_sys_timer
+sys_timer_init	bcm2836/timer.c	/^void sys_timer_init() $/;"	f
+tag	bcm2836/videocore.c	/^	struct vc_msg_tag_board_mac_address tag;	\/\/\/< the tag structure above to make$/;"	m	struct:vc_msg_board_mac_address	typeref:struct:vc_msg_board_mac_address::vc_msg_tag_board_mac_address	file:
+tag	bcm2836/videocore.c	/^	struct vc_msg_tag_ram tag;					\/\/\/< the tag structure above to make$/;"	m	struct:vc_msg_board_ram	typeref:struct:vc_msg_board_ram::vc_msg_tag_ram	file:
+tag	bcm2836/videocore.c	/^	struct vc_msg_tag_uint32 tag;	\/\/\/< the tag structure above to make$/;"	m	struct:vc_msg_uint32	typeref:struct:vc_msg_uint32::vc_msg_tag_uint32	file:
+tag	bcm2836/videocore.c	/^	struct vc_msg_tag_uint32_t tag;		\/\/\/< the tag structure above to make$/;"	m	struct:vc_msg_uint32_t	typeref:struct:vc_msg_uint32_t::vc_msg_tag_uint32_t	file:
+tag_id	bcm2836/videocore.c	/^	uint32_t tag_id;			\/\/\/< the message id$/;"	m	struct:vc_msg_tag_board_mac_address	file:
+tag_id	bcm2836/videocore.c	/^	uint32_t tag_id;			\/\/\/< the message id$/;"	m	struct:vc_msg_tag_ram	file:
+tag_id	bcm2836/videocore.c	/^	uint32_t tag_id;			\/\/\/< the message id$/;"	m	struct:vc_msg_tag_uint32_t	file:
+tag_id	bcm2836/videocore.c	/^	uint32_t tag_id;		\/\/\/< the message id$/;"	m	struct:vc_msg_tag_uint32	file:
+terminal_func	test/thread_test.c	/^void terminal_func() {$/;"	f
+th_active_head	sys/kthread.c	/^active_head* th_active_head = NULL;$/;"	v
+thread_1_func	test/thread_test.c	/^void thread_1_func() {$/;"	f
+thread_2_func	test/thread_test.c	/^void thread_2_func() {$/;"	f
+thread_entry	include/sys/kthread.h	/^static inline void thread_entry (reg_t sp, reg_t lr) {$/;"	f
+thread_exit	include/sys/kthread.h	55;"	d
+thread_exit_shell	sys/kernel_lib.c	/^void thread_exit_shell() { $/;"	f
+thread_head	sys/kthread.c	/^node_head* thread_head = NULL;$/;"	v
+thread_set_pc	include/sys/kthread.h	/^inline void thread_set_pc (reg_t func) {$/;"	f
+thread_state	include/sys/kthread.h	/^enum thread_state {ACTIVE, WAIT, BLOCKED};$/;"	g
+thread_test	test/thread_test.c	/^int thread_test() {$/;"	f
+timeout_wait	include/bcm2836/timer.h	27;"	d
+timer_test	test/timer_test.c	/^int timer_test()$/;"	f
+toupper	lib/kprint.c	56;"	d	file:
+try_receive	sys/syscall.c	/^int try_receive (void* str) {$/;"	f
+u_char	lib/kprint.c	/^typedef unsigned char u_char;$/;"	t	file:
+u_int	lib/kprint.c	/^typedef unsigned int u_int;$/;"	t	file:
+u_long	lib/kprint.c	/^typedef unsigned long u_long;$/;"	t	file:
+u_quad_t	lib/kprint.c	/^typedef unsigned long long u_quad_t;$/;"	t	file:
+u_short	lib/kprint.c	/^typedef unsigned short u_short;$/;"	t	file:
+uart_getc	bcm2836/uart.c	/^unsigned char uart_getc()$/;"	f
+uart_init	bcm2836/uart.c	/^void uart_init()$/;"	f
+uart_putc	bcm2836/uart.c	/^void uart_putc(unsigned char byte)$/;"	f
+uart_puts	bcm2836/uart.c	/^void uart_puts(const char* str)$/;"	f
+uart_write	bcm2836/uart.c	/^void uart_write(const unsigned char* buffer, size_t size)$/;"	f
+undefined_instruction_vector	bcm2836/interrupt_handler.c	/^void __attribute__((interrupt("UNDEF"))) undefined_instruction_vector(void)$/;"	f
+unpin_node	include/lib/dlink_list.h	/^static inline void unpin_node (dl_node* node) {$/;"	f
+usec_t	include/bcm2836/timer.h	/^typedef uint32_t usec_t;$/;"	t
+usleep	bcm2836/timer.c	/^void usleep(usec_t us)$/;"	f
+val	bcm2836/videocore.c	/^	uint32_t val;			\/\/\/< the value (e.g. rate (in Hz)) to set$/;"	m	struct:vc_msg_tag_uint32	file:
+value	bcm2836/videocore.c	/^	uint32_t value;				\/\/\/<$/;"	m	struct:vc_msg_tag_uint32_t	file:
+vc_msg_board_mac_address	bcm2836/videocore.c	/^struct vc_msg_board_mac_address {$/;"	s	file:
+vc_msg_board_ram	bcm2836/videocore.c	/^struct vc_msg_board_ram {$/;"	s	file:
+vc_msg_tag_board_mac_address	bcm2836/videocore.c	/^struct vc_msg_tag_board_mac_address {$/;"	s	file:
+vc_msg_tag_ram	bcm2836/videocore.c	/^struct vc_msg_tag_ram {$/;"	s	file:
+vc_msg_tag_uint32	bcm2836/videocore.c	/^struct vc_msg_tag_uint32 {$/;"	s	file:
+vc_msg_tag_uint32_t	bcm2836/videocore.c	/^struct vc_msg_tag_uint32_t {$/;"	s	file:
+vc_msg_uint32	bcm2836/videocore.c	/^struct vc_msg_uint32 {$/;"	s	file:
+vc_msg_uint32_t	bcm2836/videocore.c	/^struct vc_msg_uint32_t {$/;"	s	file:
+word	include/bcm2836/defines.h	/^typedef uint16_t word;$/;"	t
+word	include/lib/string.h	/^typedef uint16_t word;$/;"	t
+write	include/bcm2836/mbox.h	/^        uint32_t write;$/;"	m	struct:__anon5
+write	include/fs/block.h	/^        size_t (*write) (struct block_dev_t* dev, uint8_t* buf, $/;"	m	struct:block_dev_t
+write_data	lib/ringbuffer.c	/^byte write_data (rbuffer* buffer, void* data, size_t size) {$/;"	f

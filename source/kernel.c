@@ -35,20 +35,10 @@
 
 #include "test/test.h"
 
-
 int global_var = 0;
+reg_t kernel_sp = 0;
 
 #define KERNEL_HEAP_SIZE 0x10000000
-
-void  __attribute__ ((interrupt ("IRQ"))) irq_handler(void) {
-	thread_exit (cur_thread->registers);
-  	_disable_interrupts();
-  	kscheduler();
-	sys_timer->compare1 = sys_timer->counter_lo + TIMER_RATE;
-	sys_timer->control_status = ~0;
-  	_enable_interrupts();
-  	thread_entry (cur_thread->registers);
-}
 
 void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 {
@@ -59,6 +49,7 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
         char hex[9] = {};
         uint32_t volatile ra;
 
+	ra = 1 << 21;
         phys_area_list new_heap;
 
 	uart_init();
@@ -70,39 +61,52 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
         phys_area_init(&new_heap, new_heap.list, KERNEL_HEAP_START_SIZE);
 
 
-	// mem_test();
-        //heap_test();
-	//timer_test();
-	//lib_test();
-	//rbuffer_test();
+	mem_test();
+        heap_test();
+
 	kprint("Power set: %x\r\n", bcm2835_vc_set_power_state(BCM2835_VC_POWER_ID_SDCARD, BCM2835_VC_SET_POWER_STATE_ON_WAIT));
 	bdevs_init();
 
-	thread_test();
+	//timer_test();
+	lib_test(); 
+	//rbuffer_test();	
+	sd_test();
+	//thread_test();
 
-	InitIrqController();
-	sys_timer_init();	
-	_enable_interrupts();
-	run();
 
+	//InitIrqController();
+	//sys_timer_init();	
+	//_enable_interrupts();
+	//kernel_sp = _get_stack_pointer();
+	//kprint ("Kernel sp 0x%x\r\n", kernel_sp);
+	//mmio_write (GPFSEL4, ra);
+	//ra = 1 << 15;
+	//run();
+	//
 
-	while (1)
-        {
-		kprint ("sp: %x\r\n", _get_stack_pointer());
-	}
-	// kdie("First succesfull death");
+	//while (1)
+        //{
+	//	mmio_write(GPSET1, ra);
+        //        usleep(1000000);
+        //        mmio_write(GPCLR1, ra);
+        //        usleep(1000000);
 
-//	while (1) {
-//            
-//                mmio_write(GPSET1, ra);
-//                delay(0x300000);
-//
-//                mmio_write(GPCLR1, ra);
-//                delay(0x300000);
-//
-//        }
-        
+	//	//kprint ("sp: %x\r\n", _get_stack_pointer());
+	//}
+	kdie("First succesfull death");
+	uart_putc(uart_getc());
+}
 
-		//uart_putc(uart_getc());
+void __attribute__((naked())) kernel (void) {
+	kscheduler();
+	thread_entry(cur_thread->stack_pointer, cur_thread->program_counter);
+}
+
+void __attribute__((naked())) kernel_entry(void) {
+	_disable_interrupts();
+	asm volatile ( 	"str %%sp, [%0]\t\n"
+			"mov %%sp, %1\t\n"
+			"mov %%r0, %2\t\n"
+			"bx %%r0\t\n" :: "r"(&cur_thread->stack_pointer), "r"(kernel_sp), "r"(kernel): "%r0", "%sp", "memory");
 }
 

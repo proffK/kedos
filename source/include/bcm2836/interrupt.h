@@ -1,9 +1,9 @@
 #ifndef INTERRUPTS_H
 #define INTERRUPTS_H
 
-#include "sys/kscheduler.h"
 #include "bcm2836/timer.h"
 #include "lib/nostdio.h"
+#include "sys/kernel_lib.h"
 #include "sys/kthread.h"
 
 

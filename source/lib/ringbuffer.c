@@ -19,19 +19,31 @@
 
 #include "lib/ringbuffer.h"
 
-rbuffer* create_rbuffer (uint8_t FLAGS) {
-	rbuffer* buffer = (rbuffer*) kcalloc (1, sizeof (rbuffer));
-	buffer->flags = FLAGS;
-	int i = 0;
-	node* prev = (node*) kcalloc (1, sizeof (node));
-	prev->data = 0;
+rbuffer* create_rbuffer (sflag_t FLAGS, size_t size) {
+	if (size < 1) {
+#ifdef DEBUG
+	kprint ("Incorrect ringbuffer size. It must be larger then 0.\r\n");
+#endif
+		return NULL;
+	}
+
+	rbuffer* buffer = (rbuffer *) kcalloc (1, sizeof (rbuffer));
+	buffer->flags = FLAGS | RBUFFER_IS_EMPTY;
+	buffer->size = size;
+	dword i = 0;
+	node* prev = (node *) kcalloc (1, sizeof (node));
+	prev->rbdata = (rdata *) kcalloc (1, sizeof (rdata));
+	prev->rbdata->data = NULL;
+	prev->rbdata->size = 0;
 	buffer->id_in = prev;
 	buffer->id_out = prev;
-	for (i = 1; i < RING_BUFFER_SIZE; i++) {
-		node* nd = (node*) kcalloc (1, sizeof (node));
+	for (i = 1; i < size; i++) {
+		node* nd = (node *) kcalloc (1, sizeof (node));
 		prev->next = nd;
 		nd->prev = prev;
-		nd->data = 0;
+		nd->rbdata = (rdata *) kcalloc (1, sizeof (rdata));
+		nd->rbdata->data = NULL;
+		nd->rbdata->size = 0;
 		prev = nd;	
 	}
 	prev->next = buffer->id_in;
@@ -46,15 +58,20 @@ void free_rbuffer (rbuffer* buffer) {
 #ifdef DEBUG_MEM
 	kprint ("Incorrect buffer address\r\n");
 #endif
-		return NULL;
+		return;
 	}
-
-	while (buffer->id_in->next != NULL)
-	{
-		buffer->id_in = buffer->id_in->next;
-		kfree (buffer->id_in->prev);
+	
+	node* iter_node = buffer->id_in;
+	dword i = 1;
+	for (i = 1; i < buffer->size; i++) {
+		iter_node = iter_node->next;
+		kfree (iter_node->prev->rbdata->data);
+		kfree (iter_node->prev->rbdata);
+		kfree (iter_node->prev);
 	}
-	kfree (buffer->id_in);
+	kfree (iter_node->rbdata->data);
+	kfree (iter_node->rbdata);
+	kfree (iter_node);
 	kfree (buffer);
 }
 
@@ -66,7 +83,7 @@ void dump_rbuffer (rbuffer* buffer, void (*data_dump)(void* data)) {
 #ifdef DEBUG_MEM
 	kprint ("Incorrect buffer address\r\n");
 #endif
-		return NULL;
+		return;
 	}
 
 	node* tmp = buffer->id_in;
@@ -78,75 +95,93 @@ void dump_rbuffer (rbuffer* buffer, void (*data_dump)(void* data)) {
 			kprint ("ID_OUT : ");
 		else
 			kprint ("INODE  : ");
-		
-		data_dump (tmp->data);
+		if (tmp->rbdata->data != NULL)
+			data_dump (tmp->rbdata->data);
+		else
+			kprint ("NO DATA\r\n");
 		tmp = tmp->next;
 	} while (tmp != buffer->id_in);
-	kprint ("Is full      : %d\r\n", buffer->flags & RBUFFER_IS_FULL);
-	kprint ("Is empty     : %d\r\n", buffer->flags & RBUFFER_IS_EMPTY);
-	kprint ("Is protected : %d\r\n", buffer->flags & RBUFFER_IS_UNDER_PROTECTION);
-	kprint ("Is overflow  : %d\r\n", buffer->flags & RBUFFER_IS_OVERFLOW);
+	kprint ("Is full      : %d\r\n", FLAG_DUMP(buffer->flags & RBUFFER_IS_FULL));
+	kprint ("Is empty     : %d\r\n", FLAG_DUMP(buffer->flags & RBUFFER_IS_EMPTY));
+	kprint ("Is protected : %d\r\n", FLAG_DUMP(buffer->flags & RBUFFER_IS_UNDER_PROTECTION));
+	kprint ("Is overflow  : %d\r\n", FLAG_DUMP(buffer->flags & RBUFFER_IS_OVERFLOW));
 }
 
-int write_data (rbuffer* buffer, void* data) {
+byte write_data (rbuffer* buffer, void* data, size_t size) {
 	if (buffer == NULL) {
 		errno = ENOMEM;
 #ifdef DEBUG_MEM
 	kprint ("Incorrect buffer address\r\n");
 #endif
-		return 0;
+		return ENOMEM;
 	}
+
 	if (buffer->flags & RBUFFER_IS_FULL) {
 		if (buffer->flags & RBUFFER_IS_UNDER_PROTECTION) {
 #ifdef DEBUG
 	kprint ("Can't write data. Buffer is full and protected. Lose data...\r\n");
 #endif
-			return 0;
+			return 1;
 		}
-		buffer->flags = buffer->flags | RBUFFER_IS_OVERFLOW;
+		if (!(buffer->flags & RBUFFER_IS_OVERFLOW)) {
+			buffer->flags = buffer->flags | RBUFFER_IS_OVERFLOW;
+			buffer->id_out = buffer->id_out->next;
+			kfree (buffer->id_out->prev->rbdata->data);
+			buffer->id_out->prev->rbdata->size = 0;
+		}
 	}
-	buffer->id_in->data = data;
-	buffer->id_in = buffer->id_in->next;
-
-	if (buffer->flags & RBUFFER_IS_OVERFLOW)
-		buffer->id_out = buffer->id_out->next;
-	
-	if (buffer->flags & RBUFFER_IS_EMPTY)
-		buffer->flags = buffer->flags & (~RBUFFER_IS_EMPTY);
 
 	if (buffer->id_in->next == buffer->id_out) 
 		buffer->flags = buffer->flags | RBUFFER_IS_FULL;
 
-	return 1;
+	buffer->id_in->rbdata->data = (void *) kcalloc (size, sizeof (char));
+	buffer->id_in->rbdata->size = size;
+	memcpy (data, buffer->id_in->rbdata->data, size);
+
+	if (buffer->flags & RBUFFER_IS_OVERFLOW) {
+		buffer->id_out = buffer->id_out->next;
+		kfree (buffer->id_out->prev->rbdata->data);
+		buffer->id_out->prev->rbdata->size = 0;
+	}
+	buffer->id_in = buffer->id_in->next;
+	
+	if (buffer->flags & RBUFFER_IS_EMPTY)
+		buffer->flags = buffer->flags & (~RBUFFER_IS_EMPTY);
+
+	return 0;
 }
 
-void* read_data (rbuffer* buffer) {
+byte read_data (rbuffer* buffer, void* data) {
 	if (buffer == NULL) {
 		errno = ENOMEM;
 #ifdef DEBUG_MEM
 	kprint ("Incorrect buffer address\r\n");
 #endif
-		return NULL;
+		return ENOMEM;
 	}
 
 	if (buffer->flags & RBUFFER_IS_EMPTY) {
 #ifdef DEBUG
 	kprint ("Can't read from empty buffer\r\n");
 #endif
-		return NULL;
+		return 1;
 	}
+	//TODO Create all "buckets" rbdata->data on kernel init and no free then??? for optimize
+	memcpy (buffer->id_out->rbdata->data, data, buffer->id_out->rbdata->size);
+	kfree (buffer->id_out->rbdata->data);
+	buffer->id_out->rbdata->size = 0;
 
-	void* data = buffer->id_out->data;
 	buffer->id_out = buffer->id_out->next;
+
 	if (buffer->flags & RBUFFER_IS_FULL) {
 		buffer->flags = buffer->flags & (~RBUFFER_IS_FULL);
 		buffer->flags = buffer->flags & (~RBUFFER_IS_OVERFLOW);
 	}
 
-	if (buffer->id_out->next == buffer->id_in)
+	if (buffer->id_out == buffer->id_in)
 		buffer->flags = buffer->flags | RBUFFER_IS_EMPTY;
 
-	return data;
-}
 
+	return 0;
+}
 

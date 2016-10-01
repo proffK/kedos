@@ -10,9 +10,9 @@ size_t block_read (block_dev* dev, uint8_t* buf, size_t buf_size, uint32_t start
         if (dev == NULL) kdie("NULL dev pointer");
         if (buf == NULL) kdie("Try read to NULL buf pointer");
 
-        if (starting_block >= dev->num_blocks) {
-                kdie("Incorrect block number");
-        }
+//        if (starting_block >= dev->num_blocks) {
+//                kdie("Incorrect block number");
+//        }
 
         if (dev->read == NULL) {
 #ifdef TEDIOS_BLOCK_DEBUG
@@ -60,9 +60,9 @@ size_t block_write (block_dev* dev, uint8_t* buf,
         if (dev == NULL) kdie("NULL dev pointer");
         if (buf == NULL) kdie("Try write to NULL buf pointer");
 
-        if (starting_block >= dev->num_blocks) {
+        /*if (starting_block >= dev->num_blocks) {
                 kdie("Incorrect block number");
-        }
+        }*/
 
         if (dev->write == NULL) {
 #ifdef TEDIOS_BLOCK_DEBUG

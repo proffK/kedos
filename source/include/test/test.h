@@ -22,10 +22,14 @@
 
 #include <lib/nostdio.h>
 #include <lib/nostdlib.h>
+#include <lib/string.h>
 #include <bcm2836/defines.h>
 #include <bcm2836/timer.h>
 #include <mm/heap.h>
 #include <sys/kthread.h>
+#include <sys/syscall.h>
+#include <sys/devs.h>
+
 
 int mem_test();
 
@@ -38,6 +42,8 @@ int lib_test();
 int rbuffer_test();
 
 int thread_test();
+
+int sd_test();
 
 void data_message_dump(void* data);
 
