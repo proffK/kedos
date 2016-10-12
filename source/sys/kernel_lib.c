@@ -3,6 +3,12 @@
 int k_send (void* param) {
 	int retv = -1;
 	data_message* data = (data_message*) param;
+
+	if (data->receiver == 0) {
+		//Message to kernel
+		//processing (data);
+		return data->size;
+	}
 	kthread* receiver = find_thread_pid (data->receiver);
 	
 	if (receiver == NULL) {
@@ -13,6 +19,7 @@ int k_send (void* param) {
 	}
 
 	byte ret = write_data (receiver->buffer, data, sizeof (data_message));
+
 	if (ret) {
 #ifdef DEBUG
 	kprint ("Can't write data to thread with %d pid\r\n", receiver->pid);
@@ -24,11 +31,12 @@ int k_send (void* param) {
 		receiver->state = WAIT;
 		active_add_tail (th_active_head, receiver);
 	}
+
 	retv = data->size;
 	return retv;
 }	
 
-void thread_exit_shell() { 
+static void thread_exit_shell() { 
 	thread_exit();
 }
 

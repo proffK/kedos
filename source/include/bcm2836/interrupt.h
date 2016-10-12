@@ -33,6 +33,24 @@ typedef struct {
 
 } irq_controller;
 
+#define SWI_EXIT(sp, retv) \
+	asm volatile (	"mov %%r1, %%sp\t\n"\
+					"mov %%sp, %1\t\n"\
+					"pop {%%r0}\t\n"\
+					"mov %%r0, %0\t\n"\
+					"push {%%r0}\t\n"\
+					"mov %%sp, %%r1\t\n"\
+					::"r"(retv), "r"(sp):"%r0", "%r1", "%sp", "memory");
+
+#define SWI_PROCESSING(swi_num, param1, param2) \
+	asm volatile (  "ldr %%r2, [%%lr, #-4]\t\n"\
+					"bic %%r2, %%r2, #0xff000000\t\n"\
+					"mov %0, %%r2\t\n"\
+ 					"mov %1, %%r0\t\n"\
+					"mov %2, %%r1\t\n"\
+					 : "=r" (swi_num), "=r"(param1), "=r"(param2)::"%r0", "%r1", "%r2", "memory");
+
+
 
 extern irq_controller* GetIrqController( void );
 void InitIrqController (void);
