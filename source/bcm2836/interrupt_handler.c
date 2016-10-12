@@ -36,13 +36,8 @@ void __attribute__((interrupt("SWI"))) software_handler(void)
 	dword param1;
 	void* param2;
 	int retv = -1;
-	asm volatile (  "ldr %%r3, [%%lr, #-4]\t\n"
-		        "bic %%r3, %%r3, #0xff000000\t\n"
-			"mov %0, %%r3\t\n" : "=r" (swi_num)::"%r3", "memory");
+	SWI_PROCESSING (swi_num, param1, param2);
 
-	asm volatile (  "mov %0, %%r0\t\n"
-			"mov %1, %%r1\t\n":
-			"=r"(param1), "=r"(param2)::"%r0", "%r1", "memory");
 	switch (swi_num) {
 		case 0:
 		  	retv = k_send (param2);
@@ -54,13 +49,7 @@ void __attribute__((interrupt("SWI"))) software_handler(void)
 			retv = k_try_receive (param1, param2);
 			break;
 	}
-	asm volatile (	"mov %%r1, %%sp\t\n"
-			"mov %%sp, %1\t\n"
-			"pop {%%r0}\t\n"
-			"mov %%r0, %0\t\n"
-			"push {%%r0}\t\n"
-			"mov %%sp, %%r1\t\n"
-			::"r"(retv), "r"(cur_thread->stack_pointer):"%r0", "%r1", "%sp", "memory");
+	SWI_EXIT (cur_thread->stack_pointer, retv);
 }
 
 void __attribute__((interrupt("ABORT"))) prefetch_abort_vector(void)

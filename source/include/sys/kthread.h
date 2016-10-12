@@ -7,6 +7,7 @@
 #include "lib/dlink_list.h"
 
 enum thread_state {ACTIVE, WAIT, BLOCKED};
+enum schedule_type {HARD, SOFT};
 
 extern reg_t kernel_sp;
 extern pid_t cur_pid;
@@ -17,12 +18,13 @@ extern void _kernel_entry (void);
 typedef struct kthread_t {
 	dl_node node;
 	dl_node active;
+	enum schedule_type sched_type;
+	enum thread_state state;
 	rbuffer* buffer;
 	reg_t program_counter;
 	reg_t stack_base;        
 	reg_t stack_pointer;	
 	pid_t pid;
-	byte state;
 	sflag_t flags;
 } kthread;
 
@@ -40,13 +42,11 @@ typedef struct data_message_t {
 	dword size;
 } data_message;
 
-kthread* kthread_init (sflag_t flags, pid_t pid, void* func);
-int kthread_delete (kthread* thread);
 void kthread_dump (kthread* thread);
 node_head* kthread_list_init ();
 int kthread_list_delete();
-void add_kthread (sflag_t flags, void* func);
-void delete_kthread (pid_t pid);
+pid_t add_kthread (sflag_t flags, void* func, enum schedule_type stype);
+int delete_kthread (pid_t pid);
 void kthread_list_dump ();
 kthread* find_thread_pid (pid_t pid);
 void run();

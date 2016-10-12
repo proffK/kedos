@@ -7,7 +7,7 @@ int p2 = 1;
 
 #define SEND_STR(param, size) {\
 	memcpy (param, str, size);\
-	send (1, str, size);\
+	send (2, str, size);\
 }
 
 uint32_t reg = 1 << 21;
@@ -66,9 +66,9 @@ void data_message_dump (void* data) {
 int thread_test() {
 
 	node_head* tlist = kthread_list_init();
-	add_kthread (0, &thread_1_func);
-	add_kthread (0, &terminal_func);
-	add_kthread (0, &thread_2_func);
+	add_kthread (0, &thread_1_func, SOFT);
+	add_kthread (0, &terminal_func, SOFT);
+	add_kthread (0, &thread_2_func, SOFT);
 	kthread_list_dump ();
 	return 0;
 }

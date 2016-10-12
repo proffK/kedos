@@ -5,11 +5,11 @@
 kthread* cur_thread = NULL;
 node_head* thread_head = NULL;
 active_head* th_active_head = NULL;
-pid_t cur_pid = 0;
+pid_t cur_pid = 1; //kernel has pid 0
 
 extern reg_t* _get_stack_pointer();
 
-kthread* kthread_init (sflag_t flags, pid_t pid, void* func) {
+static kthread* kthread_init (sflag_t flags, pid_t pid, void* func, enum schedule_type stype) {
 	kthread* thread = (kthread*) kcalloc (1, sizeof (kthread));
 	thread->flags = flags; 
 	thread->pid = pid;
@@ -17,22 +17,24 @@ kthread* kthread_init (sflag_t flags, pid_t pid, void* func) {
 	thread->stack_base = thread->stack_pointer;	
 	thread->buffer = create_rbuffer (0, RING_BUFFER_SIZE);
 	thread->program_counter = (reg_t *)func;
+	thread->sched_type = stype;
 	init_dl_node (&thread->node);
 	init_dl_node (&thread->active);
 	if (!cur_thread)
 		cur_thread = thread;
 	asm volatile (	"mov %%r1, %%sp\t\n"
-			"mov %%sp, %0\t\n"
-			"mov %%r0, %1\t\n"
-			"push {%%r0-%%r11, %%r0}\t\n"
-			"mrs %%r0, cpsr\t\n"
-			"push {%%r0}\t\n" 
-			"mov %%sp, %%r1\t\n"::"r"(thread->stack_base), "r"(thread->program_counter):"memory", "%r0", "%r1", "%sp");
+					"mov %%sp, %0\t\n"
+					"mov %%r0, %1\t\n"
+					"push {%%r0-%%r11, %%r0}\t\n"
+					"mrs %%r0, cpsr\t\n"
+					"push {%%r0}\t\n" 
+					"mov %%sp, %%r1\t\n"
+					::"r"(thread->stack_base), "r"(thread->program_counter):"memory", "%r0", "%r1", "%sp");
 	thread->stack_pointer -= 14 * ARCH_BITS / 8;
 	return thread;
 }
 
-int kthread_delete (kthread* thread) {
+static int kthread_delete (kthread* thread) {
 	if (thread == NULL) {
 		kprint ("Incorrect thread address");
 		errno = ENOMEM;
@@ -77,7 +79,7 @@ int kthread_list_delete () {
 	return 0;
 }
 
-void add_kthread (sflag_t flags, void* func) {
+pid_t add_kthread (sflag_t flags, void* func, enum schedule_type stype) {
 	if (thread_head == NULL) {
 		kprint ("Thread list doesn't exist\r\n");
 		errno = ENOMEM;
@@ -88,27 +90,29 @@ void add_kthread (sflag_t flags, void* func) {
 		errno = ENOMEM;
 		return;
 	}
-	kthread* thread = kthread_init (flags, cur_pid, func);
+	kthread* thread = kthread_init (flags, cur_pid, func, stype);
 	node_add_tail (thread_head, thread);
 	active_add_tail (th_active_head, thread);
 	cur_pid++;
+	return thread->pid;
 }
 
-void delete_kthread (pid_t pid) {
+int delete_kthread (pid_t pid) {
 	if (thread_head == NULL) {
 		kprint ("Thread list doesn't exist\r\n");
 		errno = ENOMEM;
-		return;
+		return -1;
 	}
 
 	if (th_active_head == NULL) {
 		kprint ("Thread active list doesn't exist\r\n");
 		errno = ENOMEM;
-		return;
+		return -1;
 	}
 
 	kthread* thread = find_thread_pid (pid);
 	kthread_delete (thread);
+	return 0;
 }
 
 void kthread_list_dump () {
