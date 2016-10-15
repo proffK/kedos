@@ -28,20 +28,60 @@ rbuffer* create_rbuffer (sflag_t FLAGS, size_t size) {
 	}
 
 	rbuffer* buffer = (rbuffer *) kcalloc (1, sizeof (rbuffer));
+
+	if (!buffer) {
+#ifndef DEBUG
+	kprint ("Can't allocate rbuffer\r\n");
+#endif
+		return NULL;
+	}
+
 	buffer->flags = FLAGS | RBUFFER_IS_EMPTY;
 	buffer->size = size;
 	dword i = 0;
 	node* prev = (node *) kcalloc (1, sizeof (node));
+
+	if (!prev) {
+#ifndef DEBUG
+	kprint ("Can't allocate node in rbuffer\r\n");
+#endif
+		return NULL;
+	}
+
 	prev->rbdata = (rdata *) kcalloc (1, sizeof (rdata));
+
+	if (!prev->rbdata) {
+#ifndef DEBUG
+	kprint ("Can't allocate data in rbuffer\r\n");
+#endif
+		return NULL;
+	}
+
 	prev->rbdata->data = NULL;
 	prev->rbdata->size = 0;
 	buffer->id_in = prev;
 	buffer->id_out = prev;
 	for (i = 1; i < size; i++) {
 		node* nd = (node *) kcalloc (1, sizeof (node));
+
+		if (!nd) {
+#ifndef DEBUG
+	kprint ("Can't allocate node in rbuffer\r\n");
+#endif
+			return NULL;
+		}
+
 		prev->next = nd;
 		nd->prev = prev;
 		nd->rbdata = (rdata *) kcalloc (1, sizeof (rdata));
+		
+		if (!prev->rbdata) {
+#ifndef DEBUG
+	kprint ("Can't allocate data in rbuffer\r\n");
+#endif
+			return NULL;
+		}
+
 		nd->rbdata->data = NULL;
 		nd->rbdata->size = 0;
 		prev = nd;	
