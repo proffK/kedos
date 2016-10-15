@@ -11,11 +11,37 @@ extern reg_t* _get_stack_pointer();
 
 static kthread* kthread_init (sflag_t flags, pid_t pid, void* func, enum schedule_type stype) {
 	kthread* thread = (kthread*) kcalloc (1, sizeof (kthread));
+	if (!thread) {
+#ifdef DEBUG 
+		kprint ("Can't allocate process with pid %d\r\n", pid);
+#endif
+		return NULL;
+	}
+
 	thread->flags = flags; 
 	thread->pid = pid;
 	thread->stack_pointer = (reg_t) phys_page_alloc (THREAD_PAGE_COUNT, pid) + PAGE_SIZE - 1;
+
+	if (!thread->stack_pointer) {
+#ifdef DEBUG 
+		kprint ("Can't allocate stack for process with pid %d\r\n", pid);
+#endif
+		kfree (thread);
+		return NULL;
+	}
+
 	thread->stack_base = thread->stack_pointer;	
 	thread->buffer = create_rbuffer (0, RING_BUFFER_SIZE);
+	
+	if (!thread->buffer) {
+#ifdef DEBUG 
+		kprint ("Can't create rbuffer for process with pid %d\r\n", pid);
+#endif
+		phys_page_free (thread->stack_pointer);
+		kfree (thread);
+		return NULL;
+	}
+
 	thread->program_counter = (reg_t) func;
 	thread->sched_type = stype;
 	init_dl_node (&thread->node);
@@ -55,10 +81,27 @@ void kthread_dump (kthread* thread) {
 }
 #endif
 
-int     kthread_list_init () {
+int kthread_list_init () {
 	thread_head = (node_head*) kcalloc (1, sizeof (node_head));
+
+	if (!thread_head) {
+#ifdef DEBUG 
+		kprint ("Can't allocate thread list\r\n");
+#endif
+		return -1;
+	}
+
 	node_init (thread_head);
 	th_active_head = (active_head*) kcalloc (1, sizeof (active_head));
+
+	if (!th_active_head) {
+#ifdef DEBUG 
+		kprint ("Can't allocate active thread list\r\n");
+#endif
+		kfree (thread_head);
+		return -1;
+	}
+
 	active_init (th_active_head);
 	return 0;
 }
@@ -83,14 +126,18 @@ pid_t add_kthread (sflag_t flags, void* func, enum schedule_type stype) {
 	if (thread_head == NULL) {
 		kprint ("Thread list doesn't exist\r\n");
 		errno = ENOMEM;
-		return -1;
+		return 0;
 	}
 	if (th_active_head == NULL) {
 		kprint ("Thread active list doesn't exist\r\n");
 		errno = ENOMEM;
-		return -1;
+		return 0;
 	}
 	kthread* thread = kthread_init (flags, cur_pid, func, stype);
+
+	if (!thread) 
+		return 0;
+
 	node_add_tail (thread_head, thread);
 	active_add_tail (th_active_head, thread);
 	cur_pid++;

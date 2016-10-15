@@ -105,7 +105,7 @@ static inline void thread_entry (reg_t sp, reg_t lr) {
 					"%r7", "%r8", "%r9", "%r10", "%r11", "%lr");
 }
 
-inline void thread_set_pc (reg_t func) {
+static inline void thread_set_pc (reg_t func) {
 	asm volatile (  "bx %0\t\n"
 			::"r"(func));
 }
