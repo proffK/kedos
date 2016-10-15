@@ -22,6 +22,7 @@ all: lib bcm2836 mm fs sys test $(TARGET)
 $(TARGET): kernel.o boot.o
 	$(CC) -T $(LD_SCRIPT) -o $(TARGET).elf $(LD_FLAGS) $^ $(STLIBS)
 	$(OBJ) $(TARGET).elf -O binary $(TARGET).bin
+	mkdir -pv ../kernel
 	mv $(TARGET).bin ../kernel/kernel7.img
 
 kernel.o: kernel.c 
