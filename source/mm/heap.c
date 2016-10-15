@@ -16,7 +16,6 @@
 *   along with kedos.  If not, see <http://www.gnu.org/licenses/>.
 
 */
-
 #include <mm/heap.h>
 
 #define KERNEL 0
@@ -30,6 +29,7 @@ int phys_area_init(phys_area_list* new_list, phys_area_info* info_arr,
                    size_t start_kheap_size)
 {
         int i;
+        new_list->list = HEAP_TABLE_ADDR;
 
         for (i = 0; i < HEAP_LIST_SIZE; ++i) {
 
@@ -66,7 +66,7 @@ int phys_area_init(phys_area_list* new_list, phys_area_info* info_arr,
  * ( kernel_heap )(                     free                               )
  */
 
-void* phys_page_alloc(uint32_t n, uint32_t owner)
+void* phys_page_alloc(size_t n, pid_t owner)
 {
         phys_area_info* cur_elem = heap_list->first_elem;
         
@@ -119,7 +119,7 @@ void* phys_page_alloc(uint32_t n, uint32_t owner)
 
 }
 
-void* phys_page_realloc(void* old_page, uint32_t new_n, uint32_t new_owner)
+void* phys_page_realloc(void* old_page, size_t new_n, pid_t new_owner)
 {	
 	if (old_page == NULL) {
 
