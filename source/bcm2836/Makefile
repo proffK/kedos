@@ -2,10 +2,10 @@ TARGET=libbcm2836.a
 ARM=arm-none-eabi
 
 SOURCES=uart.c timer.c sd.c mbox.c cache.c videocore.c armtimer.c interrupt_handler.c gpio.c
-OBJECTS=uart.o timer.o sd.o mbox.o cache.o videocore.o armtimer.o interrupt_handler.o gpio.o mmio.o
+OBJECTS=uart.o timer.o sd.o mbox.o cache.o videocore.o armtimer.o interrupt_handler.o gpio.o mmio.o entry.o
 INCLUDE=../include
 
-AS_SOURCES=mmio.S
+AS_SOURCES=mmio.S entry.S
 AS=$(ARM)-gcc
 #AS_FLAGS=-mfpu=neon -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -nostartfiles
 
