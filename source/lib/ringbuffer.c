@@ -20,30 +20,61 @@
 #include "lib/ringbuffer.h"
 
 rbuffer* create_rbuffer (sflag_t FLAGS, size_t size) {
+	int i = 0;
+	int j = 0;
 	if (size < 1) {
 #ifdef DEBUG
-	kprint ("Incorrect ringbuffer size. It must be larger then 0.\r\n");
+		kprint ("Incorrect ringbuffer size. It must be larger then 0.\r\n");
 #endif
 		return NULL;
 	}
 
 	rbuffer* buffer = (rbuffer *) kcalloc (1, sizeof (rbuffer));
+
+	if (!buffer) {
+#ifdef DEBUG
+		kprint ("Can't allocate rbuffer\r\n");
+#endif
+		return NULL;
+	}
+
 	buffer->flags = FLAGS | RBUFFER_IS_EMPTY;
 	buffer->size = size;
-	dword i = 0;
 	node* prev = (node *) kcalloc (1, sizeof (node));
-	prev->rbdata = (rdata *) kcalloc (1, sizeof (rdata));
-	prev->rbdata->data = NULL;
-	prev->rbdata->size = 0;
+
+	if (!prev) {
+#ifdef DEBUG
+		kprint ("Can't allocate rbuffer\r\n");
+#endif
+		kfree (buffer);
+		return NULL;
+	}
+
+	prev->rbdata.data = NULL;
+	prev->rbdata.size = 0;
 	buffer->id_in = prev;
 	buffer->id_out = prev;
 	for (i = 1; i < size; i++) {
 		node* nd = (node *) kcalloc (1, sizeof (node));
+		if (!nd) {
+#ifdef DEBUG
+			kprint ("Can't allocate rbuffer data\r\n");
+#endif
+
+			for (j = 1; j < i; j++) {
+				prev = prev->next;
+				kfree (prev->prev);
+			}
+
+			kfree (buffer);
+			kfree (prev);
+			return NULL;
+		}
+
 		prev->next = nd;
 		nd->prev = prev;
-		nd->rbdata = (rdata *) kcalloc (1, sizeof (rdata));
-		nd->rbdata->data = NULL;
-		nd->rbdata->size = 0;
+		nd->rbdata.data = NULL;
+		nd->rbdata.size = 0;
 		prev = nd;	
 	}
 	prev->next = buffer->id_in;
@@ -65,12 +96,10 @@ void free_rbuffer (rbuffer* buffer) {
 	dword i = 1;
 	for (i = 1; i < buffer->size; i++) {
 		iter_node = iter_node->next;
-		kfree (iter_node->prev->rbdata->data);
-		kfree (iter_node->prev->rbdata);
+		kfree (iter_node->prev->rbdata.data);
 		kfree (iter_node->prev);
 	}
-	kfree (iter_node->rbdata->data);
-	kfree (iter_node->rbdata);
+	kfree (iter_node->rbdata.data);
 	kfree (iter_node);
 	kfree (buffer);
 }
@@ -95,8 +124,8 @@ void dump_rbuffer (rbuffer* buffer, void (*data_dump)(void* data)) {
 			kprint ("ID_OUT : ");
 		else
 			kprint ("INODE  : ");
-		if (tmp->rbdata->data != NULL)
-			data_dump (tmp->rbdata->data);
+		if (tmp->rbdata.data != NULL)
+			data_dump (tmp->rbdata.data);
 		else
 			kprint ("NO DATA\r\n");
 		tmp = tmp->next;
@@ -126,22 +155,30 @@ byte write_data (rbuffer* buffer, void* data, size_t size) {
 		if (!(buffer->flags & RBUFFER_IS_OVERFLOW)) {
 			buffer->flags = buffer->flags | RBUFFER_IS_OVERFLOW;
 			buffer->id_out = buffer->id_out->next;
-			kfree (buffer->id_out->prev->rbdata->data);
-			buffer->id_out->prev->rbdata->size = 0;
+			kfree (buffer->id_out->prev->rbdata.data);
+			buffer->id_out->prev->rbdata.size = 0;
 		}
 	}
 
 	if (buffer->id_in->next == buffer->id_out) 
 		buffer->flags = buffer->flags | RBUFFER_IS_FULL;
 
-	buffer->id_in->rbdata->data = (void *) kcalloc (size, sizeof (char));
-	buffer->id_in->rbdata->size = size;
-	memcpy (data, buffer->id_in->rbdata->data, size);
+	buffer->id_in->rbdata.data = (void *) kcalloc (size, sizeof (char));
+
+	if (!buffer->id_in->rbdata.data) {
+#ifdef DEBUG
+	kprint ("Can't allocate data in rbuffer\r\n");
+#endif
+		return 1;
+	}
+
+	buffer->id_in->rbdata.size = size;
+	memcpy (data, buffer->id_in->rbdata.data, size);
 
 	if (buffer->flags & RBUFFER_IS_OVERFLOW) {
 		buffer->id_out = buffer->id_out->next;
-		kfree (buffer->id_out->prev->rbdata->data);
-		buffer->id_out->prev->rbdata->size = 0;
+		kfree (buffer->id_out->prev->rbdata.data);
+		buffer->id_out->prev->rbdata.size = 0;
 	}
 	buffer->id_in = buffer->id_in->next;
 	
@@ -167,9 +204,9 @@ byte read_data (rbuffer* buffer, void* data) {
 		return 1;
 	}
 	//TODO Create all "buckets" rbdata->data on kernel init and no free then??? for optimize
-	memcpy (buffer->id_out->rbdata->data, data, buffer->id_out->rbdata->size);
-	kfree (buffer->id_out->rbdata->data);
-	buffer->id_out->rbdata->size = 0;
+	memcpy (buffer->id_out->rbdata.data, data, buffer->id_out->rbdata.size);
+	kfree (buffer->id_out->rbdata.data);
+	buffer->id_out->rbdata.size = 0;
 
 	buffer->id_out = buffer->id_out->next;
 

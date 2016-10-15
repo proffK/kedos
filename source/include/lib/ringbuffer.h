@@ -11,7 +11,7 @@ typedef struct rdata_t {
 } rdata;
 
 typedef struct node_t {
-	rdata* rbdata;
+	rdata  rbdata;
 	struct node_t* next;
 	struct node_t* prev;
 } node;
