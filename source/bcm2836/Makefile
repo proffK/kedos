@@ -7,13 +7,13 @@ INCLUDE=../include
 
 AS_SOURCES=mmio.S
 AS=$(ARM)-gcc
-AS_FLAGS=-mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -nostartfiles
+#AS_FLAGS=-mfpu=neon -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -nostartfiles
 
 AR=$(ARM)-ar 
 AR_FLAGS=rcs
 
 CC=$(ARM)-gcc
-CC_FLAGS=-mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -std=gnu99 -nostartfiles -O0 -I$(INCLUDE)
+#CC_FLAGS=-mfpu=neon -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -std=gnu99 -nostartfiles -O0 -I$(INCLUDE)
 
 OBJ=$(ARM)-objcopy
 
@@ -23,7 +23,7 @@ $(TARGET): sources asm
 	$(AR) $(AR_FLAGS) $@ $(OBJECTS)
 
 sources: $(SOURCES)
-	$(CC) $(CC_FLAGS) -c $^
+	$(CC) $(CC_FLAGS) -I$(INCLUDE) -c $^
 
 asm: $(AS_SOURCES)
 	$(AS) $(AS_FLAGS) -c $^
