@@ -38,6 +38,14 @@
 
 #include <fs/block.h>
 
+#ifdef SD_DEBUG
+static char *sd_versions[] = { "unknown", "1.0 and 1.01", "1.10", "2.00", "3.0x", "4.xx" };
+
+static char *err_irpts[] = { "CMD_TIMEOUT", "CMD_CRC", "CMD_END_BIT", "CMD_INDEX",
+	"DATA_TIMEOUT", "DATA_CRC", "DATA_END_BIT", "CURRENT_LIMIT",
+	"AUTO_CMD12", "ADMA", "TUNING", "RSVD" };
+#endif
+
 const uint32_t sd_commands[] __attribute__((aligned(4))) = {
     SD_CMD_INDEX(0),
     SD_CMD_RESERVED(1),

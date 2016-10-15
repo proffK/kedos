@@ -11,7 +11,7 @@
 
 //#define DEBUG
 
-#define FLAG_DUMP(param) param > 0 ? 1 : 0
+#define FLAG_DUMP(param) (param) > 0 ? 1 : 0
 
 void* kmalloc(size_t size);
 

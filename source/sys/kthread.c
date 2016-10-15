@@ -13,10 +13,10 @@ static kthread* kthread_init (sflag_t flags, pid_t pid, void* func, enum schedul
 	kthread* thread = (kthread*) kcalloc (1, sizeof (kthread));
 	thread->flags = flags; 
 	thread->pid = pid;
-	thread->stack_pointer = (reg_t *)phys_page_alloc (THREAD_PAGE_COUNT, pid) + PAGE_SIZE - 1;
+	thread->stack_pointer = (reg_t) phys_page_alloc (THREAD_PAGE_COUNT, pid) + PAGE_SIZE - 1;
 	thread->stack_base = thread->stack_pointer;	
 	thread->buffer = create_rbuffer (0, RING_BUFFER_SIZE);
-	thread->program_counter = (reg_t *)func;
+	thread->program_counter = (reg_t) func;
 	thread->sched_type = stype;
 	init_dl_node (&thread->node);
 	init_dl_node (&thread->active);
@@ -55,12 +55,12 @@ void kthread_dump (kthread* thread) {
 }
 #endif
 
-node_head* kthread_list_init () {
+int     kthread_list_init () {
 	thread_head = (node_head*) kcalloc (1, sizeof (node_head));
 	node_init (thread_head);
 	th_active_head = (active_head*) kcalloc (1, sizeof (active_head));
 	active_init (th_active_head);
-	return thread_head;
+	return 0;
 }
 
 int kthread_list_delete () {
@@ -83,12 +83,12 @@ pid_t add_kthread (sflag_t flags, void* func, enum schedule_type stype) {
 	if (thread_head == NULL) {
 		kprint ("Thread list doesn't exist\r\n");
 		errno = ENOMEM;
-		return;
+		return -1;
 	}
 	if (th_active_head == NULL) {
 		kprint ("Thread active list doesn't exist\r\n");
 		errno = ENOMEM;
-		return;
+		return -1;
 	}
 	kthread* thread = kthread_init (flags, cur_pid, func, stype);
 	node_add_tail (thread_head, thread);
@@ -115,16 +115,17 @@ int delete_kthread (pid_t pid) {
 	return 0;
 }
 
-void kthread_list_dump () {
+int kthread_list_dump () {
 	if (thread_head == NULL) {
 		kprint ("List is empty\r\n");
-		return;
+		return 0;
 	}
 	kprint ("\r\nThread list: \r\n");
 	for (kthread *i = node_head_first(thread_head);
         	node_is_last(thread_head, i); i = node_next(i)) {
 		kthread_dump (i);        	
     	}
+        return 0;
 }
 
 kthread* find_thread_pid (pid_t pid) {

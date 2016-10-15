@@ -65,11 +65,11 @@ void data_message_dump (void* data) {
 
 int thread_test() {
 
-	node_head* tlist = kthread_list_init();
+	kthread_list_init();
 	add_kthread (0, &thread_1_func, SOFT);
 	add_kthread (0, &terminal_func, SOFT);
 	add_kthread (0, &thread_2_func, SOFT);
-	kthread_list_dump ();
+	kthread_list_dump();
 	return 0;
 }
 

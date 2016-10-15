@@ -6,14 +6,25 @@
 #include "sys/kscheduler.h"
 #include "lib/dlink_list.h"
 
-enum thread_state {ACTIVE, WAIT, BLOCKED};
-enum schedule_type {HARD, SOFT};
+/****************************************************************************/
+
+enum thread_state {
+        ACTIVE,
+        WAIT,
+        BLOCKED
+};
+
+enum schedule_type {
+        HARD,
+        SOFT
+};
+
+/****************************************************************************/
 
 extern reg_t kernel_sp;
 extern pid_t cur_pid;
 
-extern void _kernel_entry (void);
-
+/****************************************************************************/
 
 typedef struct kthread_t {
 	dl_node node;
@@ -28,13 +39,6 @@ typedef struct kthread_t {
 	sflag_t flags;
 } kthread;
 
-define_list (node, kthread)
-define_list (active, kthread)
-
-extern kthread* cur_thread;
-extern node_head* thread_head;
-extern active_head* th_active_head;
-
 typedef struct data_message_t {
 	char data[256];
 	pid_t sender;
@@ -42,14 +46,38 @@ typedef struct data_message_t {
 	dword size;
 } data_message;
 
+/****************************************************************************/
+
+define_list (node, kthread)
+define_list (active, kthread)
+
+/****************************************************************************/
+
+extern kthread* cur_thread;
+extern node_head* thread_head;
+extern active_head* th_active_head;
+
+/****************************************************************************/
+
+extern void _kernel_entry (void);
+
 void kthread_dump (kthread* thread);
-node_head* kthread_list_init ();
+
+int kthread_list_init ();
+
 int kthread_list_delete();
+
 pid_t add_kthread (sflag_t flags, void* func, enum schedule_type stype);
+
 int delete_kthread (pid_t pid);
-void kthread_list_dump ();
+
+int kthread_list_dump ();
+
 kthread* find_thread_pid (pid_t pid);
+
 void run();
+
+/****************************************************************************/
 
 //static inline void thread_exit () {
 #define thread_exit() { \
@@ -77,7 +105,7 @@ static inline void thread_entry (reg_t sp, reg_t lr) {
 					"%r7", "%r8", "%r9", "%r10", "%r11", "%lr");
 }
 
-inline void thread_set_pc (reg_t func) {
+static inline void thread_set_pc (reg_t func) {
 	asm volatile (  "bx %0\t\n"
 			::"r"(func));
 }

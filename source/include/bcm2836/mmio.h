@@ -8,16 +8,16 @@ extern void memory_barier();
 
 static inline void mmio_write(aptr_t addr, reg_t data)
 {
-        memory_barier();
+//        memory_barier();
 	*((volatile uint32_t*) addr) = data;
-        memory_barier();
+//        memory_barier();
 }
  
 static inline reg_t mmio_read(aptr_t addr)
 {
-        memory_barier();
+//        memory_barier();
 	return *(volatile reg_t*) addr;
-        memory_barier();
+//        memory_barier();
 }
 
 static inline uint32_t mmio_dword_read(byte* addr)
