@@ -298,14 +298,4 @@ extern int kprint(const char *format, ...);
 
 // Enable SDXC maximum performance mode
 #define SDXC_MAXIMUM_PERFORMANCE
-
-#ifdef SD_DEBUG
-static char *sd_versions[] = { "unknown", "1.0 and 1.01", "1.10", "2.00", "3.0x", "4.xx" };
-
-static char *err_irpts[] = { "CMD_TIMEOUT", "CMD_CRC", "CMD_END_BIT", "CMD_INDEX",
-	"DATA_TIMEOUT", "DATA_CRC", "DATA_END_BIT", "CURRENT_LIMIT",
-	"AUTO_CMD12", "ADMA", "TUNING", "RSVD" };
-#endif
-
-
 #endif /* SD_H_ */

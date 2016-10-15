@@ -65,11 +65,6 @@ int k_receive (dword param1, void* param2) {
 	return retv;
 }
 
-static void data_dump (void* data) {
-	data_message* d = (data_message *) data;
-	kprint ("sender %d receiver %d msg %s\r\n", d->sender, d->receiver, d->data);
-}
-
 int k_try_receive (dword param1, void* param2) {
 	int retv = -1;
 	data_message* data = (data_message *) kcalloc (1, sizeof (data_message));

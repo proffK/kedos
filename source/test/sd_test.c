@@ -8,8 +8,8 @@ int sd_test() {
 	int j = 0;
 
 
-	fake_buffer = (byte *) kmalloc (2 * PAGE_SIZE);
-	buffer = (((dword) fake_buffer & (~0xFFF)) + PAGE_SIZE);
+	fake_buffer = (byte*) kmalloc (2 * PAGE_SIZE);
+	buffer = (byte*) (((dword) fake_buffer & (~0xFFF)) + PAGE_SIZE);
 	kprint ("Buffer %p\r\n", buffer);
 
 	block_read(&block_dev_table[SD_CARD], buffer, PAGE_SIZE, 0);

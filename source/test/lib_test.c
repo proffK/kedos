@@ -25,7 +25,6 @@ void core_dump (reg_t* regarr);
 int lib_test()
 {
 	byte p1 = 0xff;
-	word p2 = 0xaaaa;
 
 	reg_t regarr[REGS_NUM] = {};
 	dump_registers (regarr);
@@ -41,11 +40,11 @@ int lib_test()
 	dump_registers (regarr);
 	core_dump (regarr);
 
-	asm ("mov %%r11, %%pc\n\t"
-	     : : : "r11", "memory");	
-	
-	dump_registers (regarr);
-	core_dump (regarr);
+//	asm ("mov %%r11, %%pc\n\t"
+//	     : : : "r11", "memory");	
+//	
+//	dump_registers (regarr);
+//	core_dump (regarr);
 	return 0;
 }
 

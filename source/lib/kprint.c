@@ -435,14 +435,14 @@ number:
 void
 kprint(const char *fmt, ...)
 {
-	_disable_interrupts();
+//	_disable_interrupts();
 	/* http://www.pagetable.com/?p=298 */
 	va_list ap;
 
 	va_start(ap, fmt);
 	kvprintf(fmt, kputc, (void*)1, 10, ap);
 	va_end(ap);
-	_enable_interrupts();
+//	_enable_interrupts();
 }
 
 /* Thanks to James Cone (https://github.com/JamesC1) for this */
