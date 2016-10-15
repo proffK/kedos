@@ -6,13 +6,13 @@ OBJECTS=kprint.o strlen.o error.o kmalloc.o kdie.o memset.o memcpy.o registers_d
 INCLUDE=../include
 
 AS=$(ARM)-gcc
-AS_FLAGS=-mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -nostartfiles
+#AS_FLAGS=-mfpu=neon -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -nostartfiles
 
 AR=$(ARM)-ar 
 AR_FLAGS=rcs
 
 CC=$(ARM)-gcc
-CC_FLAGS=-Wall -mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -std=gnu99 -nostartfiles -O2 -I$(INCLUDE)
+#CC_FLAGS=-Wall -mfpu=neon -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -std=gnu99 -nostartfiles -O2 -I$(INCLUDE)
 
 OBJ=$(ARM)-objcopy
 
@@ -22,7 +22,7 @@ $(TARGET): sources
 	$(AR) $(AR_FLAGS) $@ $(OBJECTS)
 
 sources: $(SOURCES)
-	$(CC) $(CC_FLAGS) -c $(SOURCES) -lgcc
+	$(CC) $(CC_FLAGS) -I$(INCLUDE) -c $(SOURCES) -lgcc
 
 clean:
 	rm -rf *.o
