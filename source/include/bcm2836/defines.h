@@ -4,10 +4,24 @@
 
 #define PBASE 0x3F000000
 
-#define PAGE_SIZE 0x00001000
-#define HEAP_START ((void*) 0x01000000)
-#define HEAP_END ((void*) 0x3EFFFFFF)
-#define HEAP_SIZE ((HEAP_START - HEAP_END) / PAGE_SIZE)
+#define PAGE_SIZE                    0x00001000
+#define HEAP_TABLE_ADDR     ((void*) 0x00200000)
+#define HEAP_START          ((void*) 0x01000000)
+#define HEAP_END            ((void*) 0x3EFFFFFF)
+#define HEAP_SIZE           ((HEAP_START - HEAP_END) / PAGE_SIZE)
+
+/****************************************************************************/
+/******************************* Memory map *********************************/
+/****************************************************************************/
+//0x00000000 - 0x00000020 : Interrupt handlers
+//0x00000020 - 0x00008000 : Kernel stack
+//0x00008000 - 0x00200000 : Kernel code
+//0x00200000 - 0x00600000 : Memory area structs
+//0x00600000 - 0x00800000 : Resources table
+//0x00800000 - 0x01000000 : Unused
+//0x01000000 - 0x3F000000 : Available memory
+//0x3F000000 - 0x3FFFFFFF : Hardware mapping
+/****************************************************************************/
 
 #define TIMER_RATE 1000000
 

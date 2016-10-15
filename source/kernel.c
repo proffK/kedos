@@ -47,9 +47,6 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 	(void) atags;
 
         char hex[9] = {};
-        uint32_t volatile ra;
-
-	ra = 1 << 21;
         phys_area_list new_heap;
 
 	uart_init();
@@ -61,7 +58,7 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 
 
 	mem_test();
-    heap_test();
+        heap_test();
 
 	kprint("Power set: %x\r\n", bcm2835_vc_set_power_state(BCM2835_VC_POWER_ID_SDCARD, BCM2835_VC_SET_POWER_STATE_ON_WAIT));
 	bdevs_init();
