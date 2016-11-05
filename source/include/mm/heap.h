@@ -26,7 +26,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#define HEAP_LIST_SIZE 0x00400000
+#define HEAP_LIST_SIZE (0x00400000 / sizeof(phys_area_info))
 #define KERNEL_HEAP_START_SIZE 0x00010000
 
 #define DEBUG
@@ -54,7 +54,7 @@ typedef struct {
 
 extern phys_area_list* heap_list;
 
-int phys_area_init(phys_area_list* new_list, phys_area_info* info_arr, 
+int phys_area_init(phys_area_list* new_list,
                    size_t start_kheap_size);
 
 void* phys_page_alloc(size_t n, pid_t owner);

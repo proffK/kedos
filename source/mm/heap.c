@@ -25,11 +25,12 @@
 
 phys_area_list* heap_list;
 
-int phys_area_init(phys_area_list* new_list, phys_area_info* info_arr, 
-                   size_t start_kheap_size)
+int phys_area_init(phys_area_list* new_list, size_t start_kheap_size)
 {
         int i;
+		phys_area_info* info_arr;
         new_list->list = HEAP_TABLE_ADDR;
+		info_arr = new_list->list;
 
         for (i = 0; i < HEAP_LIST_SIZE; ++i) {
 
@@ -38,14 +39,16 @@ int phys_area_init(phys_area_list* new_list, phys_area_info* info_arr,
         }
 
         new_list->first_elem=info_arr;
+		kprint("I'm here 2 %x\r\n", info_arr);
 
         phys_area_info_init(new_list->first_elem, 
                             HEAP_START,
                             (HEAP_START + start_kheap_size - 1), 
                             KERNEL, 
-                            &info_arr[1]);
+                            info_arr + 1);
 
-        phys_area_info_init(&info_arr[1], 
+		kprint("I'm here 3 %x\r\n", info_arr[1]);
+        phys_area_info_init(info_arr + 1, 
                             new_list->first_elem->end + 1,
                             HEAP_END,
                             FREE,
