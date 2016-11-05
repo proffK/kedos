@@ -5,19 +5,19 @@ INCLUDE=include
 STLIBS=-L./lib -L./bcm2836 -L./mm -L./test -L./fs -L./sys -ltest -lsys -lfs -lmem -lbcm2836 -lsys -lbarebone -lbcm2836 -lgcc
 
 AS=$(ARM)-gcc
-AS_FLAGS=-mfpu=neon-vfpv4 -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -nostartfiles
+AS_FLAGS=-mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -nostartfiles
 
 CC=$(ARM)-gcc
-CC_FLAGS=-mfpu=neon-vfpv4 -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -std=gnu99 -nostartfiles
+CC_FLAGS=-mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -fpic -ffreestanding -std=gnu99 -nostartfiles
 
 LD_SCRIPT= linker.ld
-LD_FLAGS= -mfpu=neon-vfpv4 -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -ffreestanding -O2 -nostdlib -lgcc
+LD_FLAGS= -mfpu=neon -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -ffreestanding -O2 -nostdlib -lgcc
 
 OBJ=$(ARM)-objcopy
 
 .PHONY: fs lib bcm2836 mm sys test all clean count
 
-all: lib bcm2836 mm fs sys test $(TARGET)
+all: lib bcm2836 mm fs sys test $(TARGET) Makefile
 
 $(TARGET): kernel.o boot.o
 	$(CC) -T $(LD_SCRIPT) -o $(TARGET).elf $(LD_FLAGS) $^ $(STLIBS)
