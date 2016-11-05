@@ -40,6 +40,8 @@ reg_t kernel_sp = 0;
 
 #define KERNEL_HEAP_SIZE 0x10000000
 
+static void __attribute__((naked())) kernel (void); 
+
 void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 {
 	(void) r0;
@@ -58,7 +60,7 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 
 /********************************************************************/
 
-	phys_area_init(&new_heap, new_heap.list, KERNEL_HEAP_START_SIZE);
+	phys_area_init(&new_heap, KERNEL_HEAP_START_SIZE);
 
 	mem_test();
     heap_test();
@@ -66,8 +68,21 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 /********************************************************************/
 
 	retv = kthread_list_init();
-	if (!retv)
+	if (retv != 0)
 		kdie ("Can't init thread list");
+
+/********************************************************************/
+
+	kthread* thread = (kthread*) kcalloc (1, sizeof (kthread));
+
+	if (thread == NULL) 
+		kdie ("Can't init kernel thread");
+
+	thread->program_counter = (reg_t) kernel;	
+	thread->pid = 0; // Kernel thread init
+	init_dl_node (&thread->node);
+	node_add_tail (thread_head, thread);
+
 
 /********************************************************************/
 
@@ -95,7 +110,7 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 	uart_putc(uart_getc());
 }
 
-void __attribute__((naked())) kernel (void) {
+static void __attribute__((naked())) kernel (void) {
 	kscheduler();
 	thread_entry(cur_thread->stack_pointer, cur_thread->program_counter);
 }
@@ -103,8 +118,10 @@ void __attribute__((naked())) kernel (void) {
 void __attribute__((naked())) kernel_entry(void) {
 	_disable_interrupts();
 	asm volatile ( 	"str %%sp, [%0]\t\n"
-			"mov %%sp, %1\t\n"
-			"mov %%r0, %2\t\n"
-			"bx %%r0\t\n" :: "r"(&cur_thread->stack_pointer), "r"(kernel_sp), "r"(kernel): "%r0", "%sp", "memory");
+					"mov %%sp, %1\t\n"
+					"mov %%r0, %2\t\n"
+					"bx %%r0\t\n" :: "r"(&cur_thread->stack_pointer), 
+					"r"(node_head_prev(thread_head)->stack_pointer), 
+					"r"(kernel): "%r0", "%sp", "memory");
 }
 

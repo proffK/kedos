@@ -1,6 +1,7 @@
 #include "sys/kthread.h"
 #include "lib/nostdlib.h"
 
+#define DEBUG
 
 kthread* cur_thread = NULL;
 node_head* thread_head = NULL;
@@ -12,7 +13,7 @@ extern reg_t* _get_stack_pointer();
 static kthread* kthread_init (sflag_t flags, pid_t pid, void* func, enum schedule_type stype) {
 	kthread* thread = (kthread*) kcalloc (1, sizeof (kthread));
 
-	if (!thread) {
+	if (thread == NULL) {
 #ifdef DEBUG
 	kprint ("Can't allocate thread\r\n");
 #endif
@@ -21,9 +22,12 @@ static kthread* kthread_init (sflag_t flags, pid_t pid, void* func, enum schedul
 
 	thread->flags = flags; 
 	thread->pid = pid;
-	thread->stack_pointer = (reg_t) phys_page_alloc (THREAD_PAGE_COUNT, pid) + PAGE_SIZE - 1;
+	thread->stack_pointer = (reg_t) phys_page_alloc (THREAD_PAGE_COUNT, pid) 
+												+ PAGE_SIZE - sizeof(dword);
+	
+	//For protection from corruption next memory page
 
-	if (!thread->stack_pointer) {
+	if (thread->stack_pointer == 0) {
 #ifdef DEBUG
 	kprint ("Can't allocate thread stack\r\n");
 #endif
@@ -32,9 +36,9 @@ static kthread* kthread_init (sflag_t flags, pid_t pid, void* func, enum schedul
 	}
 
 	thread->stack_base = thread->stack_pointer;	
-	thread->buffer = create_rbuffer (0, RING_BUFFER_SIZE);
+	thread->buffer = create_rbuffer (RBUFFER_IS_UNDER_PROTECTION, RING_BUFFER_SIZE);
 
-	if (!thread->buffer) {
+	if (thread->buffer == NULL) {
 #ifdef DEBUG
 	kprint ("Can't allocate thread rbuffer\r\n");
 #endif
@@ -43,21 +47,23 @@ static kthread* kthread_init (sflag_t flags, pid_t pid, void* func, enum schedul
 		return NULL;
 	}
 
-
 	thread->program_counter = (reg_t) func;
 	thread->sched_type = stype;
 	init_dl_node (&thread->node);
 	init_dl_node (&thread->active);
 	if (!cur_thread)
 		cur_thread = thread;
+
 	asm volatile (	"mov %%r1, %%sp\t\n"
 					"mov %%sp, %0\t\n"
 					"mov %%r0, %1\t\n"
-					"push {%%r0-%%r11, %%r0}\t\n"
+					"push {%%r0-%%r11}\t\n"
+					"push {%%r0}\t\n"
 					"mrs %%r0, cpsr\t\n"
 					"push {%%r0}\t\n" 
 					"mov %%sp, %%r1\t\n"
-					::"r"(thread->stack_base), "r"(thread->program_counter):"memory", "%r0", "%r1", "%sp");
+					::"r"(thread->stack_base), "r"(thread->program_counter): "memory", "%r0", "%r1", "%sp");
+
 	thread->stack_pointer -= 14 * ARCH_BITS / 8;
 	return thread;
 }
@@ -196,8 +202,7 @@ kthread* find_thread_pid (pid_t pid) {
 extern void _set_sp(reg_t sp);
 
 void __attribute__((naked())) run() {
-	_set_sp (cur_thread->stack_pointer);
-	thread_set_pc (cur_thread->program_counter);
+	thread_entry (cur_thread->stack_pointer, cur_thread->program_counter);
 }
 
 

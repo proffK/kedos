@@ -6,11 +6,11 @@
 #include "lib/string.h"
 
 #define SYSCALL_PARAM(sp, param0, param1, retv) \
-	asm volatile (	"mov %%r0, %1\t\n"\
+	asm volatile (	"mov %%r0, %3\t\n"\
 					"push {%%r0}\t\n"\
-					"str %%sp, [%0]\t\n"\
-					"mov %%r0, %2\t\n"\
-					"mov %%r1, %3\t\n"\
+					"str %%sp, [%2]\t\n"\
+					"mov %%r0, %0\t\n"\
+					"mov %%r1, %1\t\n"\
 					::"r"(param0), "r"(param1), "r"(&sp), "r"(retv):"%r0", "%r1", "memory");
 
 

@@ -14,26 +14,21 @@ uint32_t reg = 1 << 21;
 
 
 void thread_1_func() {
-	char* str = (char*) kcalloc (256, sizeof (char));\
+	char* str = (char*) kcalloc (256, sizeof (char));
 	while(1) {
-		if (p1 == 1) {
-			p1 = 0;
-			if (sys_timer->counter_lo % 10 > sys_timer->counter_lo % 5)
-				SEND_STR ("Hello #1\r\n", strlen ("Hello #1\r\n") + 1);
-		}
-		p2 = 1;
+		//if (sys_timer->counter_lo % 10 > sys_timer->counter_lo % 5)
+		SEND_STR ("Hello #1\r\n", strlen ("Hello #1\r\n") + 1);
+		usleep(100000);
 	}
+
 }
 
 void thread_2_func() {
-	char* str = (char*) kcalloc (256, sizeof (char));\
+	char* str = (char*) kcalloc (256, sizeof (char));
 	while(1) {
-		if (p2 == 1) {
-			p2 = 0;
-			if (sys_timer->counter_lo % 10 > sys_timer->counter_lo % 5)
-				SEND_STR ("Hello #2\r\n", strlen ("Hello #2\r\n") + 1);
-		}
-		p1 = 1;
+		//if (sys_timer->counter_lo % 10 > sys_timer->counter_lo % 5)
+		SEND_STR ("Hello #2\r\n", strlen ("Hello #2\r\n") + 1);
+		usleep(100000);
 	}
 }
 
@@ -50,7 +45,7 @@ void terminal_func() {
 	dump_rbuffer (cur_thread->buffer, data_d);
 	while(1) {
 		retv = try_receive (str);
-		kprint ("%d ", retv);
+		//kprint ("%d ", retv);
 		if (retv >= 0)
 			kprint ("%s", str);
 		
@@ -65,7 +60,7 @@ void data_message_dump (void* data) {
 
 int thread_test() {
 
-	kthread_list_init();
+//	kthread_list_init();
 	add_kthread (0, &thread_1_func, SOFT);
 	add_kthread (0, &terminal_func, SOFT);
 	add_kthread (0, &thread_2_func, SOFT);

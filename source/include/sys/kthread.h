@@ -43,7 +43,7 @@ typedef struct data_message_t {
 	char data[256];
 	pid_t sender;
 	pid_t receiver;
-	dword size;
+	size_t size;
 } data_message;
 
 /****************************************************************************/
@@ -79,31 +79,33 @@ void run();
 
 /****************************************************************************/
 
-//static inline void thread_exit () {
 #define thread_exit() { \
 	asm volatile (	"push {%%r1}\t\n"\
-			"mov %%r1, %%sp\t\n"\
-			"mov %%sp, %%fp\t\n"\
-			"pop {%%lr}\t\n"\
-			"str %%lr, [%0]\t\n"\
-			"mov %%lr, %1\t\n"\
-			"push {%%lr}\t\n"\
-			"mov %%sp, %%r1\t\n"\
-			"pop {%%r1}\t\n"\
-			::"r"(&cur_thread->program_counter), "r"(_kernel_entry): "%sp", "%lr", "%r1", "memory");\
+					"mov %%r1, %%sp\t\n"\
+					"mov %%sp, %%fp\t\n"\
+					"pop {%%lr}\t\n"\
+					"str %%lr, [%0]\t\n"\
+					"mov %%lr, %1\t\n"\
+					"push {%%lr}\t\n"\
+					"mov %%sp, %%r1\t\n"\
+					"pop {%%r1}\t\n"\
+			:: "r"(&(cur_thread->program_counter)), "r"(_kernel_entry) : "%sp", "%lr", "%r1", "memory");\
 }
 
-static inline void thread_entry (reg_t sp, reg_t lr) {
-	asm volatile (  "mov %%sp, %0\t\n"
-			"pop {%%r0}\t\n"
-			"msr cpsr_xsf, %%r0\t\n":: "r"(sp):"%sp", "%r0");
-
-	asm volatile(	"pop {%%r0-%%r11, %%lr}\t\n"
-			"cpsie i\t\n"
-			"mov %%pc, %0\t\n"
-			:: "r"(lr): "%r0", "%r1", "%r2", "%r3", "%r4", "%r5", "%r6", 
-					"%r7", "%r8", "%r9", "%r10", "%r11", "%lr");
+#define thread_entry(sp, lr) {\
+	asm volatile (  "str %%sp, [%1]\t\n"\
+					"mov %%sp, %0\t\n"\
+					"pop {%%r0}\t\n"\
+					"msr cpsr_xsf, %%r0\t\n" :: "r"(sp),\
+					"r"(&(node_head_prev(thread_head)->stack_pointer)) : "%sp", "%r0");	\
+\
+	asm volatile(	"pop {%%r0-%%r11, %%lr}\t\n"\
+					"cpsie i\t\n"\
+					"mov %%pc, %0\t\n"\
+					:: "r"(lr) : "%r0", "%r1", "%r2", "%r3", "%r4", "%r5", "%r6", \
+					"%r7", "%r8", "%r9", "%r10", "%lr");\
 }
+
 
 static inline void thread_set_pc (reg_t func) {
 	asm volatile (  "bx %0\t\n"
