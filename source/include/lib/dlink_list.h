@@ -70,6 +70,10 @@ static inline void add_tail (dl_node* head, dl_node* node) {
 		return list_entry (head->_private.next, type, name);\
 	}\
 	\
+	static inline type* name##_head_prev (name##_head* head) {\
+		return list_entry (head->_private.prev, type, name);\
+	}\
+	\
 	static inline type* name##_next (const type* node) { \
 		return list_entry (node->name.next, type, name);\
 	}\
