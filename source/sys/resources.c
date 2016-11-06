@@ -1,4 +1,89 @@
-#include "sys/resources.h"
+#include <sys/resources.h>
+#include <bcm2836/defines.h>
+#include <lib/error.h>
+
+static res_unit** res_table;
+
+res_unit* res_table_get() {
+        return res_table;
+}
+
+static inline int free_rd() {
+        int i;
+        for (i = 0; i < RES_TABLE_SIZE; ++i) {
+                if (res_table[i] != NULL) {
+                        return i;
+                }
+        }                 
+        return -ENOMEM;
+}
+
+int res_table_init() {
+        int i;
+        res_table = (res_unit**) calloc (RES_TABLE_SIZE, sizeof(res_unit*));
+        if (res_table == NULL) 
+                return -EINVAL;
+        return 0;
+}
+
+int res_add(res_unit* res) {
+        int rd;
+        if (res == NULL || res_table == NULL) 
+                return -EINVAL;
+        rd = free_rd();
+        if (rd > 0) {
+                res_table[rd] = res;
+        }
+        return rd;
+}
+
+int res_del(int rd) {
+        if (res_table == NULL) 
+                return -EINVAL;
+        res_table[rd] = NULL;
+        return 0;
+}
+
+int res_findt(res_type_t type, int start) {
+        if (start < 0 || res_table == NULL)
+                return -EINVAL;
+        while (start < RES_TABLE_SIZE) {
+                if (res_table[start] != NULL && 
+                    (res_table[start]->type == type)) {
+                        return start;
+                }
+                start++;
+        }
+        return -EAGAIN;
+}
+
+int res_findp(pid_t pid, int start) {
+        if (start < 0 || res_table == NULL)
+                return -EINVAL;
+        while (start < RES_TABLE_SIZE) {
+                if (res_table[start] != NULL && 
+                    (res_table[start]->pid == pid)) {
+                        return start;
+                }
+                start++;
+        }
+        return -EAGAIN;
+}
+
+int res_findtp(res_type_t type, pid_t pid, int start) {
+        if (start < 0 || res_table == NULL)
+                return -EINVAL;
+        while (start < RES_TABLE_SIZE) {
+                if (res_table[start] != NULL && 
+                    (res_table[start]->type == type) &&
+                    (res_table[start]->pid == pid)) {
+                        return start;
+                }
+                start++;
+        }
+        return -EAGAIN;
+}
+
 
 static void thread_exit_shell() { 
 	thread_exit();
