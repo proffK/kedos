@@ -37,7 +37,7 @@ int res_add(res_unit* res) {
 }
 
 int res_del(int rd) {
-        if (res_table == NULL) 
+        if (!(res_table != NULL && rd < RES_TABLE_SIZE)) 
                 return -EINVAL;
         res_table[rd] = NULL;
         return 0;
@@ -103,9 +103,6 @@ static int res_is_valid (res_type_t res) {
 			((res >> 24) & 0xff) <= RES_FIRST_TYPE_MAX);
 }
 
-static int find_res_in_table_by_type (res_unit* unit, res_type_t res) {
-	return 0;
-}
 
 int res_get (res_type_t res, pid_t src, sflag_t flag) {
 	
@@ -113,6 +110,9 @@ int res_get (res_type_t res, pid_t src, sflag_t flag) {
 	int rd;
 	res_unit* ures;
 
+        if (res_table == NULL) 
+                return -EINVAL;
+ 
 	if (res_is_valid (res) == 0) {
 #ifdef DEBUG
 		kprint ("Unknown resource\r\n");
@@ -139,7 +139,8 @@ int res_get (res_type_t res, pid_t src, sflag_t flag) {
 #ifdef DEBUG
 		kprint ("Can't get resources with WAITFROM and NONBLOCK in the same time\r\n");
 #endif
-		return -EAGAIN;
+
+		return -EINVAL;
 	}
 
 	if (flag & R_WAITFROM)
@@ -151,7 +152,7 @@ int res_get (res_type_t res, pid_t src, sflag_t flag) {
 		if (ures->pid == from)
 			return rd;
 		else 
-			return -EACCES;
+			return -EINVAL;
 	}
 
 	if ((flag & R_WAITFROM) && from != 0) {
@@ -166,7 +167,7 @@ int res_get (res_type_t res, pid_t src, sflag_t flag) {
 #ifdef DEBUG
 				kprint ("Unavaliable resource\r\n");
 #endif
-				return -EAGAIN;
+				return -EACCES;
 			}
 		}
 	}
@@ -181,13 +182,9 @@ int res_give (int rd, pid_t dest, sflag_t flag) {
 	pid_t to;
 	int retv;
 
-	if (rd == 0) {
-#ifdef DEBUG
-		kprint ("Unknown resource\r\n");
-#endif
-		return -EINVAL;
-	}
-
+    if (!(res_table != NULL && rd < RES_TABLE_SIZE)) 
+    	return -EINVAL;
+ 
 	ures = res_table[rd];
 
 	if (ures == NULL) {

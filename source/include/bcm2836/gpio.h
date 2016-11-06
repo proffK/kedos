@@ -31,6 +31,7 @@
 #include <stdint.h>
 #include "defines.h"
 
+#define GPIO_NUM  54
 #define GPIO_BASE (PBASE + 0x200000)
 
 #define GPFSEL0 GPIO_BASE
