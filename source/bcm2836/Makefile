@@ -1,8 +1,8 @@
 TARGET=libbcm2836.a
 ARM=arm-none-eabi
 
-SOURCES=uart.c timer.c sd.c mbox.c cache.c videocore.c armtimer.c interrupt_handler.c gpio.c
-OBJECTS=uart.o timer.o sd.o mbox.o cache.o videocore.o armtimer.o interrupt_handler.o gpio.o mmio.o entry.o
+SOURCES=uart.c timer.c sd.c mbox.c cache.c videocore.c armtimer.c interrupt_handler.c gpio.c hardware.c
+OBJECTS=uart.o timer.o sd.o mbox.o cache.o videocore.o armtimer.o interrupt_handler.o gpio.o hardware.o mmio.o entry.o
 INCLUDE=../include
 
 AS_SOURCES=mmio.S entry.S

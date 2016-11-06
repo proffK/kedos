@@ -10,12 +10,7 @@ typedef uint32_t res_type_t;
 #define RES_THIRD_TYPE_MAX  RES_TTY
 #define RES_FOURTH_TYPE_MAX 0
 
-typedef struct {
-		void* res_init;
-		void* res_free;
-		void* res_give;
-		void* res_get;
-} ftable;
+typedef struct ftable_t ftable;
 
 typedef struct {
         pid_t pid;
@@ -23,6 +18,13 @@ typedef struct {
         void* data;
         ftable* tb;
 } res_unit;
+
+struct ftable_t {
+		int (*res_init) (res_unit* unit);
+		int (*res_free) (res_unit* unit);
+		int (*res_give) (res_unit* unit);
+		int (*res_get ) (res_unit* unit);
+};
 
 enum first_level_res {
         RES_CPU = 0x01,
@@ -52,7 +54,7 @@ static inline res_type_t res_compose(uint8_t first_level, uint8_t sec_level,
 }
 
 int res_table_init();
-res_unit* res_table_get();
+res_unit** res_table_get();
 
 int res_add (res_unit* res);
 int res_del (int rd);

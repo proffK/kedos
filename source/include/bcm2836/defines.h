@@ -10,6 +10,8 @@
 #define HEAP_END            ((void*) 0x3EFFFFFF)
 #define HEAP_SIZE           ((HEAP_START - HEAP_END) / PAGE_SIZE)
 
+#define RES_TABLE_SIZE               0x00001000
+
 /****************************************************************************/
 /******************************* Memory map *********************************/
 /****************************************************************************/
@@ -27,11 +29,11 @@
 
 #define ARCH_BITS 32
 #define REGS_NUM  16
-
+#define CORES_NUM 4
 #define RING_BUFFER_SIZE 32
 
 #define THREAD_PAGE_COUNT 1
-
+#define BASE_FREQ 1000000000
 #define RPI2
 
 typedef uint32_t reg_t;
@@ -41,5 +43,7 @@ typedef uint16_t word;
 typedef uint32_t dword;
 typedef uint32_t pid_t;
 typedef uint8_t sflag_t;
+
+int hardware_init();
 
 #endif

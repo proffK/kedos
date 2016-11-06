@@ -49,8 +49,8 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 	(void) atags;
 	int retv;
 
-    char hex[9] = {};
-    phys_area_list new_heap;
+        char hex[9] = {};
+        phys_area_list new_heap;
 
 	uart_init();
 	kprint("Hello, kernel world.\r\n"
@@ -63,7 +63,8 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 	phys_area_init(&new_heap, KERNEL_HEAP_START_SIZE);
 
 	mem_test();
-    heap_test();
+        heap_test();
+        hardware_init();
 
 /********************************************************************/
 

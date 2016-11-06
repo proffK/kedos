@@ -4,7 +4,7 @@
 
 static res_unit** res_table;
 
-res_unit* res_table_get() {
+res_unit** res_table_get() {
         return res_table;
 }
 
@@ -20,7 +20,7 @@ static inline int free_rd() {
 
 int res_table_init() {
         int i;
-        res_table = (res_unit**) calloc (RES_TABLE_SIZE, sizeof(res_unit*));
+        res_table = (res_unit**) kcalloc (RES_TABLE_SIZE, sizeof(res_unit*));
         if (res_table == NULL) 
                 return -EINVAL;
         return 0;
@@ -38,7 +38,7 @@ int res_add(res_unit* res) {
 }
 
 int res_del(int rd) {
-        if (res_table == NULL) 
+        if (!(res_table != NULL && rd < RES_TABLE_SIZE)) 
                 return -EINVAL;
         res_table[rd] = NULL;
         return 0;
@@ -104,34 +104,33 @@ static int res_is_valid (res_type_t res) {
 			((res >> 24) & 0xff) <= RES_FIRST_TYPE_MAX);
 }
 
-static int find_res_in_table_by_type (res_unit* unit, res_type_t res) {
-	return 0;
-}
-
 int res_get (void* data, res_type_t res, pid_t src, sflag_t flag) {
 	
 	pid_t from;
 	int rd;
 	res_unit* ures;
 
+        if (res_table == NULL) 
+                return -EINVAL;
+ 
 	if (res_is_valid (res) == 0) {
 #ifdef DEBUG
 		kprint ("Unknown resource\r\n");
 #endif
-		return 0;
+		return -EINVAL;
 	}
 
 #ifdef DEBUG
 	decompose_res (res);
 #endif
 
-	rd = find_res_in_table_by_type (ures, res);
+	rd = res_findt (res, 0);
 
 	if ((flag & R_WAITFROM) && (flag & R_NONBLOCK)) {
 #ifdef DEBUG
 		kprint ("Can't get resources with WAITFROM and NONBLOCK in the same time\r\n");
 #endif
-		return -1;
+		return -EINVAL;
 	}
 
 	if (flag & R_WAITFROM)
@@ -143,7 +142,7 @@ int res_get (void* data, res_type_t res, pid_t src, sflag_t flag) {
 		if (ures->pid == from)
 			return rd;
 		else 
-			return -1;
+			return -EINVAL;
 	}
 
 	if ((flag & R_WAITFROM) && from != 0) {
@@ -158,7 +157,7 @@ int res_get (void* data, res_type_t res, pid_t src, sflag_t flag) {
 #ifdef DEBUG
 				kprint ("Unavaliable resource\r\n");
 #endif
-				return -1;
+				return -EACCES;
 			}
 		}
 	}
@@ -172,8 +171,10 @@ int res_give (int rd, pid_t dest, sflag_t flag) {
 	res_unit* ures;
 	pid_t to;
 	int retv;
-
-	if (find_res_in_table_by_rd (ures, rd) == 0) {
+        if (!(res_table != NULL && rd < RES_TABLE_SIZE)) 
+                return -EINVAL;
+ 
+	if (res_table[rd] == NULL) {
 #ifdef DEBUG
 		kprint ("Unknown resource\r\n");
 #endif
