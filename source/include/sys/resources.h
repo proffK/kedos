@@ -52,7 +52,7 @@ static inline res_type_t res_compose(uint8_t first_level, uint8_t sec_level,
 }
 
 int res_table_init();
-res_unit* res_table_get();
+res_unit** res_table_get();
 
 int res_add (res_unit* res);
 int res_del (int rd);
@@ -61,7 +61,7 @@ int res_findt(res_type_t type, int start);
 int res_findp(pid_t pid, int start);
 int res_findtp(res_type_t type, pid_t pid, int start);
 
-int res_get   (void* data, res_type_t type, pid_t src, sflag_t fl);
+int res_get   (res_type_t type, pid_t src, sflag_t fl);
 int res_give  (int rd, pid_t dest, sflag_t fl);
 
 int msg_equal (msg_t* msg, uint32_t param1, uint32_t param2);

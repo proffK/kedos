@@ -245,9 +245,29 @@ int find_msg (rbuffer* buffer, enum msg_type mtype, uint32_t param1, uint32_t pa
 		return 0;
 	}
 
-	for (node* iter = buffer->id_out; iter != buffer->id_in; iter = iter->next) {
-		if (msg_equal (iter->rbdata.data, mtype, param1, param2))
+	for (node* iter = buffer->id_out; iter != buffer->id_in; iter = iter->next) { 
+		if (msg_equal (iter->rbdata.data, mtype, param1, param2)) {
+			if (iter != buffer->id_out && buffer->id_in != iter) {
+				iter->next->prev = iter->prev;
+				iter->prev->next = iter->next;
+				buffer->id_out->prev->next = iter;
+				iter->prev = buffer->id_out->prev;
+				buffer->id_out->prev = iter;
+				iter->next = buffer->id_out;
+				if ((buffer->flags & (~RBUFFER_IS_FULL)) != 0)
+					buffer->id_in = buffer->id_out->prev;
+			} else {
+				if (iter == buffer->id_in)
+					buffer->id_in = buffer->id_in->prev;
+				else 
+					buffer->id_out = buffer->id_out->next;
+			}
+			kfree (iter->rbdata.data);
+			iter->rbdata.size = 0;
+			buffer->flags &= (~RBUFFER_IS_OVERFLOW);	
+			buffer->flags &= (~RBUFFER_IS_FULL);
 			return 1;
+		}
 	}
 	return 0;
 }

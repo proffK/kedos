@@ -30,6 +30,10 @@
 
 #define RING_BUFFER_SIZE 32
 
+#define KERNEL_MSGBUF_SIZE 256
+
+#define RES_TABLE_SIZE 4096
+
 #define THREAD_PAGE_COUNT 1
 
 #define RPI2

@@ -32,9 +32,10 @@ enum msg_type {
 };
 
 typedef struct {
-	enum msg_type type;
-	uint32_t param1;
-	uint32_t param2;
+	enum msg_type 	type;
+	sflag_t  		fl;
+	uint32_t 		param1;
+	uint32_t 		param2;
 } msg_t;
 
 rbuffer* create_rbuffer (sflag_t FLAGS, size_t size);

@@ -80,6 +80,7 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 
 	thread->program_counter = (reg_t) kernel;	
 	thread->pid = 0; // Kernel thread init
+	thread->buffer = create_rbuffer (0, KERNEL_MSGBUF_SIZE);
 	init_dl_node (&thread->node);
 	node_add_tail (thread_head, thread);
 

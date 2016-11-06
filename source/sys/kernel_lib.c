@@ -1,20 +1,16 @@
 #include "sys/kernel_lib.h"
 
-static void get_msg_processing (res_type_t type, pid_t from) {
-}
-
-static void give_msg_processing (res_type_t type, pid_t to) {
-}
-
-static void kernel_msg_processing (msg_t* msg) { 
+static int kernel_msg_processing (msg_t* msg) {
+	int retv;
 	switch (msg->type) { 
 		case MSG_GET_TYPE: 
-			get_msg_processing (msg->param1, msg->param2); 
+			retv = res_get (msg->param1, msg->param2, msg->fl);
 			break; 
 		case MSG_GIVE_TYPE: 
-			give_msg_processing (msg->param1, msg->param2); 
+			retv = res_give (msg->param1, msg->param2, msg->fl);
 			break; 
 	}
+	return retv;
 }
 
 int k_send (void* param) {
@@ -29,8 +25,7 @@ int k_send (void* param) {
 #endif
 			return retv;
 		}
-		kernel_msg_processing ((msg_t *)data->data);
-		return data->size;
+		return kernel_msg_processing ((msg_t *)data->data);
 	}
 	kthread* receiver = find_thread_pid (data->receiver);
 	
