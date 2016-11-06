@@ -26,6 +26,17 @@ typedef struct rbuffer_t {
 	node* id_out;
 } rbuffer;
 
+enum msg_type {
+	MSG_GET_TYPE,
+	MSG_GIVE_TYPE
+};
+
+typedef struct {
+	enum msg_type type;
+	uint32_t param1;
+	uint32_t param2;
+} msg_t;
+
 rbuffer* create_rbuffer (sflag_t FLAGS, size_t size);
 
 void free_rbuffer (rbuffer* buffer);
@@ -35,5 +46,7 @@ void dump_rbuffer (rbuffer* buffer, void (*data_dump)(void* data));
 byte write_data (rbuffer* buffer, void* data, size_t size);
 
 byte read_data (rbuffer* buffer, void* data);
+
+int find_msg (rbuffer* buffer, enum msg_type mtype, uint32_t param1, uint32_t param2);
 
 #endif

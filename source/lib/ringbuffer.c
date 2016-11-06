@@ -222,3 +222,37 @@ byte read_data (rbuffer* buffer, void* data) {
 	return 0;
 }
 
+static int msg_equal (void* data, enum msg_type mtype, uint32_t param1, uint32_t param2) {
+	msg_t* message = (msg_t*) data;
+	return (mtype  == message->type    &&
+			param1 == message->param1  &&
+			param2 == message->param2);
+}
+
+int find_msg (rbuffer* buffer, enum msg_type mtype, uint32_t param1, uint32_t param2) {
+	if (buffer == NULL) {
+		errno = ENOMEM;
+#ifdef DEBUG_MEM
+		kprint ("Incorrect buffer address\r\n");
+#endif
+		return 0;
+	}
+
+	if (buffer->flags & RBUFFER_IS_EMPTY) {
+#ifdef DEBUG
+		kprint ("Can't read from empty buffer\r\n");
+#endif
+		return 0;
+	}
+
+	for (node* iter = buffer->id_out; iter != buffer->id_in; iter = iter->next) {
+		if (msg_equal (iter->rbdata.data, mtype, param1, param2))
+			return 1;
+	}
+	return 0;
+}
+
+
+
+
+	

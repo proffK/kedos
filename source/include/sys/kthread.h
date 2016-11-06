@@ -5,6 +5,9 @@
 #include "mm/heap.h"
 #include "sys/kscheduler.h"
 #include "lib/dlink_list.h"
+#include "sys/resources.h"
+
+#define GET_KERNEL_THREAD() (node_head_prev(thread_head))
 
 /****************************************************************************/
 
@@ -97,7 +100,7 @@ void run();
 					"mov %%sp, %0\t\n"\
 					"pop {%%r0}\t\n"\
 					"msr cpsr_xsf, %%r0\t\n" :: "r"(sp),\
-					"r"(&(node_head_prev(thread_head)->stack_pointer)) : "%sp", "%r0");	\
+					"r"(&GET_KERNEL_THREAD()->stack_pointer) : "%sp", "%r0");	\
 \
 	asm volatile(	"pop {%%r0-%%r11, %%lr}\t\n"\
 					"cpsie i\t\n"\
