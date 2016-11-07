@@ -11,7 +11,7 @@ res_unit** res_table_get() {
 static inline int free_rd() {
         int i;
         for (i = 0; i < RES_TABLE_SIZE; ++i) {
-                if (res_table[i] != NULL) {
+                if (res_table[i] == NULL) {
                         return i;
                 }
         }                 
@@ -30,7 +30,7 @@ int res_add(res_unit* res) {
         if (res == NULL || res_table == NULL) 
                 return -EINVAL;
         rd = free_rd();
-        if (rd > 0) {
+        if (rd >= 0) {
                 res_table[rd] = res;
         }
         return rd;
@@ -89,7 +89,7 @@ static void thread_exit_shell() {
 }
 
 static void decompose_res (res_type_t res) {
-	kprint ("\tRESOURCE\r\n");
+	kprint ("    RESOURCE\r\n");
 	kprint ("|0x%x|0x%x|0x%x|0x%x|\r\n", (res >> 24) & 0xff,
 										 (res >> 16) & 0xff,
 										 (res >> 8)  & 0xff,
@@ -115,7 +115,7 @@ int res_get (res_type_t res, pid_t src, sflag_t flag) {
  
 	if (res_is_valid (res) == 0) {
 #ifdef DEBUG
-		kprint ("Unknown resource\r\n");
+		kprint ("Get: Unknown resource\r\n");
 #endif
 		return -EINVAL;
 	}
@@ -125,23 +125,25 @@ int res_get (res_type_t res, pid_t src, sflag_t flag) {
 #endif
 
 	rd = res_findt (res, 0);
-
 	ures = res_table[rd];
 
 	if (ures == NULL) {
 #ifdef DEBUG
-		kprint ("Resource doesn't exist\r\n");
+		kprint ("Get: Resource doesn't exist\r\n");
 #endif
 		return -EINVAL;
 	}
 
-	if ((flag & R_WAITFROM) && (flag & R_NONBLOCK)) {
+	if ((flag & R_WAITFROM) != 0 && (flag & R_NONBLOCK) != 0) {
 #ifdef DEBUG
-		kprint ("Can't get resources with WAITFROM and NONBLOCK in the same time\r\n");
+		kprint ("Get: Can't get resources with WAITFROM and NONBLOCK at the same time\r\n");
 #endif
 
 		return -EINVAL;
 	}
+
+	if (ures->pid == cur_thread->pid) 
+		return rd;
 
 	if (flag & R_WAITFROM)
 		from = src;
@@ -165,7 +167,7 @@ int res_get (res_type_t res, pid_t src, sflag_t flag) {
 				thread_exit_shell();
 			} else {
 #ifdef DEBUG
-				kprint ("Unavaliable resource\r\n");
+				kprint ("Get: Unavaliable resource\r\n");
 #endif
 				return -EACCES;
 			}
@@ -180,7 +182,8 @@ int res_give (int rd, pid_t dest, sflag_t flag) {
 
 	res_unit* ures;
 	pid_t to;
-	int retv;
+	pid_t wait;
+	msg_t* msg;
 
     if (!(res_table != NULL && rd < RES_TABLE_SIZE)) 
     	return -EINVAL;
@@ -189,14 +192,14 @@ int res_give (int rd, pid_t dest, sflag_t flag) {
 
 	if (ures == NULL) {
 #ifdef DEBUG
-		kprint ("Resource doesn't exist\r\n");
+		kprint ("Give: Resource doesn't exist\r\n");
 #endif
 		return -EINVAL;
 	}
 
-	if (ures->pid == cur_thread->pid) {
+	if (ures->pid != cur_thread->pid) {
 #ifdef DEBUG
-		kprint ("Unavaliable resource\r\n");
+		kprint ("Give: Unavaliable resource\r\n");
 #endif
 		return -EINVAL;
 	}
@@ -210,19 +213,47 @@ int res_give (int rd, pid_t dest, sflag_t flag) {
 	
 	if (receiver == NULL) {
 #ifdef DEBUG
-		kprint ("There are no thread with %d pid\r\n", to);
+		kprint ("Give: There are no thread with %d pid\r\n", to);
 #endif
 		return -EINVAL;
 	}
 
-	do {
-		retv = find_msg (GET_KERNEL_THREAD()->buffer, MSG_GET_TYPE, ures->type, to);
-		if (retv == 0) {
-			cur_thread->state = BLOCKED;
-			thread_exit_shell();
-		}
-	} while (retv == 0);
-	
+	if ((flag & R_SENDTO) != 0) {
+		do {
+			msg = find_msg (GET_KERNEL_THREAD()->buffer, MSG_GET_TYPE, ures->type, to);
+			kprint ("here %x\r\n", msg);
+			if (msg == NULL) {
+				cur_thread->state = BLOCKED;
+				thread_exit_shell();
+			}
+		} while (msg == NULL);
+
+	} else {
+		do {
+			msg = find_msg (GET_KERNEL_THREAD()->buffer, MSG_GET_TYPE, ures->type, 0);
+			if (msg != NULL) {
+				wait = msg->sender;
+				kthread* receiver = find_thread_pid (to);
+		
+				if (receiver == NULL) {
+#ifdef DEBUG
+					kprint ("Give: There are no thread with %d pid\r\n", to);
+#endif	
+					return -EINVAL;
+				}
+
+				if (receiver->state == BLOCKED) {
+					receiver->state = WAIT;
+					active_add_tail (th_active_head, receiver);
+					break;
+				}
+			
+			}
+		} while (msg != NULL);
+
+		ures->pid = GET_KERNEL_THREAD()->pid;
+	}
+
 	if (receiver->state == BLOCKED) {
 		receiver->state = WAIT;
 		active_add_tail (th_active_head, receiver);

@@ -19,6 +19,7 @@
 
 #include "lib/ringbuffer.h"
 
+
 rbuffer* create_rbuffer (sflag_t FLAGS, size_t size) {
 	int i = 0;
 	int j = 0;
@@ -144,7 +145,7 @@ byte write_data (rbuffer* buffer, void* data, size_t size) {
 #endif
 		return ENOMEM;
 	}
-
+	
 	if (buffer->flags & RBUFFER_IS_FULL) {
 		if (buffer->flags & RBUFFER_IS_UNDER_PROTECTION) {
 #ifdef DEBUG
@@ -164,7 +165,7 @@ byte write_data (rbuffer* buffer, void* data, size_t size) {
 		buffer->flags = buffer->flags | RBUFFER_IS_FULL;
 
 	buffer->id_in->rbdata.data = (void *) kcalloc (size, sizeof (char));
-
+	
 	if (!buffer->id_in->rbdata.data) {
 #ifdef DEBUG
 	kprint ("Can't allocate data in rbuffer\r\n");
@@ -174,7 +175,6 @@ byte write_data (rbuffer* buffer, void* data, size_t size) {
 
 	buffer->id_in->rbdata.size = size;
 	memcpy (data, buffer->id_in->rbdata.data, size);
-
 	if (buffer->flags & RBUFFER_IS_OVERFLOW) {
 		buffer->id_out = buffer->id_out->next;
 		kfree (buffer->id_out->prev->rbdata.data);
@@ -218,31 +218,32 @@ byte read_data (rbuffer* buffer, void* data) {
 	if (buffer->id_out == buffer->id_in)
 		buffer->flags = buffer->flags | RBUFFER_IS_EMPTY;
 
-
 	return 0;
 }
 
-static int msg_equal (void* data, enum msg_type mtype, uint32_t param1, uint32_t param2) {
+static int msg_equal (void* data, enum msg_type mtype, int param1, int param2) {
 	msg_t* message = (msg_t*) data;
 	return (mtype  == message->type    &&
 			param1 == message->param1  &&
 			param2 == message->param2);
 }
 
-int find_msg (rbuffer* buffer, enum msg_type mtype, uint32_t param1, uint32_t param2) {
+msg_t* find_msg (rbuffer* buffer, enum msg_type mtype, int param1, int param2) {
+	void* data;
+
 	if (buffer == NULL) {
 		errno = ENOMEM;
 #ifdef DEBUG_MEM
 		kprint ("Incorrect buffer address\r\n");
 #endif
-		return 0;
+		return NULL;
 	}
 
 	if (buffer->flags & RBUFFER_IS_EMPTY) {
 #ifdef DEBUG
 		kprint ("Can't read from empty buffer\r\n");
 #endif
-		return 0;
+		return NULL;
 	}
 
 	for (node* iter = buffer->id_out; iter != buffer->id_in; iter = iter->next) { 
@@ -262,14 +263,16 @@ int find_msg (rbuffer* buffer, enum msg_type mtype, uint32_t param1, uint32_t pa
 				else 
 					buffer->id_out = buffer->id_out->next;
 			}
+			data = iter->rbdata.data;
 			kfree (iter->rbdata.data);
+			iter->rbdata.data = NULL;
 			iter->rbdata.size = 0;
 			buffer->flags &= (~RBUFFER_IS_OVERFLOW);	
 			buffer->flags &= (~RBUFFER_IS_FULL);
-			return 1;
+			return data;
 		}
 	}
-	return 0;
+	return NULL;
 }
 
 

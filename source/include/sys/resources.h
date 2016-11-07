@@ -66,6 +66,28 @@ int res_findtp(res_type_t type, pid_t pid, int start);
 int res_get   (res_type_t type, pid_t src, sflag_t fl);
 int res_give  (int rd, pid_t dest, sflag_t fl);
 
-int msg_equal (msg_t* msg, uint32_t param1, uint32_t param2);
+int msg_equal (msg_t* msg, int param1, int param2);
+
+#define GET_RES(rd, type, from, flag) \
+	do { \
+		msg_t msg; \
+		msg.type = MSG_GET_TYPE; \
+		msg.param1 = type; \
+		msg.param2 = from; \
+		msg.fl = flag; \
+		msg.sender = cur_thread->pid; \
+		rd = send (0, &msg, sizeof (msg)); \
+	} while(0)
+
+#define GIVE_RES(rd, type, src, flag) \
+	do { \
+		msg_t msg; \
+		msg.type = MSG_GIVE_TYPE; \
+		msg.param1 = rd; \
+		msg.param2 = src; \
+		msg.fl = flag; \
+		msg.sender = cur_thread->pid; \
+		send (0, &msg, sizeof (msg)); \
+	} while(0)
 
 #endif

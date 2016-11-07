@@ -70,6 +70,7 @@ int hardware_init()
                 return -ENOMEM;
         }
 
+		processor->pid = 0;
         processor->tb = (ftable*) &proc_ftable;
         processor->type = res_compose(RES_CPU, 0, 0, 0);
         res_add(processor);

@@ -1,8 +1,6 @@
 #include "sys/kthread.h"
 #include "lib/nostdlib.h"
 
-#define DEBUG
-
 kthread* cur_thread = NULL;
 node_head* thread_head = NULL;
 active_head* th_active_head = NULL;

@@ -1,13 +1,26 @@
 #include "sys/kernel_lib.h"
 
+
+static int res_give_processing (msg_t* msg) {
+	int retv;
+	retv = res_give (msg->param1, msg->param2, msg->fl);
+	return retv;
+}
+
+static int res_get_processing (msg_t* msg) {
+	int retv;
+	retv = res_get (msg->param1, msg->param2, msg->fl);
+	return retv;
+}
+
 static int kernel_msg_processing (msg_t* msg) {
 	int retv;
 	switch (msg->type) { 
 		case MSG_GET_TYPE: 
-			retv = res_get (msg->param1, msg->param2, msg->fl);
+			retv = res_get_processing (msg);
 			break; 
 		case MSG_GIVE_TYPE: 
-			retv = res_give (msg->param1, msg->param2, msg->fl);
+			retv = res_give_processing (msg);
 			break; 
 	}
 	return retv;
@@ -16,9 +29,12 @@ static int kernel_msg_processing (msg_t* msg) {
 int k_send (void* param) {
 	int retv = -1;
 	data_message* data = (data_message*) param;
+
 	if (data->receiver == 0) {
 		//Message to kernel
-		byte ret = write_data (GET_KERNEL_THREAD()->buffer, data->data, sizeof (data->size));
+
+		byte ret = write_data (GET_KERNEL_THREAD()->buffer, data->data, data->size);
+
 		if (ret) {
 #ifdef DEBUG
 			kprint ("Can't write data to thread with %d pid\r\n", GET_KERNEL_THREAD()->pid);

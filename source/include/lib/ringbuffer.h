@@ -34,8 +34,9 @@ enum msg_type {
 typedef struct {
 	enum msg_type 	type;
 	sflag_t  		fl;
-	uint32_t 		param1;
-	uint32_t 		param2;
+	int 			param1;
+	int 			param2;
+	int 			sender;
 } msg_t;
 
 rbuffer* create_rbuffer (sflag_t FLAGS, size_t size);
@@ -48,6 +49,6 @@ byte write_data (rbuffer* buffer, void* data, size_t size);
 
 byte read_data (rbuffer* buffer, void* data);
 
-int find_msg (rbuffer* buffer, enum msg_type mtype, uint32_t param1, uint32_t param2);
+msg_t* find_msg (rbuffer* buffer, enum msg_type mtype, int param1, int param2);
 
 #endif
